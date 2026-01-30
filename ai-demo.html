@@ -1206,13 +1206,13 @@
       let retellClient = null;
       let isCallActive = false;
 
-      // Component triggers
+      // Component triggers - natural phrases that sound good when spoken
       const componentTriggers = {
-        '[SERVICES]': 'comp-services',
-        '[AI_TEAM]': 'comp-ai_team',
-        '[PROCESS]': 'comp-process',
-        '[FIT]': 'comp-fit',
-        '[BOOK]': 'comp-book'
+        'show you our services': 'comp-services',
+        'here is our ai team': 'comp-ai_team',
+        'walk you through our process': 'comp-process',
+        'show you if we are a fit': 'comp-fit',
+        'pull up our calendar': 'comp-book'
       };
 
       // Initialize Retell client
@@ -1349,23 +1349,17 @@
           const role = entry.role;
           const content = entry.content || '';
 
-          // Clean triggers from display
-          let cleanContent = content;
-          for (const trigger of Object.keys(componentTriggers)) {
-            cleanContent = cleanContent.replace(trigger, '').trim();
-          }
-
-          if (!cleanContent) return;
+          if (!content.trim()) return;
 
           // If this is updating the last message of same role, update it
           if (index === transcript.length - 1 && lastMessageElement && lastMessageRole === role) {
-            lastMessageElement.textContent = cleanContent;
+            lastMessageElement.textContent = content;
           }
           // If this is a new message (new index or role changed)
           else if (index >= displayedTranscriptLength) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `transcript__msg transcript__msg--${role}`;
-            msgDiv.textContent = cleanContent;
+            msgDiv.textContent = content;
             transcriptMessages.appendChild(msgDiv);
 
             lastMessageElement = msgDiv;
@@ -1373,10 +1367,11 @@
             displayedTranscriptLength = index + 1;
           }
 
-          // Check for component triggers (only in agent messages)
+          // Check for component triggers (only in agent messages, case-insensitive)
           if (role === 'agent') {
+            const lowerContent = content.toLowerCase();
             for (const [trigger, componentId] of Object.entries(componentTriggers)) {
-              if (content.includes(trigger)) {
+              if (lowerContent.includes(trigger.toLowerCase())) {
                 showComponent(componentId);
                 break;
               }
