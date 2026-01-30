@@ -202,21 +202,10 @@ p:last-child {
   font-weight: 700;
   color: var(--black);
   letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
 }
 
 .logo span {
   color: var(--red);
-}
-
-.logo__img {
-  height: 36px;
-  width: auto;
-}
-
-.logo__img--footer {
-  height: 32px;
 }
 
 .nav {
