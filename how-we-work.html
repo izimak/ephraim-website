@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How We Work | EphrAIm Solutions</title>
+  <meta name="description" content="Our Fruitful Ops framework brings clarity to your operations through FLOW, ACCEL, and PULSE.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Fruitful Ops Intro */
+    .fruitful-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .fruitful-intro__visual {
+      position: relative;
+    }
+    .fruitful-intro__badge {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--red);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 900px) {
+      .fruitful-intro {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    /* Pillar Sections */
+    .pillar {
+      padding: 120px 0;
+    }
+    .pillar__header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+    .pillar__icon {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      border: 2px solid var(--gray-300);
+    }
+    .pillar__name {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .pillar__title {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 24px;
+    }
+    .pillar__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .pillar__card {
+      padding: 32px;
+      border-top: 3px solid var(--red);
+      background: var(--white);
+    }
+    .pillar__card h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .pillar__card p {
+      font-size: 15px;
+      color: var(--gray-700);
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .pillar__header {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .pillar__icon {
+        width: 120px;
+        height: 120px;
+        font-size: 48px;
+      }
+      .pillar__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Dark Pillar */
+    .pillar--dark {
+      background: var(--black);
+      color: var(--white);
+    }
+    .pillar--dark .pillar__icon {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+    .pillar--dark .pillar__title {
+      color: var(--white);
+    }
+    .pillar--dark .pillar__card {
+      background: rgba(255,255,255,0.05);
+    }
+    .pillar--dark .pillar__card h4 {
+      color: var(--white);
+    }
+    .pillar--dark .pillar__card p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Gray Pillar */
+    .pillar--gray {
+      background: var(--gray-100);
+    }
+
+    /* Trust Section */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+    .trust-item {
+      display: flex;
+      gap: 24px;
+      align-items: start;
+    }
+    .trust-item__number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--red);
+      border: 2px solid var(--red);
+    }
+    .trust-item h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .trust-item p {
+      font-size: 15px;
+      color: var(--gray-700);
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">Ephraim<span>Solutions</span></a>
+        <nav class="nav" id="nav">
+          <a href="what-we-do.html">What We Do</a>
+          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
+          <a href="how-we-work.html">How We Work</a>
+          <div class="nav__dropdown">
+            <a href="who-we-help.html" class="nav__dropdown-trigger">
+              Who We Help
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </a>
+            <div class="nav__dropdown-menu">
+              <a href="who-we-help.html">Overview</a>
+              <div class="nav__dropdown-divider"></div>
+              <span class="nav__dropdown-label">Industries</span>
+              <a href="industries/roofing.html">Roofing</a>
+              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
+              <a href="industries/healthcare.html">Healthcare & Clinics</a>
+              <a href="industries/finance.html">Finance & Lending</a>
+            </div>
+          </div>
+          <a href="about.html">About</a>
+          <a href="contact.html" class="nav__cta">Contact Us</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 65vh;">
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop" alt="Modern office workspace">
+    </div>
+    <div class="container">
+      <div class="hero__content fade-in">
+        <p class="eyebrow">How We Work</p>
+        <h1>We Build What We Promise</h1>
+        <p class="lead">No decks. No reports that sit on a shelf. We build systems that work, train your team to use them, and stay until the results show up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Process -->
+  <section class="section">
+    <div class="container">
+      <div class="fade-in" style="max-width: 600px; margin-bottom: 60px;">
+        <p class="eyebrow">The Process</p>
+        <h2>How Every Engagement Works</h2>
+      </div>
+
+      <div class="grid grid--3 fade-in">
+        <div class="card" style="border-top: 3px solid var(--red);">
+          <span style="font-size: 48px; font-weight: 700; color: var(--gray-200); font-family: var(--font-sans);">01</span>
+          <h3 style="margin: 16px 0 12px;">Discover</h3>
+          <p>We talk to your team, map your processes, and audit your tools. By the end, we know where the problems are and what to prioritize.</p>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--red);">
+          <span style="font-size: 48px; font-weight: 700; color: var(--gray-200); font-family: var(--font-sans);">02</span>
+          <h3 style="margin: 16px 0 12px;">Design</h3>
+          <p>We architect the solution with your input. You see exactly what we're building before we build it. No surprises.</p>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--red);">
+          <span style="font-size: 48px; font-weight: 700; color: var(--gray-200); font-family: var(--font-sans);">03</span>
+          <h3 style="margin: 16px 0 12px;">Build & Launch</h3>
+          <p>We configure, integrate, and automate. Then we go live together, train your team, and fine-tune until everything works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Clients Trust Us -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="fade-in" style="max-width: 600px; margin-bottom: 60px;">
+        <p class="eyebrow">Our Commitment</p>
+        <h2>Why Clients Trust Us</h2>
+      </div>
+
+      <div class="trust-grid fade-in">
+        <div class="trust-item">
+          <span class="trust-item__number">01</span>
+          <div>
+            <h4>We Build, Not Just Advise</h4>
+            <p>You get working systems, not PowerPoint decks. We stay until the results show up.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__number">02</span>
+          <div>
+            <h4>Your Team Learns Too</h4>
+            <p>We transfer knowledge throughout. Your people understand and own these systems when we leave.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__number">03</span>
+          <div>
+            <h4>Minimal Disruption</h4>
+            <p>We work around your operations, not through them. Your business keeps running while we build.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__number">04</span>
+          <div>
+            <h4>Right-Sized Solutions</h4>
+            <p>We build what you need now with room to grow. No bloated enterprise systems you'll never use.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__number">05</span>
+          <div>
+            <h4>Measurable Outcomes</h4>
+            <p>We define success upfront and track it. If we don't hit the numbers, we keep working until we do.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__number">06</span>
+          <div>
+            <h4>Ongoing Partnership</h4>
+            <p>After launch, we're still here. Monthly check-ins ensure your systems evolve with your business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fruitful Ops Intro -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="fruitful-intro fade-in">
+        <div>
+          <span class="fruitful-intro__badge">OUR METHODOLOGY</span>
+          <h2>Fruitful Ops™</h2>
+          <div class="divider"></div>
+          <p class="lead">Every engagement follows the same core approach. Three pillars. One goal: operations that support growth instead of fighting against it.</p>
+          <p>We design how work moves. We automate what slows you down. We give you the visibility to lead with confidence. That's what makes businesses fruitful.</p>
+        </div>
+        <div class="fruitful-intro__visual">
+          <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2940&auto=format&fit=crop" alt="Strategic planning" style="width: 100%; filter: grayscale(100%); transition: filter 0.7s;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW Pillar -->
+  <section class="pillar" id="flow">
+    <div class="container">
+      <div class="pillar__header fade-in">
+        <div class="pillar__icon">F</div>
+        <div>
+          <p class="pillar__name">FLOW</p>
+          <h2 class="pillar__title">Design How Work Moves</h2>
+          <p class="lead">Before we automate anything, we map how work actually moves through your business. Where does it start? Where does it stall? What gets lost?</p>
+          <p>Clear handoffs. Defined ownership. No more "I thought someone else was handling that."</p>
+        </div>
+      </div>
+
+      <div class="pillar__grid fade-in">
+        <div class="pillar__card">
+          <h4>Process Mapping</h4>
+          <p>We document your current workflows so everyone sees the same picture. Often this alone surfaces problems you didn't know existed.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>Bottleneck Analysis</h4>
+          <p>Where does work pile up? We find the choke points and design around them.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>Workflow Redesign</h4>
+          <p>Simpler is almost always better. We cut unnecessary steps and clarify who owns what.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCEL Pillar -->
+  <section class="pillar pillar--dark" id="accel">
+    <div class="container">
+      <div class="pillar__header fade-in">
+        <div class="pillar__icon">A</div>
+        <div>
+          <p class="pillar__name">ACCEL</p>
+          <h2 class="pillar__title">Automate What Slows You Down</h2>
+          <p class="lead" style="color: rgba(255,255,255,0.8);">Once we know how work should move, we build the systems that make it happen automatically. Your team stops doing busywork and starts doing real work.</p>
+          <p style="color: rgba(255,255,255,0.6);">Connecting your tools. Automating the handoffs. Making sure nothing falls through the cracks.</p>
+        </div>
+      </div>
+
+      <div class="pillar__grid fade-in">
+        <div class="pillar__card">
+          <h4>System Integration</h4>
+          <p>Your CRM, project tools, invoicing, and communication all connected. Data flows where it needs to go.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>Workflow Automation</h4>
+          <p>Triggers, sequences, notifications. If it happens the same way every time, we automate it.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>AI Deployment</h4>
+          <p>Practical AI for intake, triage, and follow-up. Tools that save real time, not demos that impress VCs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULSE Pillar -->
+  <section class="pillar pillar--gray" id="pulse">
+    <div class="container">
+      <div class="pillar__header fade-in">
+        <div class="pillar__icon">P</div>
+        <div>
+          <p class="pillar__name">PULSE</p>
+          <h2 class="pillar__title">See What's Actually Happening</h2>
+          <p class="lead">Good systems generate data. PULSE turns that data into clarity. Real-time dashboards. Automated reports. The metrics that matter, when you need them.</p>
+          <p>No more digging through spreadsheets. You know how the business is doing because it's right in front of you.</p>
+        </div>
+      </div>
+
+      <div class="pillar__grid fade-in">
+        <div class="pillar__card">
+          <h4>Live Dashboards</h4>
+          <p>Revenue, pipeline, capacity. Updated in real time, accessible to whoever needs them.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>Automated Reporting</h4>
+          <p>Weekly summaries, monthly reviews. Generated automatically, delivered to your inbox.</p>
+        </div>
+        <div class="pillar__card">
+          <h4>Decision Support</h4>
+          <p>The right data at the right moment. Lead with confidence, not gut feel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark cta">
+    <div class="container">
+      <div class="fade-in">
+        <h2 style="color: var(--white);">Ready to Talk?</h2>
+        <p style="color: rgba(255,255,255,0.7);">The first step is a conversation. Tell us what's going on and we'll share how we can help.</p>
+        <a href="contact.html" class="btn btn--primary">Start the Conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="logo">Ephraim<span>Solutions</span></p>
+          <p>We help growing companies build the operational systems that let them scale without the chaos.</p>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="what-we-do.html">What We Do</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <ul class="footer__links">
+            <li><a href="what-we-do.html#communication">Digital Communication</a></li>
+            <li><a href="what-we-do.html#automation">Automation & Integration</a></li>
+            <li><a href="what-we-do.html#intelligence">Business Intelligence</a></li>
+            <li><a href="ai-solutions.html">AI Employees</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

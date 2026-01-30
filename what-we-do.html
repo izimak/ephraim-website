@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What We Do | EphrAIm Solutions</title>
+  <meta name="description" content="Digital Communication, Automation, Business Intelligence, and Staffing solutions for growing businesses.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Service Navigation */
+    .service-nav {
+      display: flex;
+      gap: 0;
+      margin-top: 48px;
+    }
+    .service-nav a {
+      flex: 1;
+      padding: 24px 16px;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-right: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+    }
+    .service-nav a:last-child {
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .service-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+    .service-nav span {
+      display: block;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--red);
+    }
+    @media (max-width: 768px) {
+      .service-nav {
+        flex-direction: column;
+      }
+      .service-nav a {
+        border-right: 1px solid rgba(255,255,255,0.2);
+        border-bottom: none;
+      }
+      .service-nav a:last-child {
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+    }
+
+    /* Full Width Service Block */
+    .service-full {
+      padding: 120px 0;
+    }
+    .service-full__header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+    .service-full__number {
+      font-size: 180px;
+      font-weight: 700;
+      line-height: 0.8;
+      color: var(--red);
+      font-family: var(--font-sans);
+    }
+    .service-full__title h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .service-full__header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .service-full__number {
+        font-size: 100px;
+      }
+    }
+
+    /* Capability Cards */
+    .capability-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .capability-card {
+      padding: 32px;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      transition: all 0.3s ease;
+    }
+    .capability-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+    .capability-card h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .capability-card p {
+      font-size: 15px;
+      color: var(--gray-700);
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .capability-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Dark Service Section */
+    .service-dark {
+      background: var(--black);
+      color: var(--white);
+      padding: 120px 0;
+    }
+    .service-dark h2,
+    .service-dark h3,
+    .service-dark h4 {
+      color: var(--white);
+    }
+    .service-dark p {
+      color: rgba(255,255,255,0.75);
+    }
+    .service-dark .capability-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .service-dark .capability-card:hover {
+      border-color: var(--red);
+      background: rgba(255,255,255,0.1);
+    }
+    .service-dark .capability-card p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Split Service with Image */
+    .service-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .service-split__content {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .service-split__image {
+      position: relative;
+      overflow: hidden;
+    }
+    .service-split__image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .service-split__number {
+      font-size: 120px;
+      font-weight: 700;
+      color: var(--gray-100);
+      line-height: 1;
+      margin-bottom: 24px;
+      font-family: var(--font-sans);
+    }
+    .service-split__list {
+      list-style: none;
+      margin-top: 40px;
+    }
+    .service-split__list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-300);
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .service-split__list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    @media (max-width: 900px) {
+      .service-split {
+        grid-template-columns: 1fr;
+      }
+      .service-split__image {
+        height: 300px;
+        order: -1;
+      }
+      .service-split__content {
+        padding: 60px 24px;
+      }
+      .service-split__number {
+        font-size: 80px;
+      }
+    }
+
+    /* Horizontal Scroll Capabilities */
+    .capabilities-scroll {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 24px 0 40px;
+      margin: 0 -24px;
+      padding-left: 24px;
+      scrollbar-width: none;
+    }
+    .capabilities-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .capability-scroll-card {
+      flex: 0 0 300px;
+      padding: 40px 32px;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+    }
+    .capability-scroll-card h4 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      padding: 60px 0;
+      border-top: 1px solid var(--gray-300);
+      margin-top: 60px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat__number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--red);
+      font-family: var(--font-sans);
+    }
+    .stat__label {
+      font-size: 14px;
+      color: var(--gray-700);
+      margin-top: 8px;
+    }
+    @media (max-width: 768px) {
+      .stats-row {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">Ephraim<span>Solutions</span></a>
+        <nav class="nav" id="nav">
+          <a href="what-we-do.html">What We Do</a>
+          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
+          <a href="how-we-work.html">How We Work</a>
+          <div class="nav__dropdown">
+            <a href="who-we-help.html" class="nav__dropdown-trigger">
+              Who We Help
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </a>
+            <div class="nav__dropdown-menu">
+              <a href="who-we-help.html">Overview</a>
+              <div class="nav__dropdown-divider"></div>
+              <span class="nav__dropdown-label">Industries</span>
+              <a href="industries/roofing.html">Roofing</a>
+              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
+              <a href="industries/healthcare.html">Healthcare & Clinics</a>
+              <a href="industries/finance.html">Finance & Lending</a>
+            </div>
+          </div>
+          <a href="about.html">About</a>
+          <a href="contact.html" class="nav__cta">Contact Us</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2940&auto=format&fit=crop" alt="Modern architecture">
+    </div>
+    <div class="container">
+      <div class="hero__content fade-in">
+        <p class="eyebrow">What We Do</p>
+        <h1>We Help Businesses Run Better</h1>
+        <p class="lead">Smarter communication. Connected systems. Clear data. The right support. That's how we help you scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01: Digital Communication - Full Width with Cards -->
+  <section class="service-full section--gray" id="communication">
+    <div class="container">
+      <div class="service-full__header fade-in">
+        <span class="service-full__number">01</span>
+        <div class="service-full__title">
+          <p class="eyebrow">Capability</p>
+          <h2>Digital Communication</h2>
+          <p class="lead">Every lead gets captured. Every follow-up happens on time. Your team closes more because nothing slips through.</p>
+        </div>
+      </div>
+
+      <div class="capability-cards fade-in">
+        <div class="capability-card">
+          <h4>Unified Inbox</h4>
+          <p>Email, text, web forms, and social all land in one place. Your team stops switching between five apps.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Instant Response</h4>
+          <p>Leads hear back immediately. Automated replies keep things warm while your team focuses on closing.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Smart Routing</h4>
+          <p>Inquiries go to the right person automatically. No manual sorting, no bottlenecks.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Campaign Management</h4>
+          <p>Stay in front of prospects with sequences that build trust over time. Thoughtful touchpoints, not spam.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Conversation History</h4>
+          <p>Your whole team sees every conversation. Full context, instantly accessible.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Always On</h4>
+          <p>AI handles responses nights, weekends, and holidays. Your pipeline keeps moving even when you don't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: Automation & Integration - Dark Section -->
+  <section class="service-dark" id="automation">
+    <div class="container">
+      <div class="service-full__header fade-in">
+        <span class="service-full__number" style="color: var(--white); opacity: 0.1;">02</span>
+        <div class="service-full__title">
+          <p class="eyebrow" style="color: var(--red);">Capability</p>
+          <h2>Automation & Integration</h2>
+          <p class="lead">Your tools should talk to each other. The repetitive stuff should happen on its own. We make that real.</p>
+        </div>
+      </div>
+
+      <div class="capability-cards fade-in">
+        <div class="capability-card">
+          <h4>Connect Your Tools</h4>
+          <p>CRM, project management, invoicing, books. Everything syncs, nothing falls through the cracks.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Automate the Repetitive Stuff</h4>
+          <p>Status updates, reminders, handoffs, notifications. If it happens the same way every time, it should be automatic.</p>
+        </div>
+        <div class="capability-card">
+          <h4>AI Where It Makes Sense</h4>
+          <p>Intake, summarization, triage. Practical AI that saves real time, not gimmicks.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Custom Tools When Needed</h4>
+          <p>Sometimes the right software doesn't exist. We build small, focused tools for your specific problems.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Clean Data Migration</h4>
+          <p>Switching platforms shouldn't mean losing your history. We handle the move, you keep everything.</p>
+        </div>
+        <div class="capability-card">
+          <h4>Process First, Then Tech</h4>
+          <p>Bad process automated is still bad process. We fix the workflow first, then build the tech to support it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03: Business Intelligence - Split Layout -->
+  <section class="service-split" id="intelligence">
+    <div class="service-split__content fade-in">
+      <span class="service-split__number">03</span>
+      <p class="eyebrow">Capability</p>
+      <h2>Business Intelligence</h2>
+      <p class="lead" style="margin-top: 16px;">You should know how your business is doing without digging through spreadsheets. We build dashboards that make that possible.</p>
+      <p>Revenue, pipeline, capacity, margins. Updated in real time, designed for decisions. Your leadership team leads with data, not gut feel.</p>
+
+      <ul class="service-split__list">
+        <li>Dashboards your leadership team will actually use</li>
+        <li>Automated reports that replace manual spreadsheet work</li>
+        <li>KPIs tracked across sales, ops, and finance</li>
+        <li>Clear visibility into pipeline and capacity</li>
+        <li>Custom views for the questions that matter to you</li>
+      </ul>
+    </div>
+    <div class="service-split__image">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" alt="Analytics dashboard">
+    </div>
+  </section>
+
+  <!-- 04: Back Office Staffing - Split Layout Reversed -->
+  <section class="service-split" id="staffing" style="background: var(--gray-100);">
+    <div class="service-split__image">
+      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2940&auto=format&fit=crop" alt="Team collaboration">
+    </div>
+    <div class="service-split__content fade-in">
+      <span class="service-split__number">04</span>
+      <p class="eyebrow">Capability</p>
+      <h2>Back Office Staffing</h2>
+      <p class="lead" style="margin-top: 16px;">Sometimes you don't need another tool. You need another set of hands. We provide both people and AI agents.</p>
+      <p>Virtual assistants who know your systems. AI agents that handle intake, scheduling, follow-ups. Contractors for specific projects. The right support without the overhead of full-time hires.</p>
+
+      <ul class="service-split__list">
+        <li>Trained virtual assistants who know your systems</li>
+        <li>AI agents for intake, scheduling, and follow-ups</li>
+        <li>Contractors for specific projects or skill sets</li>
+        <li>Fractional ops support as you scale</li>
+        <li>Custom AI agent development for your workflows</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark cta">
+    <div class="container">
+      <div class="fade-in">
+        <h2 style="color: var(--white);">Ready to Fix What's Slowing You Down?</h2>
+        <p style="color: rgba(255,255,255,0.7);">Let's figure out what you need and how we can help.</p>
+        <a href="contact.html" class="btn btn--primary">Start the Conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="logo">Ephraim<span>Solutions</span></p>
+          <p>We help companies simplify their systems, automate repetitive work, and create clarity for growth.</p>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="what-we-do.html">What We Do</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <ul class="footer__links">
+            <li><a href="#communication">Digital Communication</a></li>
+            <li><a href="#automation">Automation & Integration</a></li>
+            <li><a href="#intelligence">Business Intelligence</a></li>
+            <li><a href="ai-solutions.html">AI Employees</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

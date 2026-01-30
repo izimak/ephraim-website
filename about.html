@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | EphrAIm Solutions</title>
+  <meta name="description" content="We're a team of operators and technologists who've lived the growth pains you're facing.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Founder Cards */
+    .founders {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+    .founder {
+      text-align: center;
+    }
+    .founder__image {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 24px;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .founder__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s;
+    }
+    .founder:hover .founder__image img {
+      filter: grayscale(0%);
+    }
+    .founder__name {
+      font-size: 24px;
+      font-family: var(--font-serif);
+      margin-bottom: 4px;
+    }
+    .founder__title {
+      font-size: 14px;
+      color: var(--red);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .founder__bio {
+      font-size: 15px;
+      color: var(--gray-700);
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .founders {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">Ephraim<span>Solutions</span></a>
+        <nav class="nav" id="nav">
+          <a href="what-we-do.html">What We Do</a>
+          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
+          <a href="how-we-work.html">How We Work</a>
+          <div class="nav__dropdown">
+            <a href="who-we-help.html" class="nav__dropdown-trigger">
+              Who We Help
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </a>
+            <div class="nav__dropdown-menu">
+              <a href="who-we-help.html">Overview</a>
+              <div class="nav__dropdown-divider"></div>
+              <span class="nav__dropdown-label">Industries</span>
+              <a href="industries/roofing.html">Roofing</a>
+              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
+              <a href="industries/healthcare.html">Healthcare & Clinics</a>
+              <a href="industries/finance.html">Finance & Lending</a>
+            </div>
+          </div>
+          <a href="about.html">About</a>
+          <a href="contact.html" class="nav__cta">Contact Us</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 60vh;">
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2940&auto=format&fit=crop" alt="Modern workspace">
+    </div>
+    <div class="container">
+      <div class="hero__content fade-in">
+        <p class="eyebrow">The Firm</p>
+        <h1>We've Been Where You Are</h1>
+        <p class="lead">EphrAIm was founded by operators who got tired of watching good businesses struggle with preventable problems.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="section">
+    <div class="container">
+      <div class="split fade-in">
+        <div class="split__image">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2940&auto=format&fit=crop" alt="Team collaboration" style="filter: grayscale(100%); transition: filter 0.7s;">
+        </div>
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2>From Frustration to Foundation</h2>
+          <div class="divider"></div>
+          <p>We've sat in your seat. We've watched leads slip through the cracks, stayed late to fix problems that systems should prevent, and wondered why "scaling" felt more like "suffering."</p>
+          <p>The consulting world offered expensive advice. The software world offered tools without strategy. Neither solved the real problem: businesses need integrated operational systems, not piecemeal solutions.</p>
+          <p><strong>EphrAIm bridges that gap.</strong> We combine strategic thinking with hands-on implementation to build the operational infrastructure that growing businesses actually need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founders Section -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="fade-in" style="max-width: 600px; margin: 0 auto 60px; text-align: center;">
+        <p class="eyebrow">Leadership</p>
+        <h2>The Founders</h2>
+        <div class="divider divider--center"></div>
+      </div>
+
+      <div class="founders fade-in">
+        <div class="founder">
+          <div class="founder__image">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Israel Makambu">
+          </div>
+          <h3 class="founder__name">Israel Makambu</h3>
+          <p class="founder__title">CO-FOUNDER</p>
+          <p class="founder__bio">A builder at heart. Israel spent years in operations and technology before starting EphrAIm, driven by the belief that growing businesses deserve better systems than spreadsheets and duct tape.</p>
+        </div>
+
+        <div class="founder">
+          <div class="founder__image">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop" alt="Ryan Mani">
+          </div>
+          <h3 class="founder__name">Ryan Mani</h3>
+          <p class="founder__title">CO-FOUNDER</p>
+          <p class="founder__bio">A strategist who gets his hands dirty. Ryan brings deep experience in process design and automation, with a track record of helping businesses scale without losing their soul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="section">
+    <div class="container">
+      <div class="split split--reverse fade-in">
+        <div>
+          <p class="eyebrow">What Drives Us</p>
+          <h2>Our Mission</h2>
+          <div class="divider"></div>
+          <p class="lead" style="font-style: italic;">"Make enterprise-grade operations accessible to mid-market businesses."</p>
+          <p>Fortune 500 companies have armies of people building and maintaining their operational systems. Growing businesses shouldn't need that kind of headcount to compete. We exist to level that playing field.</p>
+        </div>
+        <div class="split__image">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&auto=format&fit=crop" alt="Strategy session" style="filter: grayscale(100%); transition: filter 0.7s;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="fade-in" style="max-width: 700px; margin-bottom: 60px;">
+        <p class="eyebrow">Our Values</p>
+        <h2>What We Stand For</h2>
+      </div>
+
+      <div class="grid grid--3 stagger">
+        <div class="card fade-in">
+          <h4>Outcomes Over Activity</h4>
+          <p>We measure success by results, not hours logged. If the system isn't delivering value, we're not done.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h4>Clarity Over Complexity</h4>
+          <p>The best systems are simple to use. We fight the urge to over-engineer and focus on what actually matters.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h4>Partnership Over Projects</h4>
+          <p>We're not just vendors. We invest in your success because your wins are our wins.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h4>Honesty Over Harmony</h4>
+          <p>We'll tell you what you need to hear, not what you want to hear. Candor serves you better than comfort.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h4>Progress Over Perfection</h4>
+          <p>Done beats perfect. We launch, learn, and iterate rather than planning forever.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h4>Teaching Over Dependency</h4>
+          <p>We want you to understand your systems, not rely on us forever. Knowledge transfer is non-negotiable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Name Section -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="section-header fade-in">
+        <p class="eyebrow">The Name</p>
+        <h2>Why "EphrAIm"?</h2>
+        <div class="divider divider--center"></div>
+      </div>
+
+      <div class="fade-in" style="max-width: 600px; margin: 0 auto;">
+        <p>In the Hebrew Bible, Ephraim was known for fruitfulness. Prosperity that came through sustained effort and wise stewardship. That's the outcome we pursue for every client.</p>
+        <p>The "AI" in EphrAIm represents our embrace of intelligent automation. Not as a gimmick, but as a practical tool for building systems that scale. We use technology thoughtfully, always in service of human goals.</p>
+        <p><strong>Fruitfulness through wisdom. Scale through systems. That's EphrAIm.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark cta">
+    <div class="container">
+      <div class="fade-in">
+        <h2 style="color: var(--white);">Let's Talk About Your Business</h2>
+        <p style="color: rgba(255,255,255,0.7);">We're always happy to have a conversation, even if it doesn't lead to an engagement.</p>
+        <a href="contact.html" class="btn btn--primary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="logo">Ephraim<span>Solutions</span></p>
+          <p>We help growing companies build the operational systems that let them scale without the chaos.</p>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="what-we-do.html">What We Do</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <ul class="footer__links">
+            <li><a href="what-we-do.html#communication">Digital Communication</a></li>
+            <li><a href="what-we-do.html#automation">Automation & Integration</a></li>
+            <li><a href="what-we-do.html#intelligence">Business Intelligence</a></li>
+            <li><a href="ai-solutions.html">AI Employees</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

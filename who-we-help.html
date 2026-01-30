@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who We Help | EphrAIm Solutions</title>
+  <meta name="description" content="We work with home services, healthcare, finance, and insurance businesses facing operational complexity.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Industry Cards */
+    .industry-card {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .industry-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+    .industry-card__image {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .industry-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s;
+    }
+    .industry-card:hover .industry-card__image img {
+      filter: grayscale(0%);
+    }
+    .industry-card__content {
+      padding: 32px 40px 48px;
+    }
+    .industry-card__focus {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(110, 97, 254, 0.1);
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .industry-card h3 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    .industry-card__desc {
+      color: var(--gray-700);
+      margin-bottom: 24px;
+    }
+    .industry-card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .industry-card__list li {
+      padding: 12px 0;
+      border-top: 1px solid var(--gray-200);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .industry-card__list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* Split with list */
+    .fit-list {
+      list-style: none;
+      padding: 0;
+      margin: 32px 0 0;
+    }
+    .fit-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: start;
+      gap: 16px;
+    }
+    .fit-list li::before {
+      content: '✓';
+      color: var(--red);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">Ephraim<span>Solutions</span></a>
+        <nav class="nav" id="nav">
+          <a href="what-we-do.html">What We Do</a>
+          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
+          <a href="how-we-work.html">How We Work</a>
+          <div class="nav__dropdown">
+            <a href="who-we-help.html" class="nav__dropdown-trigger">
+              Who We Help
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </a>
+            <div class="nav__dropdown-menu">
+              <a href="who-we-help.html">Overview</a>
+              <div class="nav__dropdown-divider"></div>
+              <span class="nav__dropdown-label">Industries</span>
+              <a href="industries/roofing.html">Roofing</a>
+              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
+              <a href="industries/healthcare.html">Healthcare & Clinics</a>
+              <a href="industries/finance.html">Finance & Lending</a>
+            </div>
+          </div>
+          <a href="about.html">About</a>
+          <a href="contact.html" class="nav__cta">Contact Us</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 65vh;">
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=2874&auto=format&fit=crop" alt="Business team meeting">
+    </div>
+    <div class="container">
+      <div class="hero__content fade-in">
+        <p class="eyebrow">Who We Help</p>
+        <h1>Built for Businesses Like Yours</h1>
+        <p class="lead">We work with growing companies where operational complexity is the barrier to scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Are We Right For You -->
+  <section class="section">
+    <div class="container">
+      <div class="split fade-in">
+        <div class="split__image">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2940&auto=format&fit=crop" alt="Growing business team" style="filter: grayscale(100%); transition: filter 0.7s;">
+        </div>
+        <div>
+          <p class="eyebrow">The Sweet Spot</p>
+          <h2>Are We Right for You?</h2>
+          <div class="divider"></div>
+          <p>We work best with businesses that have proven their model and are now struggling with the operational side of growth. You know what works. Now you need systems to scale it.</p>
+
+          <ul class="fit-list">
+            <li>Revenue between $2M and $100M</li>
+            <li>Service-based business model</li>
+            <li>Growth is creating operational strain</li>
+            <li>Ready to invest in systems, not just more people</li>
+            <li>Leadership willing to adopt new processes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Section -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="fade-in" style="max-width: 600px; margin-bottom: 60px;">
+        <p class="eyebrow">Industries</p>
+        <h2>Where We Focus</h2>
+      </div>
+
+      <div class="grid grid--2 fade-in" style="gap: 32px;">
+        <!-- Home Services -->
+        <div class="industry-card">
+          <div class="industry-card__image">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2940&auto=format&fit=crop" alt="Home services technician">
+          </div>
+          <div class="industry-card__content">
+            <span class="industry-card__focus">COMMUNICATION + AI STAFFING</span>
+            <h3>Home Services</h3>
+            <p class="industry-card__desc">Roofing, plumbing, HVAC, remodeling, and other trades growing beyond the owner's direct oversight.</p>
+            <ul class="industry-card__list">
+              <li>Leads getting lost between marketing and dispatch</li>
+              <li>Scheduling chaos and missed appointments</li>
+              <li>No consistent follow-up process</li>
+              <li>Need to scale without hiring more office staff</li>
+            </ul>
+            <p style="margin-top: 24px; font-size: 14px; color: var(--gray-600);">We build communication systems that capture every lead and deploy AI agents to handle scheduling, follow-ups, and customer service.</p>
+            <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="industries/roofing.html" class="btn btn--outline-dark" style="padding: 10px 16px; font-size: 13px;">Roofing</a>
+              <a href="industries/hvac-plumbing.html" class="btn btn--outline-dark" style="padding: 10px 16px; font-size: 13px;">HVAC & Plumbing</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Healthcare / Clinics -->
+        <div class="industry-card">
+          <div class="industry-card__image">
+            <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2940&auto=format&fit=crop" alt="Medical clinic">
+          </div>
+          <div class="industry-card__content">
+            <span class="industry-card__focus">COMMUNICATION + DATA</span>
+            <h3>Clinics & Healthcare</h3>
+            <p class="industry-card__desc">Private practices, dental groups, therapy centers, and specialty clinics balancing patient care with business operations.</p>
+            <ul class="industry-card__list">
+              <li>Front desk overwhelmed with scheduling</li>
+              <li>Patient communication is inconsistent</li>
+              <li>No visibility into practice performance</li>
+              <li>Revenue data scattered across systems</li>
+            </ul>
+            <p style="margin-top: 24px; font-size: 14px; color: var(--gray-600);">We streamline patient communication and build dashboards that show you exactly how your practice is performing.</p>
+            <div style="margin-top: 24px;">
+              <a href="industries/healthcare.html" class="btn btn--outline-dark" style="padding: 10px 16px; font-size: 13px;">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Finance & Lending -->
+        <div class="industry-card">
+          <div class="industry-card__image">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2940&auto=format&fit=crop" alt="Finance and lending">
+          </div>
+          <div class="industry-card__content">
+            <span class="industry-card__focus">COMMUNICATION + AI STAFFING</span>
+            <h3>Finance & Lending</h3>
+            <p class="industry-card__desc">Small lending firms, equipment finance companies, and loan brokers moving deals from application to funded.</p>
+            <ul class="industry-card__list">
+              <li>Leads go cold waiting for follow-up</li>
+              <li>Documents chased manually for weeks</li>
+              <li>No clear view of pipeline health</li>
+              <li>Delinquencies caught too late</li>
+            </ul>
+            <p style="margin-top: 24px; font-size: 14px; color: var(--gray-600);">We build systems that respond to applications instantly, chase documents automatically, and keep borrowers on track with payments.</p>
+            <div style="margin-top: 24px;">
+              <a href="industries/finance.html" class="btn btn--outline-dark" style="padding: 10px 16px; font-size: 13px;">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insurance & Custom -->
+        <div class="industry-card">
+          <div class="industry-card__image">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2940&auto=format&fit=crop" alt="Insurance and business services">
+          </div>
+          <div class="industry-card__content">
+            <span class="industry-card__focus">CUSTOM APPS + AUTOMATION</span>
+            <h3>Insurance & Specialty Services</h3>
+            <p class="industry-card__desc">Insurance agencies, brokerages, and other businesses with unique workflows that off-the-shelf software can't handle.</p>
+            <ul class="industry-card__list">
+              <li>Processes that don't fit standard software</li>
+              <li>Manual workarounds everywhere</li>
+              <li>Data trapped in spreadsheets and legacy systems</li>
+              <li>Need tools built for how you actually work</li>
+            </ul>
+            <p style="margin-top: 24px; font-size: 14px; color: var(--gray-600);">We build custom applications and automation tailored to your specific workflows. No forcing your business into someone else's box.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Not A Fit Section -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="section-header fade-in">
+        <p class="eyebrow">Transparency</p>
+        <h2>When We're Not the Right Fit</h2>
+        <div class="divider divider--center"></div>
+      </div>
+
+      <div class="fade-in" style="max-width: 600px; margin: 0 auto;">
+        <p>We believe in honest conversations upfront. We're probably not the right partner if:</p>
+        <ul style="list-style: disc; padding-left: 24px; margin-top: 24px;">
+          <li style="margin-bottom: 12px;"><strong>You need a quick fix.</strong> Our work takes time to do right.</li>
+          <li style="margin-bottom: 12px;"><strong>Leadership isn't bought in.</strong> Systems fail without executive sponsorship.</li>
+          <li style="margin-bottom: 12px;"><strong>You're still figuring out your model.</strong> Nail your offering before optimizing operations.</li>
+          <li style="margin-bottom: 12px;"><strong>You want software, not systems.</strong> We build processes around tools, not just install tools.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark cta">
+    <div class="container">
+      <div class="fade-in">
+        <h2 style="color: var(--white);">Think We Might Be a Match?</h2>
+        <p style="color: rgba(255,255,255,0.7);">Let's have a conversation about your situation.</p>
+        <a href="contact.html" class="btn btn--primary">Start the Conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="logo">Ephraim<span>Solutions</span></p>
+          <p>We help growing companies build the operational systems that let them scale without the chaos.</p>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="what-we-do.html">What We Do</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <ul class="footer__links">
+            <li><a href="what-we-do.html#communication">Digital Communication</a></li>
+            <li><a href="what-we-do.html#automation">Automation & Integration</a></li>
+            <li><a href="what-we-do.html#intelligence">Business Intelligence</a></li>
+            <li><a href="ai-solutions.html">AI Employees</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
