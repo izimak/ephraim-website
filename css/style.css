@@ -959,3 +959,146 @@ p:last-child {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ============================================
+   AI TRIGGER BUTTON - FLOATING ORB
+   ============================================ */
+
+.ai-trigger {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-decoration: none;
+}
+
+.ai-trigger__orb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9B7DFF, #6E61FE 40%, #4A3ACD 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 60px rgba(110, 97, 254, 0.6),
+    0 0 100px rgba(110, 97, 254, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: ai-orb-breathe 4s ease-in-out infinite, ai-orb-float 6s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ai-trigger:hover .ai-trigger__orb {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 80px rgba(110, 97, 254, 0.8),
+    0 0 120px rgba(110, 97, 254, 0.5),
+    inset 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+.ai-trigger__orb::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, #6E61FE, #00D4FF, #6E61FE, transparent);
+  animation: ai-orb-rotate 8s linear infinite;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.ai-trigger__orb::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
+  border-radius: 50%;
+  top: 15%;
+  left: 20%;
+  filter: blur(2px);
+}
+
+.ai-trigger__icon {
+  position: relative;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  color: white;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+}
+
+.ai-trigger__label {
+  position: absolute;
+  right: calc(100% + 16px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.ai-trigger__label::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.9);
+}
+
+.ai-trigger:hover .ai-trigger__label {
+  opacity: 1;
+}
+
+@keyframes ai-orb-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes ai-orb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes ai-orb-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .ai-trigger {
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .ai-trigger__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-trigger__label {
+    display: none;
+  }
+}

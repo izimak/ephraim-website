@@ -1452,8 +1452,8 @@
   </footer>
 
   <!-- AI Trigger - Living Orb -->
-  <button class="ai-trigger" id="ai-trigger" aria-label="Talk to AI Assistant">
-    <span class="ai-trigger__suggest" id="ai-suggest">Ready to talk?</span>
+  <a href="ai-demo.html" class="ai-trigger" id="ai-trigger" aria-label="Talk to AI Assistant">
+    <span class="ai-trigger__suggest" id="ai-suggest">Talk to AI</span>
     <div class="ai-trigger__orb">
       <svg class="ai-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
@@ -1469,7 +1469,7 @@
       <span class="ai-trigger__particle"></span>
       <span class="ai-trigger__particle"></span>
     </div>
-  </button>
+  </a>
 
   <!-- Full-Screen AI Experience -->
   <div class="ai-experience" id="ai-experience">
@@ -1625,24 +1625,11 @@
       });
 
       // ========== OPEN / CLOSE EXPERIENCE ==========
+      // Trigger now links to ai-demo.html - no click handler needed
       trigger.addEventListener('click', function() {
         hasOpened = true;
         clearSuggestion();
-        experience.classList.add('active');
-        trigger.style.opacity = '0';
-        trigger.style.pointerEvents = 'none';
-        document.body.style.overflow = 'hidden';
-
-        // Dramatic entrance
-        setTimeout(() => {
-          typeText("Hello. I'm EphrAIm.", function() {
-            setTimeout(() => {
-              typeText("Tap the orb to speak with me.", function() {
-                statusSub.textContent = "Or switch to chat mode below";
-              });
-            }, 800);
-          });
-        }, 600);
+        // Let the link navigate naturally
       });
 
       function closeExperience() {

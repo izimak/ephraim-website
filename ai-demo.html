@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Sales Demo | EphrAIm Solutions</title>
+  <meta name="description" content="Talk to our AI sales agent and see what EphrAIm Solutions can do for your business.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================
+       AI DEMO - FULL SCREEN EXPERIENCE
+       ============================================ */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body.demo-active {
+      overflow: hidden;
+    }
+
+    .demo {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0a0a12;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Background Effects */
+    .demo__bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .demo__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(110, 97, 254, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(110, 97, 254, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .demo__glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.4;
+    }
+
+    .demo__glow--1 {
+      background: #6E61FE;
+      top: -400px;
+      left: -200px;
+    }
+
+    .demo__glow--2 {
+      background: #7B1FEC;
+      bottom: -400px;
+      right: -200px;
+      opacity: 0.3;
+    }
+
+    /* Header */
+    .demo__header {
+      position: relative;
+      z-index: 10;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .demo__logo {
+      height: 32px;
+      opacity: 0.9;
+    }
+
+    .demo__close {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .demo__close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .demo__close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Main Content Area */
+    .demo__main {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      .demo__main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+      }
+
+      .demo.has-component .demo__main {
+        grid-template-rows: auto 1fr;
+      }
+    }
+
+    /* Left Panel - Voice Interface */
+    .demo__voice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 1024px) {
+      .demo__voice {
+        padding: 32px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    /* Voice Orb */
+    .voice-orb {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+
+    .voice-orb__sphere {
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #9B7DFF 0%, #6E61FE 40%, #4A3ACD 100%);
+      box-shadow:
+        0 0 60px rgba(110, 97, 254, 0.6),
+        0 0 100px rgba(110, 97, 254, 0.3),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .voice-orb:hover .voice-orb__sphere {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 80px rgba(110, 97, 254, 0.8),
+        0 0 120px rgba(110, 97, 254, 0.4),
+        inset 0 0 50px rgba(255, 255, 255, 0.25);
+    }
+
+    .voice-orb__sphere::before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, rgba(255,255,255,0.6), transparent);
+      border-radius: 50%;
+      top: 15%;
+      left: 20%;
+    }
+
+    /* Pulse rings */
+    .voice-orb__ring {
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(110, 97, 254, 0.3);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .voice-orb.active .voice-orb__ring {
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    .voice-orb__ring:nth-child(2) { animation-delay: 0.5s; }
+    .voice-orb__ring:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* Listening animation */
+    .voice-orb.listening .voice-orb__sphere {
+      animation: listening-pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes listening-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Speaking animation */
+    .voice-orb.speaking .voice-orb__sphere {
+      animation: speaking-glow 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes speaking-glow {
+      0% { box-shadow: 0 0 60px rgba(110, 97, 254, 0.6), 0 0 100px rgba(110, 97, 254, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.2); }
+      100% { box-shadow: 0 0 100px rgba(110, 97, 254, 0.9), 0 0 150px rgba(110, 97, 254, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.3); }
+    }
+
+    /* Status */
+    .voice-status {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .voice-status__text {
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 8px 0;
+      min-height: 30px;
+    }
+
+    .voice-status__sub {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* Controls */
+    .voice-controls {
+      display: flex;
+      gap: 16px;
+    }
+
+    .voice-btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .voice-btn--primary {
+      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
+      color: white;
+      box-shadow: 0 8px 32px rgba(110, 97, 254, 0.4);
+    }
+
+    .voice-btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(110, 97, 254, 0.5);
+    }
+
+    .voice-btn--primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .voice-btn--secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .voice-btn--secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .voice-btn--danger {
+      background: rgba(220, 38, 38, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .voice-btn--danger:hover {
+      background: rgba(220, 38, 38, 0.3);
+    }
+
+    .voice-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Right Panel - Visual Components */
+    .demo__visuals {
+      position: relative;
+      overflow-y: auto;
+      padding: 48px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .demo__visuals {
+        padding: 32px 24px;
+      }
+    }
+
+    .demo__visuals-placeholder {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .demo__visuals-placeholder svg {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 24px;
+      opacity: 0.5;
+    }
+
+    .demo__visuals-placeholder p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    /* Component Container */
+    .visual-component {
+      display: none;
+      animation: fadeSlideIn 0.5s ease forwards;
+    }
+
+    .visual-component.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Component Header */
+    .component-header {
+      margin-bottom: 32px;
+    }
+
+    .component-header__eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #6E61FE;
+      margin-bottom: 12px;
+    }
+
+    .component-header__title {
+      font-size: 28px;
+      font-weight: 600;
+      color: white;
+      margin: 0;
+    }
+
+    /* ============================================
+       VISUAL COMPONENTS
+       ============================================ */
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      background: rgba(110, 97, 254, 0.1);
+      border-color: rgba(110, 97, 254, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .service-card__icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(110, 97, 254, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .service-card__icon svg {
+      width: 24px;
+      height: 24px;
+      color: #6E61FE;
+    }
+
+    .service-card__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 12px 0;
+    }
+
+    .service-card__desc {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* AI Team Grid */
+    .ai-team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      .ai-team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ai-role-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    .ai-role-card:hover {
+      background: rgba(110, 97, 254, 0.1);
+      border-color: rgba(110, 97, 254, 0.3);
+    }
+
+    .ai-role-card__avatar {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-role-card__avatar svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .ai-role-card__content {
+      flex: 1;
+    }
+
+    .ai-role-card__badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(110, 97, 254, 0.2);
+      color: #a599ff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .ai-role-card__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 8px 0;
+    }
+
+    .ai-role-card__desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Process Steps */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+    }
+
+    .process-step__number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .process-step__content h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 8px 0;
+    }
+
+    .process-step__content p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Fit Checklist */
+    .fit-checklist {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .fit-checklist__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 24px 0;
+    }
+
+    .fit-checklist__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .fit-checklist__item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+    }
+
+    .fit-checklist__item:last-child {
+      border-bottom: none;
+    }
+
+    .fit-checklist__item svg {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      color: #22c55e;
+    }
+
+    /* Calendar Embed */
+    .calendar-embed {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .calendar-embed__title {
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 12px 0;
+    }
+
+    .calendar-embed__desc {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0 0 32px 0;
+    }
+
+    .calendar-embed__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(110, 97, 254, 0.4);
+    }
+
+    .calendar-embed__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(110, 97, 254, 0.5);
+    }
+
+    .calendar-embed__btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Transcript */
+    .transcript {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .transcript__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0 0 16px 0;
+      letter-spacing: 0.05em;
+    }
+
+    .transcript__messages {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .transcript__msg {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+
+    .transcript__msg--agent {
+      background: rgba(110, 97, 254, 0.2);
+      color: rgba(255, 255, 255, 0.9);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .transcript__msg--user {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Loading State */
+    .loading-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error State */
+    .error-message {
+      background: rgba(220, 38, 38, 0.1);
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #f87171;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    /* ============================================
+       MOBILE OPTIMIZATIONS
+       ============================================ */
+
+    @media (max-width: 768px) {
+      /* Smaller header on mobile */
+      .demo__header {
+        padding: 16px 20px;
+      }
+
+      .demo__logo {
+        height: 24px;
+      }
+
+      .demo__close {
+        width: 40px;
+        height: 40px;
+      }
+
+      /* Compact voice section when component is shown */
+      .demo.has-component .demo__voice {
+        padding: 20px;
+        flex-shrink: 0;
+      }
+
+      .demo.has-component .voice-orb {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 16px;
+      }
+
+      .demo.has-component .voice-orb__sphere {
+        inset: 15px;
+      }
+
+      .demo.has-component .voice-status {
+        margin-bottom: 16px;
+      }
+
+      .demo.has-component .voice-status__text {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .demo.has-component .voice-status__sub {
+        font-size: 12px;
+      }
+
+      .demo.has-component .voice-controls {
+        gap: 8px;
+      }
+
+      .demo.has-component .voice-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+      }
+
+      .demo.has-component .transcript {
+        display: none !important;
+      }
+
+      /* Make visuals panel prominent */
+      .demo.has-component .demo__visuals {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px 16px;
+        max-height: none;
+      }
+
+      /* Component header smaller on mobile */
+      .demo.has-component .component-header {
+        margin-bottom: 20px;
+      }
+
+      .demo.has-component .component-header__title {
+        font-size: 22px;
+      }
+
+      /* Scroll indicator */
+      .demo__visuals::before {
+        content: '';
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 10;
+        display: none;
+      }
+
+      .demo.has-component .demo__visuals::before {
+        display: block;
+      }
+
+      /* Stack services on mobile */
+      .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+      }
+
+      .service-card {
+        padding: 20px;
+      }
+
+      .service-card__icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+      }
+
+      .service-card__title {
+        font-size: 16px;
+      }
+
+      .service-card__desc {
+        font-size: 13px;
+      }
+
+      /* AI Team grid on mobile */
+      .ai-team-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+      }
+
+      /* Process steps on mobile */
+      .process-steps {
+        gap: 16px;
+      }
+
+      .process-step {
+        padding: 20px;
+      }
+
+      /* Fit checklist on mobile */
+      .fit-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Calendar on mobile */
+      .calendar-embed {
+        min-height: 400px;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+      .demo.has-component .voice-orb {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
+      }
+
+      .demo.has-component .voice-orb__sphere {
+        inset: 10px;
+      }
+
+      .demo.has-component .demo__voice {
+        padding: 16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .demo.has-component .voice-status {
+        margin-bottom: 0;
+        text-align: left;
+      }
+
+      .demo.has-component .voice-controls {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="demo-active">
+  <div class="demo">
+    <!-- Background -->
+    <div class="demo__bg">
+      <div class="demo__grid"></div>
+      <div class="demo__glow demo__glow--1"></div>
+      <div class="demo__glow demo__glow--2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="demo__header">
+      <img src="images/logo.svg" alt="EphrAIm Solutions" class="demo__logo">
+      <a href="index.html" class="demo__close" aria-label="Close demo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo__main">
+      <!-- Left: Voice Interface -->
+      <div class="demo__voice">
+        <div class="voice-orb" id="voiceOrb">
+          <div class="voice-orb__ring"></div>
+          <div class="voice-orb__ring"></div>
+          <div class="voice-orb__ring"></div>
+          <div class="voice-orb__sphere"></div>
+        </div>
+
+        <div class="voice-status">
+          <p class="voice-status__text" id="statusText">Click to start conversation</p>
+          <p class="voice-status__sub" id="statusSub">AI-powered sales assistant</p>
+        </div>
+
+        <div class="voice-controls" id="voiceControls">
+          <button class="voice-btn voice-btn--primary" id="startBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+            Start Call
+          </button>
+        </div>
+
+        <div id="errorContainer"></div>
+
+        <!-- Transcript -->
+        <div class="transcript" id="transcriptSection" style="display: none;">
+          <h4 class="transcript__title">CONVERSATION</h4>
+          <div class="transcript__messages" id="transcriptMessages"></div>
+        </div>
+      </div>
+
+      <!-- Right: Visual Components -->
+      <div class="demo__visuals">
+        <!-- Placeholder -->
+        <div class="demo__visuals-placeholder" id="visualPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>Visual content will appear here<br>as we talk</p>
+        </div>
+
+        <!-- SERVICES Component -->
+        <div class="visual-component" id="comp-services">
+          <div class="component-header">
+            <p class="component-header__eyebrow">WHAT WE DO</p>
+            <h3 class="component-header__title">Three Areas of Focus</h3>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h4 class="service-card__title">Digital Communication</h4>
+              <p class="service-card__desc">Never miss a lead. Unified inbox, instant response, smart routing, and 24/7 availability.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </div>
+              <h4 class="service-card__title">Automation & Integration</h4>
+              <p class="service-card__desc">Connect your tools. Automate handoffs. Let your software work for you, not against you.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </div>
+              <h4 class="service-card__title">Business Intelligence</h4>
+              <p class="service-card__desc">Real-time dashboards. Automated reports. Know how your business is doing without digging.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI_TEAM Component -->
+        <div class="visual-component" id="comp-ai_team">
+          <div class="component-header">
+            <p class="component-header__eyebrow">AI EMPLOYEES</p>
+            <h3 class="component-header__title">Your AI Team</h3>
+          </div>
+          <div class="ai-team-grid">
+            <div class="ai-role-card">
+              <div class="ai-role-card__avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="ai-role-card__content">
+                <span class="ai-role-card__badge">FRONT OF HOUSE</span>
+                <h4 class="ai-role-card__title">AI Receptionist</h4>
+                <p class="ai-role-card__desc">Answers every call 24/7, books appointments, handles FAQs.</p>
+              </div>
+            </div>
+            <div class="ai-role-card">
+              <div class="ai-role-card__avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"/>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div class="ai-role-card__content">
+                <span class="ai-role-card__badge">REVENUE</span>
+                <h4 class="ai-role-card__title">AI Sales Assistant</h4>
+                <p class="ai-role-card__desc">Instant lead response, follow-ups, nurturing until they're ready.</p>
+              </div>
+            </div>
+            <div class="ai-role-card">
+              <div class="ai-role-card__avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+              </div>
+              <div class="ai-role-card__content">
+                <span class="ai-role-card__badge">BACK OFFICE</span>
+                <h4 class="ai-role-card__title">AI Admin</h4>
+                <p class="ai-role-card__desc">Verifies invoices, checks pricing, catches billing errors.</p>
+              </div>
+            </div>
+            <div class="ai-role-card">
+              <div class="ai-role-card__avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </div>
+              <div class="ai-role-card__content">
+                <span class="ai-role-card__badge">ACCOUNTS RECEIVABLE</span>
+                <h4 class="ai-role-card__title">AI Collections</h4>
+                <p class="ai-role-card__desc">Payment reminders, overdue follow-ups, keeps cash flowing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROCESS Component -->
+        <div class="visual-component" id="comp-process">
+          <div class="component-header">
+            <p class="component-header__eyebrow">HOW WE WORK</p>
+            <h3 class="component-header__title">Our Process</h3>
+          </div>
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step__number">1</div>
+              <div class="process-step__content">
+                <h4>Discover</h4>
+                <p>We talk to your team, map your processes, and audit your tools. We find where the problems are and what to prioritize.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step__number">2</div>
+              <div class="process-step__content">
+                <h4>Design</h4>
+                <p>We architect the solution with your input. You see exactly what we're building before we build it. No surprises.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step__number">3</div>
+              <div class="process-step__content">
+                <h4>Build & Launch</h4>
+                <p>We configure, integrate, and automate. Then we go live together, train your team, and fine-tune until everything works.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FIT Component -->
+        <div class="visual-component" id="comp-fit">
+          <div class="component-header">
+            <p class="component-header__eyebrow">IS THIS FOR YOU?</p>
+            <h3 class="component-header__title">We're a Good Fit If...</h3>
+          </div>
+          <div class="fit-checklist">
+            <ul class="fit-checklist__list">
+              <li class="fit-checklist__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Revenue between $2M and $100M
+              </li>
+              <li class="fit-checklist__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Service-based business model
+              </li>
+              <li class="fit-checklist__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Growth is creating operational strain
+              </li>
+              <li class="fit-checklist__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Ready to invest in systems, not just more people
+              </li>
+              <li class="fit-checklist__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Leadership willing to adopt new processes
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BOOK Component -->
+        <div class="visual-component" id="comp-book">
+          <div class="component-header">
+            <p class="component-header__eyebrow">NEXT STEP</p>
+            <h3 class="component-header__title">Let's Talk</h3>
+          </div>
+          <div class="calendar-embed">
+            <h4 class="calendar-embed__title">Book a Discovery Call</h4>
+            <p class="calendar-embed__desc">30 minutes to understand your situation and see if we can help.</p>
+            <a href="contact.html" class="calendar-embed__btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              Schedule Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Retell SDK via ES Module -->
+  <script type="module">
+    import { RetellWebClient } from 'https://esm.sh/retell-client-js-sdk@2.0.7';
+    window.RetellWebClient = RetellWebClient;
+    window.dispatchEvent(new Event('retell-ready'));
+  </script>
+
+  <script>
+    // ============================================
+    // AI DEMO - RETELL INTEGRATION
+    // ============================================
+
+    (function() {
+      // Configuration
+      const API_URL = 'https://retell-api.vercel.app/api/create-call';
+
+      // Elements
+      const voiceOrb = document.getElementById('voiceOrb');
+      const statusText = document.getElementById('statusText');
+      const statusSub = document.getElementById('statusSub');
+      const startBtn = document.getElementById('startBtn');
+      const voiceControls = document.getElementById('voiceControls');
+      const errorContainer = document.getElementById('errorContainer');
+      const visualPlaceholder = document.getElementById('visualPlaceholder');
+      const transcriptSection = document.getElementById('transcriptSection');
+      const transcriptMessages = document.getElementById('transcriptMessages');
+
+      // State
+      let retellClient = null;
+      let isCallActive = false;
+
+      // Component triggers
+      const componentTriggers = {
+        '[SERVICES]': 'comp-services',
+        '[AI_TEAM]': 'comp-ai_team',
+        '[PROCESS]': 'comp-process',
+        '[FIT]': 'comp-fit',
+        '[BOOK]': 'comp-book'
+      };
+
+      // Initialize Retell client
+      function initRetell() {
+        if (typeof RetellWebClient === 'undefined') {
+          console.error('Retell SDK not loaded');
+          showError('Failed to load voice SDK. Please refresh the page.');
+          return false;
+        }
+
+        retellClient = new RetellWebClient();
+
+        // Event handlers
+        retellClient.on('call_started', () => {
+          console.log('Call started');
+          isCallActive = true;
+          voiceOrb.classList.add('active');
+          updateStatus('Connected', 'Listening...');
+          updateControls('active');
+        });
+
+        retellClient.on('call_ended', () => {
+          console.log('Call ended');
+          isCallActive = false;
+          voiceOrb.classList.remove('active', 'listening', 'speaking');
+          updateStatus('Call ended', 'Click to start a new conversation');
+          updateControls('ended');
+        });
+
+        retellClient.on('agent_start_talking', () => {
+          voiceOrb.classList.remove('listening');
+          voiceOrb.classList.add('speaking');
+          updateStatus('Agent speaking', '');
+        });
+
+        retellClient.on('agent_stop_talking', () => {
+          voiceOrb.classList.remove('speaking');
+          voiceOrb.classList.add('listening');
+          updateStatus('Listening...', 'Speak now');
+        });
+
+        retellClient.on('update', (update) => {
+          // Handle transcript updates
+          if (update.transcript) {
+            handleTranscript(update.transcript);
+          }
+        });
+
+        retellClient.on('error', (error) => {
+          console.error('Retell error:', error);
+          showError('Connection error. Please try again.');
+          endCall();
+        });
+
+        return true;
+      }
+
+      // Start call
+      async function startCall() {
+        if (isCallActive) return;
+
+        startBtn.disabled = true;
+        startBtn.innerHTML = '<div class="loading-spinner"></div> Connecting...';
+        clearError();
+
+        try {
+          // Get access token from our API
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to create call');
+          }
+
+          const { access_token } = await response.json();
+
+          // Initialize client if needed
+          if (!retellClient) {
+            if (!initRetell()) return;
+          }
+
+          // Start the call
+          await retellClient.startCall({
+            accessToken: access_token,
+            sampleRate: 24000
+          });
+
+          // Show transcript section
+          transcriptSection.style.display = 'block';
+
+        } catch (error) {
+          console.error('Failed to start call:', error);
+          showError('Failed to connect. Please check your connection and try again.');
+          startBtn.disabled = false;
+          startBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+            Start Call
+          `;
+        }
+      }
+
+      // End call
+      function endCall() {
+        if (retellClient && isCallActive) {
+          retellClient.stopCall();
+        }
+        isCallActive = false;
+        voiceOrb.classList.remove('active', 'listening', 'speaking');
+      }
+
+      // Handle transcript and trigger components
+      function handleTranscript(transcript) {
+        if (!transcript || transcript.length === 0) return;
+
+        const lastEntry = transcript[transcript.length - 1];
+        if (!lastEntry) return;
+
+        const role = lastEntry.role; // 'agent' or 'user'
+        const content = lastEntry.content || '';
+
+        // Add to transcript display
+        addTranscriptMessage(role, content);
+
+        // Check for component triggers (only in agent messages)
+        if (role === 'agent') {
+          for (const [trigger, componentId] of Object.entries(componentTriggers)) {
+            if (content.includes(trigger)) {
+              showComponent(componentId);
+              break;
+            }
+          }
+        }
+      }
+
+      // Add message to transcript
+      function addTranscriptMessage(role, content) {
+        // Clean triggers from display
+        let cleanContent = content;
+        for (const trigger of Object.keys(componentTriggers)) {
+          cleanContent = cleanContent.replace(trigger, '').trim();
+        }
+
+        if (!cleanContent) return;
+
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `transcript__msg transcript__msg--${role}`;
+        msgDiv.textContent = cleanContent;
+        transcriptMessages.appendChild(msgDiv);
+        transcriptMessages.scrollTop = transcriptMessages.scrollHeight;
+      }
+
+      // Show visual component
+      function showComponent(componentId) {
+        // Hide placeholder
+        visualPlaceholder.style.display = 'none';
+
+        // Add class for mobile optimization
+        document.querySelector('.demo').classList.add('has-component');
+
+        // Hide all components
+        document.querySelectorAll('.visual-component').forEach(comp => {
+          comp.classList.remove('active');
+        });
+
+        // Show target component
+        const component = document.getElementById(componentId);
+        if (component) {
+          component.classList.add('active');
+
+          // On mobile, scroll to make component visible
+          if (window.innerWidth <= 768) {
+            setTimeout(() => {
+              component.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        }
+      }
+
+      // Update status display
+      function updateStatus(main, sub) {
+        statusText.textContent = main;
+        if (sub !== undefined) {
+          statusSub.textContent = sub;
+        }
+      }
+
+      // Update controls
+      function updateControls(state) {
+        if (state === 'active') {
+          voiceControls.innerHTML = `
+            <button class="voice-btn voice-btn--danger" id="endBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              End Call
+            </button>
+          `;
+          document.getElementById('endBtn').addEventListener('click', endCall);
+        } else {
+          voiceControls.innerHTML = `
+            <button class="voice-btn voice-btn--primary" id="startBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+              Start New Call
+            </button>
+          `;
+          document.getElementById('startBtn').addEventListener('click', startCall);
+        }
+      }
+
+      // Error handling
+      function showError(message) {
+        errorContainer.innerHTML = `<div class="error-message">${message}</div>`;
+      }
+
+      function clearError() {
+        errorContainer.innerHTML = '';
+      }
+
+      // Initialize - wait for SDK to load
+      function setupEventListeners() {
+        startBtn.addEventListener('click', startCall);
+      }
+
+      document.addEventListener('DOMContentLoaded', setupEventListeners);
+
+      // Wait for Retell SDK to be ready (loaded via ES module)
+      window.addEventListener('retell-ready', () => {
+        console.log('Retell SDK loaded');
+        initRetell();
+
+        // Allow clicking orb to start/stop
+        voiceOrb.addEventListener('click', () => {
+          if (isCallActive) {
+            // Could add mute toggle here
+          } else {
+            startCall();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
