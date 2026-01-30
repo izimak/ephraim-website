@@ -12,26 +12,58 @@ document.addEventListener('DOMContentLoaded', function() {
   const navToggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('nav');
 
+  // Create overlay element
+  const navOverlay = document.createElement('div');
+  navOverlay.className = 'nav-overlay';
+  document.body.appendChild(navOverlay);
+
+  function openNav() {
+    nav.classList.add('open');
+    navToggle.classList.add('active');
+    navOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    nav.classList.remove('open');
+    navToggle.classList.remove('active');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   if (navToggle && nav) {
     navToggle.addEventListener('click', function() {
-      nav.classList.toggle('open');
-      navToggle.classList.toggle('active');
-    });
-
-    // Close nav when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
-        nav.classList.remove('open');
-        navToggle.classList.remove('active');
+      if (nav.classList.contains('open')) {
+        closeNav();
+      } else {
+        openNav();
       }
     });
 
-    // Close nav when clicking a link
-    nav.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        nav.classList.remove('open');
-        navToggle.classList.remove('active');
+    // Close nav when clicking overlay
+    navOverlay.addEventListener('click', closeNav);
+
+    // Close nav when clicking a link (except dropdown triggers)
+    nav.querySelectorAll('a:not(.nav__dropdown-trigger)').forEach(function(link) {
+      link.addEventListener('click', closeNav);
+    });
+
+    // Handle mobile dropdown toggles
+    nav.querySelectorAll('.nav__dropdown-trigger').forEach(function(trigger) {
+      trigger.addEventListener('click', function(e) {
+        if (window.innerWidth <= 900) {
+          e.preventDefault();
+          const dropdown = this.closest('.nav__dropdown');
+          dropdown.classList.toggle('open');
+        }
       });
+    });
+
+    // Close nav on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        closeNav();
+      }
     });
   }
 

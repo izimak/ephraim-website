@@ -1232,6 +1232,12 @@
           voiceOrb.classList.add('active');
           updateStatus('Connected', 'Listening...');
           updateControls('active');
+
+          // Reset transcript tracking for new call
+          displayedTranscriptLength = 0;
+          lastMessageElement = null;
+          lastMessageRole = null;
+          transcriptMessages.innerHTML = '';
         });
 
         retellClient.on('call_ended', () => {
@@ -1329,45 +1335,59 @@
         voiceOrb.classList.remove('active', 'listening', 'speaking');
       }
 
+      // Track displayed transcript to avoid duplicates
+      let displayedTranscriptLength = 0;
+      let lastMessageElement = null;
+      let lastMessageRole = null;
+
       // Handle transcript and trigger components
       function handleTranscript(transcript) {
         if (!transcript || transcript.length === 0) return;
 
-        const lastEntry = transcript[transcript.length - 1];
-        if (!lastEntry) return;
+        // Process each entry in transcript
+        transcript.forEach((entry, index) => {
+          const role = entry.role;
+          const content = entry.content || '';
 
-        const role = lastEntry.role; // 'agent' or 'user'
-        const content = lastEntry.content || '';
+          // Clean triggers from display
+          let cleanContent = content;
+          for (const trigger of Object.keys(componentTriggers)) {
+            cleanContent = cleanContent.replace(trigger, '').trim();
+          }
 
-        // Add to transcript display
-        addTranscriptMessage(role, content);
+          if (!cleanContent) return;
 
-        // Check for component triggers (only in agent messages)
-        if (role === 'agent') {
-          for (const [trigger, componentId] of Object.entries(componentTriggers)) {
-            if (content.includes(trigger)) {
-              showComponent(componentId);
-              break;
+          // If this is updating the last message of same role, update it
+          if (index === transcript.length - 1 && lastMessageElement && lastMessageRole === role) {
+            lastMessageElement.textContent = cleanContent;
+          }
+          // If this is a new message (new index or role changed)
+          else if (index >= displayedTranscriptLength) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `transcript__msg transcript__msg--${role}`;
+            msgDiv.textContent = cleanContent;
+            transcriptMessages.appendChild(msgDiv);
+
+            lastMessageElement = msgDiv;
+            lastMessageRole = role;
+            displayedTranscriptLength = index + 1;
+          }
+
+          // Check for component triggers (only in agent messages)
+          if (role === 'agent') {
+            for (const [trigger, componentId] of Object.entries(componentTriggers)) {
+              if (content.includes(trigger)) {
+                showComponent(componentId);
+                break;
+              }
             }
           }
-        }
-      }
+        });
 
-      // Add message to transcript
-      function addTranscriptMessage(role, content) {
-        // Clean triggers from display
-        let cleanContent = content;
-        for (const trigger of Object.keys(componentTriggers)) {
-          cleanContent = cleanContent.replace(trigger, '').trim();
-        }
-
-        if (!cleanContent) return;
-
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `transcript__msg transcript__msg--${role}`;
-        msgDiv.textContent = cleanContent;
-        transcriptMessages.appendChild(msgDiv);
-        transcriptMessages.scrollTop = transcriptMessages.scrollHeight;
+        // Scroll after DOM updates
+        requestAnimationFrame(() => {
+          transcriptMessages.scrollTop = transcriptMessages.scrollHeight;
+        });
       }
 
       // Show visual component
