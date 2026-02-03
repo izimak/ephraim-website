@@ -241,7 +241,7 @@ p:last-child {
   background: var(--red);
   color: var(--white) !important;
   padding: 12px 24px;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   transition: background 0.2s ease;
 }
 
@@ -559,6 +559,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 1;
+  opacity: .5;
 }
 
 .hero__bg img {
