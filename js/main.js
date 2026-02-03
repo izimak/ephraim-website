@@ -234,4 +234,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // ============================================
+  // DYNAMICALLY SET YEAR IN FOOTER/NO HARCODED YEAR
+  // ============================================
+
+  const yearElement = document.getElementById('copyright-year');
+  if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+  }
+
+  // ============================================
+  // AI TRIGGER LABEL - Show on load, hide after 3s
+  // ============================================
+
+  const aiTriggerLabel = document.querySelector('.ai-trigger__label');
+
+  if (aiTriggerLabel) {
+    // Hide the label after 5 seconds
+    setTimeout(function() {
+      aiTriggerLabel.classList.add('ai-trigger__label--hidden');
+    }, 5000);
+  }
+
+
 });

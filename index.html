@@ -5,696 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EphrAIm Solutions | Operational Excellence for Growing Businesses</title>
   <meta name="description" content="We build the operational systems that allow growing companies to handle more customers and protect their margins without constantly hiring more staff.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ============================================
-       AI EXPERIENCE - IMMERSIVE FUTURISTIC DESIGN
-       ============================================ */
-
-    /* Floating Trigger - Living Orb */
-    .ai-trigger {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      z-index: 1000;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      animation: none; /* Override style.css float - orb has its own animation */
-    }
-    .ai-trigger__orb {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #9B7DFF, #6E61FE 40%, #4A3ACD 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 0 60px rgba(110, 97, 254, 0.6),
-        0 0 100px rgba(110, 97, 254, 0.4),
-        inset 0 0 30px rgba(255, 255, 255, 0.2);
-      animation: orb-breathe 4s ease-in-out infinite, orb-float 6s ease-in-out infinite;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .ai-trigger:hover .ai-trigger__orb {
-      transform: scale(1.15);
-      box-shadow:
-        0 0 80px rgba(110, 97, 254, 0.8),
-        0 0 120px rgba(110, 97, 254, 0.5),
-        inset 0 0 40px rgba(255, 255, 255, 0.3);
-    }
-    .ai-trigger__orb::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, transparent, #6E61FE, #00D4FF, #6E61FE, transparent);
-      animation: orb-rotate 8s linear infinite;
-      opacity: 0.6;
-    }
-    .ai-trigger__orb::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
-      border-radius: 50%;
-      top: 15%;
-      left: 20%;
-      filter: blur(2px);
-    }
-    .ai-trigger__icon {
-      position: relative;
-      z-index: 2;
-      width: 28px;
-      height: 28px;
-      color: white;
-      filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
-    }
-    .ai-trigger__particles {
-      position: absolute;
-      inset: -20px;
-      pointer-events: none;
-    }
-    .ai-trigger__particle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 4px;
-      height: 4px;
-      background: #00D4FF;
-      border-radius: 50%;
-      opacity: 0;
-      animation: particle-orbit 3s linear infinite;
-    }
-    .ai-trigger__particle:nth-child(1) { animation-delay: 0s; }
-    .ai-trigger__particle:nth-child(2) { animation-delay: 0.5s; }
-    .ai-trigger__particle:nth-child(3) { animation-delay: 1s; }
-    .ai-trigger__particle:nth-child(4) { animation-delay: 1.5s; }
-    .ai-trigger__particle:nth-child(5) { animation-delay: 2s; }
-    .ai-trigger__particle:nth-child(6) { animation-delay: 2.5s; }
-
-    @keyframes orb-breathe {
-      0%, 100% { box-shadow: 0 0 60px rgba(110, 97, 254, 0.6), 0 0 100px rgba(110, 97, 254, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.2); }
-      50% { box-shadow: 0 0 80px rgba(110, 97, 254, 0.8), 0 0 120px rgba(110, 97, 254, 0.5), inset 0 0 40px rgba(255, 255, 255, 0.25); }
-    }
-    @keyframes orb-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes orb-rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes particle-orbit {
-      0% { transform: rotate(0deg) translateX(50px) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); opacity: 0; }
-    }
-
-    /* Suggestion Bubble */
-    .ai-trigger__suggest {
-      position: absolute;
-      right: calc(100% + 20px);
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(20px);
-      color: white;
-      padding: 16px 24px;
-      border-radius: 20px;
-      font-size: 15px;
-      font-weight: 500;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(20px) scale(0.9);
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-      border: 1px solid rgba(110, 97, 254, 0.3);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(110, 97, 254, 0.2);
-    }
-    .ai-trigger__suggest::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(110, 97, 254, 0.1), transparent);
-      pointer-events: none;
-    }
-    .ai-trigger__suggest.show {
-      opacity: 1;
-      transform: translateX(0) scale(1);
-    }
-    .ai-trigger:hover .ai-trigger__suggest {
-      opacity: 0 !important;
-    }
-
-    /* ========== FULL SCREEN AI EXPERIENCE ========== */
-    .ai-experience {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    .ai-experience.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Cosmic Background */
-    .ai-experience__bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, #0a0a12 0%, #000008 100%);
-      overflow: hidden;
-    }
-    .ai-experience__stars {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.6), transparent),
-        radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.7), transparent),
-        radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.4), transparent),
-        radial-gradient(2px 2px at 300px 160px, rgba(255,255,255,0.6), transparent);
-      background-size: 350px 350px;
-      animation: stars-drift 100s linear infinite;
-    }
-    @keyframes stars-drift {
-      from { transform: translateY(0); }
-      to { transform: translateY(-350px); }
-    }
-
-    /* Nebula Effects */
-    .ai-experience__nebula {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.4;
-      animation: nebula-pulse 8s ease-in-out infinite;
-    }
-    .ai-experience__nebula--1 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, #6E61FE 0%, transparent 70%);
-      top: -200px;
-      right: -100px;
-      animation-delay: 0s;
-    }
-    .ai-experience__nebula--2 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #7B1FEC 0%, transparent 70%);
-      bottom: -150px;
-      left: -100px;
-      animation-delay: -3s;
-    }
-    .ai-experience__nebula--3 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #00D4FF 0%, transparent 70%);
-      top: 40%;
-      left: 30%;
-      animation-delay: -5s;
-      opacity: 0.2;
-    }
-    @keyframes nebula-pulse {
-      0%, 100% { transform: scale(1); opacity: 0.4; }
-      50% { transform: scale(1.2); opacity: 0.6; }
-    }
-
-    /* Grid Lines */
-    .ai-experience__grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(110, 97, 254, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(110, 97, 254, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      transform: perspective(500px) rotateX(60deg);
-      transform-origin: center top;
-      opacity: 0.5;
-    }
-
-    /* Close Button */
-    .ai-experience__close {
-      position: absolute;
-      top: 32px;
-      right: 32px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      color: rgba(255, 255, 255, 0.7);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-    .ai-experience__close:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      transform: rotate(90deg);
-    }
-    .ai-experience__close svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    /* Main Content Container */
-    .ai-experience__content {
-      position: relative;
-      z-index: 5;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    /* AI Core - Central Element */
-    .ai-core {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    /* Orbital Rings */
-    .ai-core__orbit {
-      position: absolute;
-      border: 1px solid rgba(110, 97, 254, 0.2);
-      border-radius: 50%;
-      animation: orbit-spin 20s linear infinite;
-    }
-    .ai-core__orbit--1 {
-      inset: 0;
-      animation-duration: 20s;
-    }
-    .ai-core__orbit--2 {
-      inset: 30px;
-      animation-duration: 15s;
-      animation-direction: reverse;
-      border-color: rgba(0, 212, 255, 0.2);
-    }
-    .ai-core__orbit--3 {
-      inset: 60px;
-      animation-duration: 10s;
-      border-color: rgba(123, 31, 236, 0.2);
-    }
-    .ai-core__orbit-dot {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: #00D4FF;
-      border-radius: 50%;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      box-shadow: 0 0 20px #00D4FF;
-    }
-    .ai-core__orbit--2 .ai-core__orbit-dot {
-      background: #6E61FE;
-      box-shadow: 0 0 20px #6E61FE;
-      left: auto;
-      right: 0;
-    }
-    .ai-core__orbit--3 .ai-core__orbit-dot {
-      background: #7B1FEC;
-      box-shadow: 0 0 20px #7B1FEC;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    @keyframes orbit-spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Central Sphere */
-    .ai-core__sphere {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #9B7DFF 0%, #6E61FE 30%, #4A3ACD 70%, #2D1F7A 100%);
-      box-shadow:
-        0 0 80px rgba(110, 97, 254, 0.8),
-        0 0 160px rgba(110, 97, 254, 0.4),
-        inset 0 0 60px rgba(255, 255, 255, 0.2),
-        inset -20px -20px 40px rgba(0, 0, 0, 0.3);
-      animation: sphere-pulse 3s ease-in-out infinite;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .ai-core__sphere:hover {
-      transform: scale(1.1);
-    }
-    .ai-core__sphere::before {
-      content: '';
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background: radial-gradient(circle, rgba(255,255,255,0.6), transparent);
-      border-radius: 50%;
-      top: 15%;
-      left: 15%;
-      filter: blur(3px);
-    }
-    @keyframes sphere-pulse {
-      0%, 100% {
-        box-shadow: 0 0 80px rgba(110, 97, 254, 0.8), 0 0 160px rgba(110, 97, 254, 0.4), inset 0 0 60px rgba(255, 255, 255, 0.2), inset -20px -20px 40px rgba(0, 0, 0, 0.3);
-      }
-      50% {
-        box-shadow: 0 0 100px rgba(110, 97, 254, 1), 0 0 200px rgba(110, 97, 254, 0.6), inset 0 0 80px rgba(255, 255, 255, 0.25), inset -20px -20px 40px rgba(0, 0, 0, 0.3);
-      }
-    }
-
-    /* Sound Wave Visualizer */
-    .ai-core__waves {
-      position: absolute;
-      inset: -40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-    .ai-core__wave {
-      position: absolute;
-      border: 2px solid rgba(110, 97, 254, 0.4);
-      border-radius: 50%;
-      animation: wave-expand 2s ease-out infinite;
-      opacity: 0;
-    }
-    .ai-core__wave:nth-child(1) { animation-delay: 0s; }
-    .ai-core__wave:nth-child(2) { animation-delay: 0.4s; }
-    .ai-core__wave:nth-child(3) { animation-delay: 0.8s; }
-    .ai-core__wave:nth-child(4) { animation-delay: 1.2s; }
-    .ai-core__wave:nth-child(5) { animation-delay: 1.6s; }
-    @keyframes wave-expand {
-      0% { width: 120px; height: 120px; opacity: 0.8; }
-      100% { width: 300px; height: 300px; opacity: 0; }
-    }
-
-    /* Listening State */
-    .ai-core.listening .ai-core__sphere {
-      animation: sphere-listening 0.5s ease-in-out infinite;
-    }
-    .ai-core.listening .ai-core__wave {
-      animation-duration: 1s;
-      border-color: rgba(0, 212, 255, 0.5);
-    }
-    @keyframes sphere-listening {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    /* Status Text */
-    .ai-status {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .ai-status__text {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 20px;
-      font-weight: 500;
-      margin: 0 0 8px 0;
-      min-height: 30px;
-    }
-    .ai-status__subtext {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 14px;
-      margin: 0;
-    }
-
-    /* Typing Effect */
-    .ai-status__text .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 20px;
-      background: #6E61FE;
-      margin-left: 2px;
-      animation: cursor-blink 1s step-end infinite;
-      vertical-align: text-bottom;
-    }
-    @keyframes cursor-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* Audio Bars */
-    .ai-audio-bars {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      height: 60px;
-      margin-bottom: 40px;
-    }
-    .ai-audio-bars span {
-      width: 6px;
-      border-radius: 3px;
-      background: linear-gradient(to top, #6E61FE, #00D4FF);
-      animation: audio-bar 0.8s ease-in-out infinite;
-    }
-    .ai-audio-bars span:nth-child(1) { height: 20px; animation-delay: 0s; }
-    .ai-audio-bars span:nth-child(2) { height: 35px; animation-delay: 0.1s; }
-    .ai-audio-bars span:nth-child(3) { height: 25px; animation-delay: 0.2s; }
-    .ai-audio-bars span:nth-child(4) { height: 45px; animation-delay: 0.3s; }
-    .ai-audio-bars span:nth-child(5) { height: 30px; animation-delay: 0.4s; }
-    .ai-audio-bars span:nth-child(6) { height: 50px; animation-delay: 0.5s; }
-    .ai-audio-bars span:nth-child(7) { height: 35px; animation-delay: 0.6s; }
-    .ai-audio-bars span:nth-child(8) { height: 25px; animation-delay: 0.7s; }
-    .ai-audio-bars span:nth-child(9) { height: 40px; animation-delay: 0.8s; }
-    @keyframes audio-bar {
-      0%, 100% { transform: scaleY(1); opacity: 0.8; }
-      50% { transform: scaleY(0.4); opacity: 0.5; }
-    }
-
-    /* Mode Toggle Pills */
-    .ai-mode-toggle {
-      display: flex;
-      gap: 8px;
-      padding: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-    }
-    .ai-mode-pill {
-      padding: 14px 32px;
-      border-radius: 50px;
-      border: none;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-    }
-    .ai-mode-pill:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    .ai-mode-pill.active {
-      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
-      color: white;
-      box-shadow: 0 8px 32px rgba(110, 97, 254, 0.4);
-    }
-    .ai-mode-pill svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    /* Chat Panel (slides up from bottom) */
-    .ai-chat-panel {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%) translateY(100%);
-      width: 100%;
-      max-width: 600px;
-      max-height: 60vh;
-      background: rgba(15, 15, 25, 0.95);
-      backdrop-filter: blur(40px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-bottom: none;
-      border-radius: 24px 24px 0 0;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 10;
-    }
-    .ai-chat-panel.active {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .ai-chat-panel__header {
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .ai-chat-panel__title {
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .ai-chat-panel__title::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: #00D4FF;
-      border-radius: 50%;
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-
-    .ai-chat-panel__messages {
-      flex: 1;
-      padding: 24px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .ai-chat-msg {
-      max-width: 80%;
-      padding: 16px 20px;
-      border-radius: 20px;
-      font-size: 15px;
-      line-height: 1.5;
-      animation: msg-appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes msg-appear {
-      from { opacity: 0; transform: translateY(20px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .ai-chat-msg--ai {
-      align-self: flex-start;
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.9);
-      border-bottom-left-radius: 6px;
-    }
-    .ai-chat-msg--user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
-      color: white;
-      border-bottom-right-radius: 6px;
-    }
-
-    .ai-chat-panel__input {
-      padding: 20px 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .ai-chat-input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 50px;
-      padding: 8px 8px 8px 24px;
-      transition: all 0.3s ease;
-    }
-    .ai-chat-input-wrap:focus-within {
-      border-color: rgba(110, 97, 254, 0.5);
-      box-shadow: 0 0 0 4px rgba(110, 97, 254, 0.15);
-    }
-    .ai-chat-input-wrap input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      color: white;
-      font-size: 15px;
-      font-family: inherit;
-    }
-    .ai-chat-input-wrap input::placeholder {
-      color: rgba(255, 255, 255, 0.3);
-    }
-    .ai-chat-send {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-    .ai-chat-send:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 32px rgba(110, 97, 254, 0.5);
-    }
-    .ai-chat-send svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .ai-trigger {
-        bottom: 24px;
-        right: 24px;
-        width: 64px;
-        height: 64px;
-      }
-      .ai-trigger__suggest {
-        display: none;
-      }
-      .ai-experience__close {
-        top: 20px;
-        right: 20px;
-        width: 48px;
-        height: 48px;
-      }
-      .ai-core {
-        width: 220px;
-        height: 220px;
-      }
-      .ai-core__sphere {
-        width: 100px;
-        height: 100px;
-      }
-      .ai-mode-pill {
-        padding: 12px 24px;
-        font-size: 14px;
-      }
-      .ai-chat-panel {
-        max-width: 100%;
-        border-radius: 20px 20px 0 0;
-      }
-    }
 
     /* ============================================
        AI EMPLOYEES SHOWCASE SECTION
@@ -812,118 +124,6 @@
     .ai-showcase__cta:hover svg {
       transform: translateX(4px);
     }
-
-    /* Demo Section */
-    .ai-demo {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-top: 80px;
-    }
-    @media (max-width: 900px) {
-      .ai-demo {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-    }
-
-    /* Chat Demo */
-    .ai-chat-demo {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
-      padding: 32px;
-      backdrop-filter: blur(20px);
-    }
-    .ai-chat-demo__header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .ai-chat-demo__avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ai-chat-demo__avatar svg {
-      width: 24px;
-      height: 24px;
-      color: white;
-    }
-    .ai-chat-demo__name {
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-    }
-    .ai-chat-demo__status {
-      font-size: 13px;
-      color: #00D4FF;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .ai-chat-demo__status::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: #00D4FF;
-      border-radius: 50%;
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-
-    .ai-chat-demo__messages {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .demo-msg {
-      max-width: 85%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.5;
-      animation: demo-msg-in 0.5s ease forwards;
-      opacity: 0;
-    }
-    .demo-msg--customer {
-      align-self: flex-start;
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.9);
-      border-bottom-left-radius: 4px;
-    }
-    .demo-msg--ai {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #6E61FE, #7B1FEC);
-      color: white;
-      border-bottom-right-radius: 4px;
-    }
-    .demo-msg--ai .ai-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 600;
-      margin-left: 8px;
-    }
-    @keyframes demo-msg-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .demo-msg:nth-child(1) { animation-delay: 0.3s; }
-    .demo-msg:nth-child(2) { animation-delay: 1s; }
-    .demo-msg:nth-child(3) { animation-delay: 2s; }
-    .demo-msg:nth-child(4) { animation-delay: 3s; }
 
     /* Benefits List */
     .ai-benefits {
@@ -1081,25 +281,7 @@
       font-size: 15px;
     }
 
-    /* Nav Highlight */
-    .nav__highlight {
-      position: relative;
-      color: var(--red) !important;
-      font-weight: 600 !important;
-    }
-    .nav__highlight::after {
-      content: 'NEW';
-      position: absolute;
-      top: -8px;
-      right: -28px;
-      background: var(--red);
-      color: white;
-      font-size: 8px;
-      font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 3px;
-      letter-spacing: 0.05em;
-    }
+    
   </style>
 </head>
 <body>
@@ -1107,31 +289,31 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a href="index.html" class="logo"><img src="images/logo-dark.svg" alt="Ephraim Solutions"></a>
+        <a href="/" class="logo"><img src="/images/logo-dark.svg" alt="Ephraim Solutions"></a>
 
         <nav class="nav" id="nav">
-          <a href="what-we-do.html">What We Do</a>
-          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
-          <a href="how-we-work.html">How We Work</a>
+          <a href="/what-we-do/">What We Do</a>
+          <a href="/ai-solutions/" class = "new-page">AI Employees</a>
+          <a href="/how-we-work/">How We Work</a>
           <div class="nav__dropdown">
-            <a href="who-we-help.html" class="nav__dropdown-trigger">
+            <a href="/who-we-help/" class="nav__dropdown-trigger">
               Who We Help
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
             </a>
             <div class="nav__dropdown-menu">
-              <a href="who-we-help.html">Overview</a>
+              <a href="/who-we-help/">Overview</a>
               <div class="nav__dropdown-divider"></div>
               <span class="nav__dropdown-label">Industries</span>
-              <a href="industries/roofing.html">Roofing</a>
-              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
-              <a href="industries/healthcare.html">Healthcare & Clinics</a>
-              <a href="industries/finance.html">Finance & Lending</a>
+              <a href="/industries/roofing/">Roofing</a>
+              <a href="/industries/hvac-plumbing/">HVAC & Plumbing</a>
+              <a href="/industries/healthcare/">Healthcare & Clinics</a>
+              <a href="/industries/finance/">Finance & Lending</a>
             </div>
           </div>
-          <a href="about.html">About</a>
-          <a href="contact.html" class="nav__cta">Contact Us</a>
+          <a href="/about/">About</a>
+          <a href="/contact/" class="nav__cta">Contact Us</a>
         </nav>
 
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
@@ -1154,13 +336,13 @@
         <h1>Scale Your Revenue Without Scaling Your Overhead</h1>
         <p class="lead">We help companies simplify their systems, automate repetitive work, and use practical AI to create clarity and growth.</p>
         <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-          <a href="what-we-do.html" class="btn btn--primary">
+          <a href="/what-we-do/" class="btn btn--primary">
             Explore Our Capabilities
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="contact.html" class="btn btn--outline">Discuss Your Growth Goals</a>
+          <a href="/contact/" class="btn btn--outline">Discuss Your Growth Goals</a>
         </div>
       </div>
     </div>
@@ -1187,7 +369,7 @@
           <p>
             <strong>EphrAIm Solutions exists to solve this specific problem.</strong> We implement systems that automate the busy work and organize your data so you can grow without the growing pains.
           </p>
-          <a href="what-we-do.html" class="btn btn--outline-dark" style="margin-top: 24px;">
+          <a href="/what-we-do/" class="btn btn--outline-dark" style="margin-top: 24px;">
             See How We Help
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1261,7 +443,7 @@
       </div>
 
       <div class="fade-in" style="text-align: center; margin-top: 48px;">
-        <a href="what-we-do.html" class="btn btn--primary">
+        <a href="/what-we-do/" class="btn btn--primary">
           Explore Our Approach
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1294,7 +476,7 @@
           </span>
           <h2 class="ai-showcase__title">Build Your AI Team</h2>
           <p class="ai-showcase__subtitle">Hire AI employees that work 24/7, never call in sick, and handle the work that's drowning your team. Real roles. Real responsibilities. Real results.</p>
-          <a href="ai-solutions.html" class="ai-showcase__cta">
+          <a href="/ai-solutions/" class="ai-showcase__cta">
             Meet The Team
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1399,7 +581,7 @@
               Our Fruitful Ops™ framework, powered by <strong>FLOW</strong>, <strong>ACCEL</strong>, and <strong>PULSE</strong>, is how we get you there. We design how work moves, automate what slows you down, and give you the clarity to lead with confidence.
             </p>
           </div>
-          <a href="about.html" class="btn btn--outline-dark">
+          <a href="/about/" class="btn btn--outline-dark">
             Learn More About Us
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1416,7 +598,7 @@
       <div class="fade-in">
         <h2 style="color: var(--white);">Ready to See What Your Business Can Really Do?</h2>
         <p style="color: rgba(255,255,255,0.7);">Start a conversation about your growth goals today.</p>
-        <a href="contact.html" class="btn btn--primary">Start a Conversation</a>
+        <a href="/contact/" class="btn btn--primary">Start a Conversation</a>
       </div>
     </div>
   </section>
@@ -1426,16 +608,16 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <p class="logo"><img src="images/logo.svg" alt="Ephraim Solutions"></p>
+          <p class="logo"><img src="/images/logo.svg" alt="Ephraim Solutions"></p>
           <p>We build the operational systems that allow growing companies to scale revenue without scaling overhead.</p>
         </div>
         <div>
           <h5>Company</h5>
           <ul class="footer__links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="what-we-do.html">What We Do</a></li>
-            <li><a href="how-we-work.html">How We Work</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/what-we-do/">What We Do</a></li>
+            <li><a href="/how-we-work/">How We Work</a></li>
+            <li><a href="/contact/">Contact</a></li>
           </ul>
         </div>
         <div>
@@ -1444,19 +626,21 @@
             <li><a href="what-we-do.html#communication">Digital Communication</a></li>
             <li><a href="what-we-do.html#automation">Automation & Integration</a></li>
             <li><a href="what-we-do.html#intelligence">Business Intelligence</a></li>
-            <li><a href="ai-solutions.html">AI Employees</a></li>
+            <li><a href="/ai-solutions/" class = "new-page">AI Employees</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+        <p>&copy; <span id="copyright-year"></span> EphrAIm Solutions. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- AI Trigger - Living Orb -->
-  <a href="ai-demo.html" class="ai-trigger" id="ai-trigger" aria-label="Talk to AI Assistant">
-    <span class="ai-trigger__suggest" id="ai-suggest">Talk to AI</span>
+    <!-- AI Demo Trigger -->
+  <a href="/ai-assistant/" class="ai-trigger" aria-label="Talk to our AI expert Assistant">
+    <span class="ai-trigger__ring"></span>
+    <span class="ai-trigger__ring"></span>
+    <span class="ai-trigger__label">Talk to our AI expert</span>
     <div class="ai-trigger__orb">
       <svg class="ai-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
@@ -1464,320 +648,8 @@
         <line x1="12" y1="19" x2="12" y2="22"/>
       </svg>
     </div>
-    <div class="ai-trigger__particles">
-      <span class="ai-trigger__particle"></span>
-      <span class="ai-trigger__particle"></span>
-      <span class="ai-trigger__particle"></span>
-      <span class="ai-trigger__particle"></span>
-      <span class="ai-trigger__particle"></span>
-      <span class="ai-trigger__particle"></span>
-    </div>
   </a>
 
-  <!-- Full-Screen AI Experience -->
-  <div class="ai-experience" id="ai-experience">
-    <!-- Cosmic Background -->
-    <div class="ai-experience__bg">
-      <div class="ai-experience__stars"></div>
-      <div class="ai-experience__nebula ai-experience__nebula--1"></div>
-      <div class="ai-experience__nebula ai-experience__nebula--2"></div>
-      <div class="ai-experience__nebula ai-experience__nebula--3"></div>
-      <div class="ai-experience__grid"></div>
-    </div>
-
-    <!-- Close Button -->
-    <button class="ai-experience__close" id="ai-close" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-
-    <!-- Main Content -->
-    <div class="ai-experience__content">
-      <!-- AI Core Visualization -->
-      <div class="ai-core" id="ai-core">
-        <!-- Orbital Rings -->
-        <div class="ai-core__orbit ai-core__orbit--1">
-          <span class="ai-core__orbit-dot"></span>
-        </div>
-        <div class="ai-core__orbit ai-core__orbit--2">
-          <span class="ai-core__orbit-dot"></span>
-        </div>
-        <div class="ai-core__orbit ai-core__orbit--3">
-          <span class="ai-core__orbit-dot"></span>
-        </div>
-
-        <!-- Sound Waves (visible when active) -->
-        <div class="ai-core__waves">
-          <span class="ai-core__wave"></span>
-          <span class="ai-core__wave"></span>
-          <span class="ai-core__wave"></span>
-          <span class="ai-core__wave"></span>
-          <span class="ai-core__wave"></span>
-        </div>
-
-        <!-- Central Sphere -->
-        <div class="ai-core__sphere" id="ai-sphere"></div>
-      </div>
-
-      <!-- Status -->
-      <div class="ai-status">
-        <p class="ai-status__text" id="ai-status-text">
-          <span id="ai-status-content">Tap the orb to begin</span>
-          <span class="typing-cursor" id="typing-cursor" style="display: none;"></span>
-        </p>
-        <p class="ai-status__subtext" id="ai-status-sub">Voice-powered AI assistant</p>
-      </div>
-
-      <!-- Audio Visualizer Bars -->
-      <div class="ai-audio-bars" id="ai-audio-bars">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span>
-      </div>
-
-      <!-- Mode Toggle -->
-      <div class="ai-mode-toggle">
-        <button class="ai-mode-pill active" id="mode-voice">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-          </svg>
-          Voice
-        </button>
-        <button class="ai-mode-pill" id="mode-chat">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          Chat
-        </button>
-      </div>
-    </div>
-
-    <!-- Chat Panel (slides up when chat mode selected) -->
-    <div class="ai-chat-panel" id="ai-chat-panel">
-      <div class="ai-chat-panel__header">
-        <span class="ai-chat-panel__title">EphrAIm Assistant</span>
-      </div>
-      <div class="ai-chat-panel__messages" id="chat-messages">
-        <div class="ai-chat-msg ai-chat-msg--ai">
-          Hey there! I'm here to help you learn about EphrAIm Solutions. Ask me anything about our services, how we work, or whether we might be a good fit for your business.
-        </div>
-      </div>
-      <div class="ai-chat-panel__input">
-        <div class="ai-chat-input-wrap">
-          <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
-          <button class="ai-chat-send" id="chat-send" aria-label="Send message">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="22" y1="2" x2="11" y2="13"/>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/main.js"></script>
-  <script>
-    // ============================================
-    // IMMERSIVE AI EXPERIENCE
-    // ============================================
-    (function() {
-      // Elements
-      const trigger = document.getElementById('ai-trigger');
-      const experience = document.getElementById('ai-experience');
-      const closeBtn = document.getElementById('ai-close');
-      const aiCore = document.getElementById('ai-core');
-      const aiSphere = document.getElementById('ai-sphere');
-      const statusText = document.getElementById('ai-status-content');
-      const statusSub = document.getElementById('ai-status-sub');
-      const typingCursor = document.getElementById('typing-cursor');
-      const audioBars = document.getElementById('ai-audio-bars');
-      const voiceMode = document.getElementById('mode-voice');
-      const chatMode = document.getElementById('mode-chat');
-      const chatPanel = document.getElementById('ai-chat-panel');
-      const chatMessages = document.getElementById('chat-messages');
-      const chatInput = document.getElementById('chat-input');
-      const chatSend = document.getElementById('chat-send');
-      const aiSuggest = document.getElementById('ai-suggest');
-
-      let isListening = false;
-      let currentMode = 'voice';
-      let suggestTimer = null;
-      let hasOpened = false;
-
-      // ========== AUTO SUGGESTION ==========
-      function startSuggestTimer() {
-        suggestTimer = setTimeout(function() {
-          if (!hasOpened) {
-            aiSuggest.classList.add('show');
-          }
-        }, 4000);
-      }
-      startSuggestTimer();
-
-      function clearSuggestion() {
-        if (suggestTimer) clearTimeout(suggestTimer);
-        aiSuggest.classList.remove('show');
-      }
-
-      // Clear on scroll
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 200) clearSuggestion();
-      });
-
-      // ========== OPEN / CLOSE EXPERIENCE ==========
-      // Trigger now links to ai-demo.html - no click handler needed
-      trigger.addEventListener('click', function() {
-        hasOpened = true;
-        clearSuggestion();
-        // Let the link navigate naturally
-      });
-
-      function closeExperience() {
-        experience.classList.remove('active');
-        trigger.style.opacity = '1';
-        trigger.style.pointerEvents = 'auto';
-        document.body.style.overflow = '';
-        chatPanel.classList.remove('active');
-        aiCore.classList.remove('listening');
-        isListening = false;
-        statusText.textContent = "Tap the orb to begin";
-        statusSub.textContent = "Voice-powered AI assistant";
-      }
-
-      closeBtn.addEventListener('click', closeExperience);
-
-      // Close on escape
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && experience.classList.contains('active')) {
-          closeExperience();
-        }
-      });
-
-      // ========== TYPING EFFECT ==========
-      function typeText(text, callback) {
-        statusText.textContent = '';
-        typingCursor.style.display = 'inline-block';
-        let i = 0;
-        const interval = setInterval(function() {
-          if (i < text.length) {
-            statusText.textContent += text.charAt(i);
-            i++;
-          } else {
-            clearInterval(interval);
-            typingCursor.style.display = 'none';
-            if (callback) callback();
-          }
-        }, 40);
-      }
-
-      // ========== VOICE INTERACTION ==========
-      aiSphere.addEventListener('click', function() {
-        if (currentMode !== 'voice') return;
-
-        if (!isListening) {
-          // Start listening
-          isListening = true;
-          aiCore.classList.add('listening');
-          typeText("I'm listening...", null);
-          statusSub.textContent = "Speak now";
-
-          // Simulate listening for 3 seconds then respond
-          setTimeout(function() {
-            aiCore.classList.remove('listening');
-            typeText("Processing your request...", function() {
-              setTimeout(function() {
-                const responses = [
-                  "I can help you streamline your operations and scale without the chaos.",
-                  "We specialize in automation, communication systems, and business intelligence.",
-                  "Our sweet spot is businesses doing $2M to $100M who need operational clarity.",
-                  "Would you like to schedule a discovery call with our team?"
-                ];
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                typeText(response, function() {
-                  statusSub.textContent = "Tap the orb to speak again";
-                  isListening = false;
-                });
-              }, 500);
-            });
-          }, 3000);
-        }
-      });
-
-      // ========== MODE SWITCHING ==========
-      chatMode.addEventListener('click', function() {
-        if (currentMode === 'chat') return;
-        currentMode = 'chat';
-        chatMode.classList.add('active');
-        voiceMode.classList.remove('active');
-        chatPanel.classList.add('active');
-        aiCore.classList.remove('listening');
-        isListening = false;
-        statusText.textContent = "Chat mode active";
-        statusSub.textContent = "Type your message below";
-        setTimeout(() => chatInput.focus(), 400);
-      });
-
-      voiceMode.addEventListener('click', function() {
-        if (currentMode === 'voice') return;
-        currentMode = 'voice';
-        voiceMode.classList.add('active');
-        chatMode.classList.remove('active');
-        chatPanel.classList.remove('active');
-        statusText.textContent = "Tap the orb to speak";
-        statusSub.textContent = "Voice-powered AI assistant";
-      });
-
-      // ========== CHAT FUNCTIONALITY ==========
-      function sendChatMessage() {
-        const message = chatInput.value.trim();
-        if (!message) return;
-
-        // Add user message
-        const userMsg = document.createElement('div');
-        userMsg.className = 'ai-chat-msg ai-chat-msg--user';
-        userMsg.textContent = message;
-        chatMessages.appendChild(userMsg);
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        // Simulate AI thinking
-        setTimeout(function() {
-          const aiMsg = document.createElement('div');
-          aiMsg.className = 'ai-chat-msg ai-chat-msg--ai';
-          aiMsg.textContent = getAIResponse(message);
-          chatMessages.appendChild(aiMsg);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1200);
-      }
-
-      chatSend.addEventListener('click', sendChatMessage);
-      chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') sendChatMessage();
-      });
-
-      function getAIResponse(message) {
-        const lower = message.toLowerCase();
-        if (lower.includes('service') || lower.includes('what do you do') || lower.includes('help')) {
-          return "We focus on four areas: Digital Communication (never miss a lead), Automation & Integration (connect your tools), Business Intelligence (real-time dashboards), and Back Office Staffing (AI agents + virtual assistants). What challenge are you facing?";
-        }
-        if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
-          return "Pricing depends on scope and complexity. The best next step is a 30-minute discovery call where we understand your situation and give you honest feedback on whether we can help. Want me to help you schedule one?";
-        }
-        if (lower.includes('contact') || lower.includes('talk') || lower.includes('call') || lower.includes('schedule')) {
-          return "You can reach our team at hello@ephraim.solutions or head to our contact page. We respond within 24 hours, usually faster. Looking forward to hearing from you!";
-        }
-        if (lower.includes('industry') || lower.includes('who') || lower.includes('work with')) {
-          return "Our clients are typically in Home Services, Healthcare Clinics, Finance & Accounting, and Insurance. Revenue between $2M and $100M. If you're feeling the operational growing pains of success, we're probably a good fit.";
-        }
-        if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey')) {
-          return "Hey! Great to connect. I'm here to answer any questions about EphrAIm Solutions. What would you like to know?";
-        }
-        return "Great question! I can tell you about our services, who we work with, or help you connect with our team. What's on your mind?";
-      }
-    })();
-  </script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

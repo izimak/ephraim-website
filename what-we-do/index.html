@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What We Do | EphrAIm Solutions</title>
   <meta name="description" content="Digital Communication, Automation, Business Intelligence, and Staffing solutions for growing businesses.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
     /* Service Navigation */
     .service-nav {
@@ -168,7 +168,7 @@
     .service-split__number {
       font-size: 120px;
       font-weight: 700;
-      color: var(--gray-100);
+      color: var(--gray-300);
       line-height: 1;
       margin-bottom: 24px;
       font-family: var(--font-sans);
@@ -268,30 +268,30 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a href="index.html" class="logo"><img src="images/logo-dark.svg" alt="Ephraim Solutions"></a>
+        <a href="/" class="logo"><img src="/images/logo-dark.svg" alt="Ephraim Solutions"></a>
         <nav class="nav" id="nav">
-          <a href="what-we-do.html">What We Do</a>
-          <a href="ai-solutions.html" class="nav__highlight">AI Employees</a>
-          <a href="how-we-work.html">How We Work</a>
+          <a href="/what-we-do/" class="nav__highlight">What We Do</a>
+          <a href="/ai-solutions/" class = "new-page">AI Employees</a>
+          <a href="/how-we-work/">How We Work</a>
           <div class="nav__dropdown">
-            <a href="who-we-help.html" class="nav__dropdown-trigger">
+            <a href="/who-we-help/" class="nav__dropdown-trigger">
               Who We Help
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
             </a>
             <div class="nav__dropdown-menu">
-              <a href="who-we-help.html">Overview</a>
+              <a href="/who-we-help/">Overview</a>
               <div class="nav__dropdown-divider"></div>
               <span class="nav__dropdown-label">Industries</span>
-              <a href="industries/roofing.html">Roofing</a>
-              <a href="industries/hvac-plumbing.html">HVAC & Plumbing</a>
-              <a href="industries/healthcare.html">Healthcare & Clinics</a>
-              <a href="industries/finance.html">Finance & Lending</a>
+              <a href="/industries/roofing/">Roofing</a>
+              <a href="/industries/hvac-plumbing/">HVAC & Plumbing</a>
+              <a href="/industries/healthcare/">Healthcare & Clinics</a>
+              <a href="/industries/finance/">Finance & Lending</a>
             </div>
           </div>
-          <a href="about.html">About</a>
-          <a href="contact.html" class="nav__cta">Contact Us</a>
+          <a href="/about/">About</a>
+          <a href="/contact/" class="nav__cta">Contact Us</a>
         </nav>
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
           <span></span>
@@ -303,7 +303,7 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero" style="min-height: 70vh;">
+  <section class="hero">
     <div class="hero__bg">
       <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2940&auto=format&fit=crop" alt="Modern architecture">
     </div>
@@ -448,7 +448,7 @@
       <div class="fade-in">
         <h2 style="color: var(--white);">Ready to Fix What's Slowing You Down?</h2>
         <p style="color: rgba(255,255,255,0.7);">Let's figure out what you need and how we can help.</p>
-        <a href="contact.html" class="btn btn--primary">Start the Conversation</a>
+        <a href="/contact/" class="btn btn--primary">Start the Conversation</a>
       </div>
     </div>
   </section>
@@ -458,16 +458,16 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <p class="logo"><img src="images/logo.svg" alt="Ephraim Solutions"></p>
+          <p class="logo"><img src="/images/logo.svg" alt="Ephraim Solutions"></p>
           <p>We help companies simplify their systems, automate repetitive work, and create clarity for growth.</p>
         </div>
         <div>
           <h5>Company</h5>
           <ul class="footer__links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="what-we-do.html">What We Do</a></li>
-            <li><a href="how-we-work.html">How We Work</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/what-we-do/">What We Do</a></li>
+            <li><a href="/how-we-work/">How We Work</a></li>
+            <li><a href="/contact/">Contact</a></li>
           </ul>
         </div>
         <div>
@@ -476,21 +476,21 @@
             <li><a href="#communication">Digital Communication</a></li>
             <li><a href="#automation">Automation & Integration</a></li>
             <li><a href="#intelligence">Business Intelligence</a></li>
-            <li><a href="ai-solutions.html">AI Employees</a></li>
+            <li><a href="/ai-solutions/" class = "new-page">AI Employees</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2024 EphrAIm Solutions. All rights reserved.</p>
+        <p>&copy; <span id="copyright-year"></span> EphrAIm Solutions. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- AI Demo Trigger -->
-  <a href="ai-demo.html" class="ai-trigger" aria-label="Talk to AI Assistant">
+  <a href="/ai-assistant/" class="ai-trigger" aria-label="Talk to our AI expert Assistant">
     <span class="ai-trigger__ring"></span>
     <span class="ai-trigger__ring"></span>
-    <span class="ai-trigger__label">Talk to AI</span>
+    <span class="ai-trigger__label">Talk to our AI expert</span>
     <div class="ai-trigger__orb">
       <svg class="ai-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
@@ -500,6 +500,6 @@
     </div>
   </a>
 
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

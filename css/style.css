@@ -98,7 +98,7 @@ p:last-child {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-dark);
 }
 
 .hero .eyebrow {
@@ -241,7 +241,7 @@ p:last-child {
   background: var(--red);
   color: var(--white) !important;
   padding: 12px 24px;
-  font-weight: 600;
+  font-weight: 600 !important;
   transition: background 0.2s ease;
 }
 
@@ -252,13 +252,21 @@ p:last-child {
 
 .nav__highlight {
   position: relative;
-  color: var(--red) !important;
+  color: var(--red-dark) !important;
   font-weight: 600 !important;
 }
-.nav__highlight::after {
+
+.new-page {
+  position: relative;
+}
+
+.new-page::after {
   content: 'NEW';
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: -8px;
+  top: -12px;
   right: -28px;
   background: var(--red);
   color: white;
@@ -267,6 +275,10 @@ p:last-child {
   padding: 2px 5px;
   border-radius: 3px;
   letter-spacing: 0.05em;
+  text-align: center;
+  height: 17.6px;
+  width: 32px;
+  line-height: 1;
 }
 
 /* Nav Dropdown */
@@ -525,7 +537,7 @@ p:last-child {
 
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: 756px;
   display: flex;
   align-items: center;
   padding-top: 72px;
@@ -547,6 +559,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 1;
+  opacity: .5;
 }
 
 .hero__bg img {
@@ -1164,7 +1177,7 @@ p:last-child {
   right: calc(100% + 16px);
   top: 50%;
   transform: translateY(-50%);
-  background: var(--red, #6E61FE);
+  background: var(--red);
   color: white;
   padding: 12px 20px;
   border-radius: 24px;
@@ -1174,6 +1187,23 @@ p:last-child {
   pointer-events: none;
   box-shadow: 0 4px 20px rgba(110, 97, 254, 0.4);
   animation: ai-label-pulse 2s ease-in-out infinite;
+  /* Transition for show/hide animation - use top instead of transform (animation uses transform) */
+  transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  opacity: 1;
+}
+
+/* Hidden state - slides down and fades out */
+.ai-trigger__label--hidden {
+  top: calc(50% + 40px);
+  opacity: 0;
+  animation-play-state: paused;
+}
+
+/* On hover, show the label (slide up from bottom) */
+.ai-trigger:hover .ai-trigger__label--hidden {
+  top: 50%;
+  opacity: 1;
+  animation-play-state: running;
 }
 
 .ai-trigger__label::after {
