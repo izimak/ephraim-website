@@ -243,5 +243,18 @@ document.addEventListener('DOMContentLoaded', function() {
       yearElement.textContent = new Date().getFullYear();
   }
 
+  // ============================================
+  // AI TRIGGER LABEL - Show on load, hide after 3s
+  // ============================================
+
+  const aiTriggerLabel = document.querySelector('.ai-trigger__label');
+
+  if (aiTriggerLabel) {
+    // Hide the label after 5 seconds
+    setTimeout(function() {
+      aiTriggerLabel.classList.add('ai-trigger__label--hidden');
+    }, 5000);
+  }
+
 
 });
