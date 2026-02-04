@@ -257,4 +257,88 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
+// ============================================
+// Code for timeline-spine
+// ============================================
+
+// JavaScript to dynamically position nodes based on step cards
+  const steps = document.querySelectorAll('.spine-node');
+  const timelineNodes = document.querySelector('.timeline-nodes');
+  const timelineSpine = document.querySelector('.timeline-spine');
+  const numSteps = steps.length;
+  
+  // Get mobile breakpoint from data attribute
+  const mobileBreakpoint = parseInt(timelineSpine.getAttribute('data-mobile-breakpoint')) || 1024;
+  
+  // Clear any existing nodes
+  timelineNodes.innerHTML = '';
+  
+  // Create beginning node (small)
+  const beginNode = document.createElement('div');
+  beginNode.className = 'timeline-node timeline-node--start';
+  timelineNodes.appendChild(beginNode);
+  
+  // Create content nodes (one for each step)
+  for (let i = 0; i < numSteps; i++) {
+    const node = document.createElement('div');
+    node.className = 'timeline-node timeline-node--content hollow';
+    node.setAttribute('data-step', i);
+    timelineNodes.appendChild(node);
+  }
+  
+  // Create ending node (large with checkmark)
+  const endNode = document.createElement('div');
+  endNode.className = 'timeline-node timeline-node--end';
+  timelineNodes.appendChild(endNode);
+  
+  // Function to check screen width and toggle mobile class
+  function checkMobileBreakpoint() {
+    if (window.innerWidth <= mobileBreakpoint) {
+      timelineSpine.classList.add('mobile-screen');
+    } else {
+      timelineSpine.classList.remove('mobile-screen');
+    }
+  }
+  
+  // Function to align nodes
+  function alignNodes() {
+    const spineRect = timelineSpine.getBoundingClientRect();
+    const contentNodes = document.querySelectorAll('.timeline-node--content');
+    
+    // Position beginning node at the left edge
+    beginNode.style.left = '0%';
+    beginNode.style.position = 'absolute';
+    
+    // Position content nodes aligned with step cards
+    steps.forEach((step, index) => {
+      const stepRect = step.getBoundingClientRect();
+      const stepCenter = stepRect.left + stepRect.width / 2;
+      const spineLeft = spineRect.left;
+      const spineWidth = spineRect.width;
+      const relativePosition = ((stepCenter - spineLeft) / spineWidth) * 100;
+      
+      if (contentNodes[index]) {
+        contentNodes[index].style.left = `${relativePosition}%`;
+        contentNodes[index].style.transform = 'translateX(-50%)';
+        contentNodes[index].style.position = 'absolute';
+      }
+    });
+    
+    // Position ending node at the right edge
+    endNode.style.left = '100%';
+    endNode.style.transform = 'translateX(-50%)';
+    endNode.style.position = 'absolute';
+  }
+  
+  // Check breakpoint and align on load
+  checkMobileBreakpoint();
+  setTimeout(alignNodes, 100); // Small delay to ensure layout is complete
+  
+  // Check breakpoint and align on resize
+  window.addEventListener('resize', function() {
+    checkMobileBreakpoint();
+    alignNodes();
+  });
 });
+
+
