@@ -446,9 +446,9 @@ p:last-child {
     gap: 8px;
   }
 
-  .nav__highlight::after {
-    position: static;
-    transform: none;
+  .new-page::after {
+    top: 22px;
+    right: 100px;
   }
 
   .nav__cta {
@@ -473,12 +473,12 @@ p:last-child {
   }
 
   .nav__dropdown-trigger {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 16px 0;
-    border-bottom: none;
+    border-bottom: none !important;
   }
 
   .nav__dropdown-trigger svg {
@@ -936,128 +936,162 @@ p:last-child {
 .mt-5 { margin-top: 48px; }
 
 /* ============================================
-   FLIP CARDS
+   FOCUS GRID - Table-like Layout
    ============================================ */
 
-.flip-grid {
+.focus-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0;
+  gap: 0; /* No gap - cells share borders like a table */
 }
 
-@media (max-width: 768px) {
-  .flip-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .flip-card {
-    height: 280px;
-  }
-
-  .flip-card__front,
-  .flip-card__back {
-    padding: 32px;
-    border-right: 1px solid var(--gray-300) !important;
-  }
-
-  .flip-card__number {
-    font-size: 48px;
-  }
-
-  .flip-card__front h3 {
-    font-size: 26px;
-  }
-
-  .flip-card__back p {
-    font-size: 16px;
-  }
-}
-
-/* Tap to flip on touch devices */
-.flip-card.flipped .flip-card__inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card {
-  perspective: 1000px;
-  height: 320px;
-  cursor: pointer;
-}
-
-.flip-card__inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card__inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card__front,
-.flip-card__back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+.focus-cell {
+  padding: 48px;
+  border: 1px solid var(--gray-300);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 48px;
-  border: 1px solid var(--gray-300);
-}
-
-.flip-card:nth-child(odd) .flip-card__front,
-.flip-card:nth-child(odd) .flip-card__back {
+  min-height: 250px; /* Ensures consistent cell heights */
+  transition: all 0.3s ease;
   border-right: none;
 }
 
-.flip-card:nth-child(1) .flip-card__front,
-.flip-card:nth-child(1) .flip-card__back,
-.flip-card:nth-child(2) .flip-card__front,
-.flip-card:nth-child(2) .flip-card__back {
-  border-bottom: none;
+/* Remove outer borders to create table effect */
+/* Remove left border on left column (odd cells in 2-column grid) */
+.focus-cell:nth-child(odd) {
+  border-left: none;
 }
 
-.flip-card__front {
-  background: var(--white);
+
+/* Remove top border on last row (cells 3 and 4) */
+.focus-cell:nth-child(3),
+.focus-cell:nth-child(4) {
+  border-top: none;
 }
 
-.flip-card__back {
-  background: var(--black);
-  color: var(--white);
-  transform: rotateY(180deg);
+/* Cell Header - Number inline with title */
+.focus-cell__header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.flip-card__number {
-  font-size: 64px;
+.focus-cell__number {
+  font-family: var(--font-sans);
+  font-size: 32px;
   font-weight: 700;
   color: var(--red);
   line-height: 1;
-  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
-.flip-card__front h3 {
-  font-size: 32px;
+.focus-cell__header h3 {
+  font-size: 24px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.focus-cell__content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--gray-700);
   margin: 0;
 }
 
-.flip-card__back h4 {
-  color: var(--red);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+/* Bottom CTA Section */
+.focus-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 40px 0;
 }
 
-.flip-card__back p {
-  font-size: 18px;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.85);
+.focus-cta__content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.focus-cta__content h3 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--black);
+  line-height: 1.3;
+}
+
+.focus-cta__content p {
+  font-size: 16px;
+  color: var(--gray-700);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.focus-cta__action {
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .focus-grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .focus-cell {
+    padding: 32px;
+    min-height: auto;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--gray-300);
+    border-bottom: none;
+  }
+
+  .focus-cell:first-child {
+    border-top: none;
+  }
+
+  /* Add top border back in for cells 3 and 4 */
+.focus-cell:nth-child(3),
+.focus-cell:nth-child(4) {
+  border-top: 1px solid var(--gray-300);
+}
+
+
+  .focus-cell__number {
+    font-size: 24px;
+  }
+
+  .focus-cell__header {
+    gap: 12px;
+  }
+
+  .focus-cell__header h3 {
+    font-size: 22px;
+  }
+
+  .focus-cell__content {
+    font-size: 15px;
+  }
+
+  .focus-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 32px 0;
+  }
+
+  .focus-cta__content h3 {
+    font-size: 24px;
+  }
+
+  .focus-cta__action {
+    width: 100%;
+  }
+
+  .focus-cta__action .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============================================
@@ -1269,5 +1303,91 @@ p:last-child {
 
   .ai-trigger__label {
     display: none;
+  }
+}
+
+
+
+.timeline-spine {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  margin-top: 40px;
+  transition: all 0.3s ease;
+}
+
+.timeline-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timeline-line {
+  stroke: var(--gray-300);
+  stroke-width: 2;
+  fill: none;
+  transition: all 0.3s ease;
+}
+
+.timeline-nodes {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Start node - small */
+.timeline-node:first-child {
+  width: 12px;
+  height: 12px;
+}
+
+/* Middle nodes - medium */
+.timeline-node:not(:first-child):not(:last-child) {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hollow middle nodes (optional - for inactive states) */
+.timeline-node.hollow {
+  background: white;
+  border: 2px solid var(--red);
+  outline: 4px solid white;
+}
+
+/* End node - large with checkmark */
+.timeline-node:last-child {
+  width: 45px;
+  height: 45px;
+}
+
+.timeline-node:last-child::after {
+  content: '✓';
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.timeline-spine.mobile-screen {
+    display: none;
+  }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-spine {
+    display: none; /* Hide on mobile or adjust as needed */
   }
 }
