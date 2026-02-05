@@ -1391,3 +1391,28 @@ p:last-child {
     display: none; /* Hide on mobile or adjust as needed */
   }
 }
+
+
+
+#form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
