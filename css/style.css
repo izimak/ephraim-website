@@ -92,6 +92,16 @@ p:last-child {
   margin-bottom: 0;
 }
 
+.footer__heading {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
+
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 14px;
