@@ -809,12 +809,12 @@
       /* Scroll indicator */
       .demo__visuals::before {
         content: '';
-        position: sticky;
+        position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 40px;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 100%);
         pointer-events: none;
         z-index: 10;
         display: none;
@@ -905,6 +905,10 @@
         justify-content: center;
       }
     }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: white;
+    }
   </style>
 </head>
 <body class="demo-active">
@@ -926,6 +930,9 @@
         </svg>
       </a>
     </header>
+
+    <!-- Visually hidden page title for accessibility -->
+    <h1 style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">AI Sales Assistant Demo</h1>
 
     <!-- Main Content -->
     <main class="demo__main">
@@ -958,7 +965,7 @@
 
         <!-- Transcript -->
         <div class="transcript" id="transcriptSection" style="display: none;">
-          <h4 class="transcript__title">CONVERSATION</h4>
+          <h3 class="transcript__title">CONVERSATION</h3>
           <div class="transcript__messages" id="transcriptMessages"></div>
         </div>
       </div>
@@ -979,7 +986,7 @@
         <div class="visual-component" id="comp-services">
           <div class="component-header">
             <p class="component-header__eyebrow">WHAT WE DO</p>
-            <h3 class="component-header__title">Three Areas of Focus</h3>
+            <h2 class="component-header__title">Three Areas of Focus</h2>
           </div>
           <div class="services-grid">
             <div class="service-card">
@@ -988,7 +995,7 @@
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
-              <h4 class="service-card__title">Digital Communication</h4>
+              <h3 class="service-card__title">Digital Communication</h3>
               <p class="service-card__desc">Never miss a lead. Unified inbox, instant response, smart routing, and 24/7 availability.</p>
             </div>
             <div class="service-card">
@@ -998,7 +1005,7 @@
                   <polyline points="8 6 2 12 8 18"/>
                 </svg>
               </div>
-              <h4 class="service-card__title">Automation & Integration</h4>
+              <h3 class="service-card__title">Automation & Integration</h3>
               <p class="service-card__desc">Connect your tools. Automate handoffs. Let your software work for you, not against you.</p>
             </div>
             <div class="service-card">
@@ -1009,7 +1016,7 @@
                   <line x1="6" y1="20" x2="6" y2="14"/>
                 </svg>
               </div>
-              <h4 class="service-card__title">Business Intelligence</h4>
+              <h3 class="service-card__title">Business Intelligence</h3>
               <p class="service-card__desc">Real-time dashboards. Automated reports. Know how your business is doing without digging.</p>
             </div>
           </div>
@@ -1030,7 +1037,7 @@
               </div>
               <div class="ai-role-card__content">
                 <span class="ai-role-card__badge">FRONT OF HOUSE</span>
-                <h4 class="ai-role-card__title">AI Receptionist</h4>
+                <h3 class="ai-role-card__title">AI Receptionist</h3>
                 <p class="ai-role-card__desc">Answers every call 24/7, books appointments, handles FAQs.</p>
               </div>
             </div>
@@ -1043,7 +1050,7 @@
               </div>
               <div class="ai-role-card__content">
                 <span class="ai-role-card__badge">REVENUE</span>
-                <h4 class="ai-role-card__title">AI Sales Assistant</h4>
+                <h3 class="ai-role-card__title">AI Sales Assistant</h3>
                 <p class="ai-role-card__desc">Instant lead response, follow-ups, nurturing until they're ready.</p>
               </div>
             </div>
@@ -1058,7 +1065,7 @@
               </div>
               <div class="ai-role-card__content">
                 <span class="ai-role-card__badge">BACK OFFICE</span>
-                <h4 class="ai-role-card__title">AI Admin</h4>
+                <h3 class="ai-role-card__title">AI Admin</h3>
                 <p class="ai-role-card__desc">Verifies invoices, checks pricing, catches billing errors.</p>
               </div>
             </div>
@@ -1071,7 +1078,7 @@
               </div>
               <div class="ai-role-card__content">
                 <span class="ai-role-card__badge">ACCOUNTS RECEIVABLE</span>
-                <h4 class="ai-role-card__title">AI Collections</h4>
+                <h3 class="ai-role-card__title">AI Collections</h3>
                 <p class="ai-role-card__desc">Payment reminders, overdue follow-ups, keeps cash flowing.</p>
               </div>
             </div>
@@ -1088,21 +1095,21 @@
             <div class="process-step">
               <div class="process-step__number">1</div>
               <div class="process-step__content">
-                <h4>Discover</h4>
+                <h3>Discover</h3>
                 <p>We talk to your team, map your processes, and audit your tools. We find where the problems are and what to prioritize.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step__number">2</div>
               <div class="process-step__content">
-                <h4>Design</h4>
+                <h3>Design</h3>
                 <p>We architect the solution with your input. You see exactly what we're building before we build it. No surprises.</p>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step__number">3</div>
               <div class="process-step__content">
-                <h4>Build & Launch</h4>
+                <h3>Build & Launch</h3>
                 <p>We configure, integrate, and automate. Then we go live together, train your team, and fine-tune until everything works.</p>
               </div>
             </div>
@@ -1158,7 +1165,7 @@
             <h3 class="component-header__title">Let's Talk</h3>
           </div>
           <div class="calendar-embed">
-            <h4 class="calendar-embed__title">Book a Discovery Call</h4>
+            <h3 class="calendar-embed__title">Book a Discovery Call</h3>
             <p class="calendar-embed__desc">30 minutes to understand your situation and see if we can help.</p>
             <a href="/contact/" class="calendar-embed__btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

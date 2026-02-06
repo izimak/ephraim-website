@@ -92,6 +92,16 @@ p:last-child {
   margin-bottom: 0;
 }
 
+.footer__heading {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
+
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -167,7 +177,9 @@ p:last-child {
   .grid--3,
   .grid--4 {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+  
 }
 
 /* ============================================
@@ -537,7 +549,6 @@ p:last-child {
 
 .hero {
   position: relative;
-  min-height: 756px;
   display: flex;
   align-items: center;
   padding-top: 72px;
@@ -870,9 +881,22 @@ p:last-child {
 }
 
 @media (max-width: 768px) {
+  .footer__links li, .footer__heading {
+    text-align: center;
+  }
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .footer__brand {
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__brand p {
+    text-align: center;
   }
 }
 
@@ -1033,6 +1057,12 @@ p:last-child {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .focus-grid {
     grid-template-columns: 1fr; 
   }
@@ -1301,9 +1331,23 @@ p:last-child {
     height: 24px;
   }
 
+  .ai-trigger__orb::after {
+    background: radial-gradient(circle, rgba(255,255,255,0.5), transparent);
+  }
+
   .ai-trigger__label {
     display: none;
   }
+
+  .ai-trigger__ring {
+    border: 2px solid rgba(110, 97, 254, 0.3);
+  }
+
+  @keyframes ai-ring-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
 }
 
 
@@ -1390,4 +1434,29 @@ p:last-child {
   .timeline-spine {
     display: none; /* Hide on mobile or adjust as needed */
   }
+}
+
+
+
+#form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
 }
