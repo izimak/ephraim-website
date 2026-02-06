@@ -451,4 +451,157 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Auto-scroll functionality for pipeline on mobile
+(function() {
+  const pipelineVisual = document.querySelector('.pipeline-visual');
+
+  if (!pipelineVisual) {
+    
+    return;
+  }
+  
+  let autoScrollAnimationFrame = null;
+  let userInteractionTimeout = null;
+  let isUserInteracting = false;
+  let isResetting = false;
+  let lastScrollTime = 0;
+  
+  const SCROLL_SPEED = 0.5; // pixels per frame
+  const RESET_DELAY = 3000; // 3 seconds
+  const SCROLL_INTERVAL = 16; // ~60fps
+  const RESET_ANIMATION_TIME = 800; // Time for smooth scroll back to start
+
+  function isMobile() {
+    const mobile = window.innerWidth <= 768;
+    return mobile;
+  }
+
+  function autoScroll(currentTime) {
+    if (!isMobile() || isUserInteracting || isResetting) {
+      autoScrollAnimationFrame = null;
+      return;
+    }
+
+    if (currentTime - lastScrollTime >= SCROLL_INTERVAL) {
+      const maxScroll = pipelineVisual.scrollWidth - pipelineVisual.clientWidth;
+      const currentScroll = pipelineVisual.scrollLeft;
+      if (!document.body.contains(pipelineVisual)) { 
+        cleanup();
+        return;
+      }
+
+      if (currentScroll >= maxScroll - 1) {
+        
+        isResetting = true;
+        stopAutoScroll(); // FIXED: Stop the animation before resetting
+        pipelineVisual.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+        
+        // Resume auto-scroll after smooth animation completes
+        setTimeout(() => {
+          isResetting = false;
+          if (isMobile() && !isUserInteracting) {
+            startAutoScroll();
+          }
+        }, RESET_ANIMATION_TIME);
+        return;
+      } else {
+        pipelineVisual.scrollLeft += SCROLL_SPEED;
+      }
+      lastScrollTime = currentTime;
+    }
+    autoScrollAnimationFrame = requestAnimationFrame(autoScroll);
+  }
+
+  function startAutoScroll() {
+    
+    if (!isMobile() || isUserInteracting || isResetting || autoScrollAnimationFrame) {
+      return;
+    }
+
+    autoScrollAnimationFrame = requestAnimationFrame(autoScroll);
+  }
+
+  function stopAutoScroll() {
+    
+    if (autoScrollAnimationFrame) {
+      cancelAnimationFrame(autoScrollAnimationFrame);
+      autoScrollAnimationFrame = null;
+      
+    }
+  }
+
+  function handleUserInteraction(event) {
+    
+    isUserInteracting = true;
+    isResetting = false; // Cancel any ongoing reset
+    stopAutoScroll();
+
+    if (userInteractionTimeout) {
+      clearTimeout(userInteractionTimeout);
+      
+    }
+
+    userInteractionTimeout = setTimeout(() => {
+      
+      isUserInteracting = false;
+      if (isMobile() && document.body.contains(pipelineVisual)) {
+        startAutoScroll();
+      }
+    }, RESET_DELAY);
+  }
+
+  function handleResize() {
+    
+    if (isMobile() && !isUserInteracting) {
+      startAutoScroll();
+    } else if (!isMobile()) {
+      stopAutoScroll();
+    }
+  }
+
+  function cleanup() {
+    
+    stopAutoScroll();
+    
+    if (userInteractionTimeout) {
+      clearTimeout(userInteractionTimeout);
+      userInteractionTimeout = null;
+    }
+
+    pipelineVisual.removeEventListener('touchstart', handleUserInteraction);
+    pipelineVisual.removeEventListener('mousedown', handleUserInteraction);
+    pipelineVisual.removeEventListener('wheel', handleUserInteraction);
+    window.removeEventListener('resize', handleResize);
+    window.removeEventListener('beforeunload', cleanup);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+    
+    
+  }
+
+  function handleVisibilityChange() {
+    
+    if (document.hidden) {
+      stopAutoScroll();
+    } else if (isMobile() && !isUserInteracting) {
+      startAutoScroll();
+    }
+  }
+
+  pipelineVisual.addEventListener('touchstart', handleUserInteraction, { passive: true });
+  pipelineVisual.addEventListener('mousedown', handleUserInteraction);
+  pipelineVisual.addEventListener('wheel', handleUserInteraction, { passive: true });
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('beforeunload', cleanup);
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
+  if (isMobile()) {
+    
+    startAutoScroll();
+  } else {
+    
+  }
+})();
 });

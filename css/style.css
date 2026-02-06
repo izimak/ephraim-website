@@ -177,7 +177,9 @@ p:last-child {
   .grid--3,
   .grid--4 {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+  
 }
 
 /* ============================================
@@ -547,7 +549,6 @@ p:last-child {
 
 .hero {
   position: relative;
-  min-height: 756px;
   display: flex;
   align-items: center;
   padding-top: 72px;
@@ -880,9 +881,22 @@ p:last-child {
 }
 
 @media (max-width: 768px) {
+  .footer__links li, .footer__heading {
+    text-align: center;
+  }
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .footer__brand {
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__brand p {
+    text-align: center;
   }
 }
 
@@ -1043,6 +1057,12 @@ p:last-child {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .focus-grid {
     grid-template-columns: 1fr; 
   }
@@ -1311,9 +1331,23 @@ p:last-child {
     height: 24px;
   }
 
+  .ai-trigger__orb::after {
+    background: radial-gradient(circle, rgba(255,255,255,0.5), transparent);
+  }
+
   .ai-trigger__label {
     display: none;
   }
+
+  .ai-trigger__ring {
+    border: 2px solid rgba(110, 97, 254, 0.3);
+  }
+
+  @keyframes ai-ring-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
 }
 
 
