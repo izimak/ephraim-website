@@ -170,6 +170,107 @@
       gap: 24px;
       margin-top: 60px;
     }
+
+    .container-landing-page {
+      display: flex;
+      padding-inline: 100px;
+      padding-block: 100px;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1728px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .container-landing-page .hero__content {}
+
+    .landing-page-hero-images-container {
+      display: grid;
+      z-index: 1;
+      grid-template-columns: auto auto auto;
+      height: 562px;
+      gap: 20px;
+    }
+
+    .landing-page-hero-images-container > :nth-child(1) {
+      align-self: end;
+    }
+
+    .landing-page-hero-images-container > :nth-child(2) {
+      align-self: start;
+    }
+
+    .landing-page-hero-images-container > :nth-child(3) {
+      align-self: end;
+    }
+
+    .landing-page-panel-image-container {
+      width: 225px;
+      height: 472px;
+    }
+
+    .landing-page-panel-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-landing-page {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 72px;
+        height: 100vh;
+        max-height: 1080px;
+        background: linear-gradient(180deg, #0a0a12 0%, #12121a 50%, #0a0a12 100%);
+        overflow: hidden;
+      }
+
+      .hero-landing-page::before,
+      .hero-landing-page::after {
+        content: '';
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        filter: blur(150px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hero-landing-page::before {
+        background: #6E61FE;
+        opacity: 0.3;
+        top: -400px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .hero-landing-page::after {
+        background: #7B1FEC;
+        opacity: 0.2;
+        bottom: -400px;
+        right: -200px;
+      }
+
+
+    .landing-page-hero-text {
+      font-size: 64px;
+    }
+
+    @media (max-width: 1000px) {
+      .landing-page-hero-images-container {
+        transform: scale(0.7);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .landing-page-hero-images-container {
+        display: none;
+      }
+    }
+
     @media (max-width: 1024px) {
       .ai-roles-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -326,14 +427,12 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero__bg">
-      <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2940&auto=format&fit=crop" alt="Entrepreneur working late">
-    </div>
-    <div class="container">
+  <section class="hero hero-landing-page">
+    
+    <div class="container-landing-page">
       <div class="hero__content fade-in">
         <p class="eyebrow">Operational Excellence</p>
-        <h1>Scale Your Revenue Without Scaling Your Overhead</h1>
+        <h1 class="landing-page-hero-text">Scale Your Revenue Without Scaling Your Overhead</h1>
         <p class="lead">We help companies simplify their systems, automate repetitive work, and use practical AI to create clarity and growth.</p>
         <div style="display: flex; gap: 16px; flex-wrap: wrap;">
           <a href="/what-we-do/" class="btn btn--primary">
@@ -345,6 +444,19 @@
           <a href="/contact/" class="btn btn--outline">Discuss Your Growth Goals</a>
         </div>
       </div>
+      <div class="landing-page-hero-images-container">
+        <div class="landing-page-panel-image-container"><img src="images/business-men-shaking-hands.jpg"></img></div>
+        <div class="landing-page-panel-image-container"><img src="images/strategy-meeting-in-conference-room.jpg"></img></div>
+        <div class="landing-page-panel-image-container"><img src="images/man-holding-ipad.jpg"></img></div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <span class="scroll-indicator__text">Scroll to explore</span>
+      <svg class="scroll-indicator__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
     </div>
   </section>
 

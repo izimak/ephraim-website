@@ -254,6 +254,27 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ============================================
+  // SCROLL INDICATOR - Click to scroll to next section
+  // ============================================
+
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', function() {
+      const heroSection = this.closest('.hero');
+      if (heroSection) {
+        const nextSection = heroSection.nextElementSibling;
+        if (nextSection) {
+          nextSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  }
+
+  // ============================================
   // DYNAMICALLY SET YEAR IN FOOTER/NO HARDCODED YEAR
   // ============================================
 
