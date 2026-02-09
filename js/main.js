@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dropdownTriggers.length > 0) {
       dropdownTriggers.forEach(function(trigger) {
         trigger.addEventListener('click', function(e) {
-          if (window.innerWidth <= 900) {
+          if (window.innerWidth <= 950) {
             e.preventDefault();
             const dropdown = this.closest('.nav__dropdown');
             if (dropdown) {
