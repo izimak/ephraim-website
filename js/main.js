@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dropdownTriggers.length > 0) {
       dropdownTriggers.forEach(function(trigger) {
         trigger.addEventListener('click', function(e) {
-          if (window.innerWidth <= 900) {
+          if (window.innerWidth <= 950) {
             e.preventDefault();
             const dropdown = this.closest('.nav__dropdown');
             if (dropdown) {
@@ -249,6 +249,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }
         });
+      }
+    });
+  }
+
+  // ============================================
+  // SCROLL INDICATOR - Click to scroll to next section
+  // ============================================
+
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', function() {
+      const heroSection = this.closest('.hero');
+      if (heroSection) {
+        const nextSection = heroSection.nextElementSibling;
+        if (nextSection) {
+          nextSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       }
     });
   }
