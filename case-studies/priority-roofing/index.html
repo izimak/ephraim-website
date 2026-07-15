@@ -39,6 +39,7 @@
     .cs-dropcap { font-size: 60px !important; }
     .cs-inline-visual { height: 260px !important; }
     .cs-quote { font-size: 26px !important; }
+    .cs-more { flex-direction: column !important; }
   }
 </style>
 </head>
@@ -53,10 +54,10 @@
     <canvas id="cs-canvas" style="position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none;"></canvas>
     <div style="position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 40%, rgba(10,7,19,0) 30%, rgba(10,7,19,.55) 100%); pointer-events:none;"></div>
 
-    <a href="/" class="cs-brand" style="position:absolute; top:0; left:0; right:0; padding:30px 56px; display:flex; align-items:center; gap:13px; z-index:3;">
-      <div style="width:24px; height:24px; border-radius:6px; background:#6c4cf1;"></div>
-      <span style="color:#fff; font-weight:600; font-size:16px; letter-spacing:.3px;">Ephraim Solutions</span>
-    </a>
+    <div class="cs-brand" style="position:absolute; top:0; left:0; right:0; padding:30px 56px; display:flex; align-items:center; justify-content:space-between; z-index:3;">
+      <a href="/"><img src="/images/Ephraim Purple White.svg" alt="Ephraim Solutions" style="height:36px; width:auto; display:block;"></a>
+      <a href="/case-studies/" style="color:#cabfff; font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:600;">All case studies</a>
+    </div>
 
     <div class="cs-hero-center" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 100px; pointer-events:none;">
       <div style="display:inline-flex; align-items:center; gap:10px; padding:8px 18px; border:1px solid rgba(183,169,255,.4); border-radius:100px; color:#cabfff; font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">2026 · Case Study</div>
@@ -171,6 +172,23 @@
       <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:30px;">The platform is live and expanding across Priority's 30 branches, with new capabilities added as the company continues to grow.</div>
       <div data-section="team" style="margin-top:44px; padding-top:24px; border-top:1px solid #e6e3f0; font-size:15px; color:#4a4658;">Engagement led by Bec Chamberlain, Ephraim Solutions.</div>
       <div style="margin-top:18px; font-size:15px;"><a href="/contact/">Talk to us about your operations →</a></div>
+
+      <div style="margin-top:56px; padding-top:32px; border-top:1px solid #e6e3f0;">
+        <div style="font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:#8a8698;">More case studies</div>
+        <div class="cs-more" style="display:flex; gap:16px; margin-top:18px;">
+          <a href="/case-studies/specialty-designer-roofing/" style="flex:1; border:1px solid #e6e3f0; border-radius:10px; padding:20px 22px; display:block;">
+            <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#6c4cf1; font-weight:600;">Business Analytics</div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; color:#14141c; margin-top:8px; line-height:1.3;">Specialty Designer Roofing: from running blind to real-time profit visibility</div>
+            <div style="font-size:14px; color:#6c4cf1; margin-top:12px;">Read the case study →</div>
+          </a>
+          <a href="/case-studies/eagle-surveying/" style="flex:1; border:1px solid #e6e3f0; border-radius:10px; padding:20px 22px; display:block;">
+            <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#6c4cf1; font-weight:600;">Custom Estimating</div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; color:#14141c; margin-top:8px; line-height:1.3;">Eagle Surveying: spreadsheet quoting replaced with a system built for surveying</div>
+            <div style="font-size:14px; color:#6c4cf1; margin-top:12px;">Read the case study →</div>
+          </a>
+        </div>
+        <div style="margin-top:22px; font-size:14px;"><a href="/">← Back to ephraimsolutions.ai</a></div>
+      </div>
     </div>
   </div>
 
