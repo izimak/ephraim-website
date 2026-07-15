@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Priority Roofing: Anatomy of an Operational Transformation | EphrAIm Solutions</title>
+<meta name="description" content="A six-part field review of how a $200 million roofing contractor replaced three commercial CRMs with software built around its own workflow — and what changed for the office, the field, and the P&L.">
+<link rel="icon" type="image/svg+xml" href="/images/Ephram E White.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,0,600;6..72,1,400;6..72,1,500;6..72,1,600&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper: #faf8f4;
+    --paper-edge: #efece4;
+    --ink: #1d1a26;
+    --ink-soft: #4a4658;
+    --muted: #8a8698;
+    --violet: #6c4cf1;
+    --violet-deep: #573bd6;
+    --priority-blue: #205BAF;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Work Sans', system-ui, sans-serif;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--sans);
+    background: #0a0713;
+    overflow: hidden;
+    color: var(--ink);
+  }
+
+  /* ---------- ambient stage ---------- */
+  .stage-glow { position: fixed; border-radius: 50%; filter: blur(60px); pointer-events: none; z-index: 0; }
+  .sg1 { width: 900px; height: 900px; left: -280px; top: -380px; background: radial-gradient(circle, rgba(108,76,241,.4), transparent 62%); }
+  .sg2 { width: 700px; height: 700px; right: -220px; bottom: -300px; background: radial-gradient(circle, rgba(123,31,236,.28), transparent 60%); }
+
+  /* ---------- book sheet ---------- */
+  .book-wrap {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 44px 72px 64px;
+    z-index: 1;
+  }
+  .book {
+    position: relative;
+    width: min(1240px, 100%);
+    height: min(820px, 100%);
+    background: var(--paper);
+    border-radius: 6px 14px 14px 6px;
+    box-shadow:
+      0 60px 120px -30px rgba(0,0,0,.75),
+      0 0 0 1px rgba(255,255,255,.06),
+      0 0 90px -30px rgba(108,76,241,.35);
+  }
+  .book::before, .book::after {
+    content: ''; position: absolute; top: 6px; bottom: 6px; width: 5px;
+    border-radius: 0 10px 10px 0;
+    background: repeating-linear-gradient(90deg, var(--paper-edge) 0 1px, #fff 1px 2.5px);
+  }
+  .book::before { right: -5px; }
+  .book::after { right: -9px; top: 12px; bottom: 12px; opacity: .6; }
+
+  /* ---------- pages ---------- */
+  .page {
+    position: absolute; inset: 0;
+    padding: 58px 68px 64px;
+    display: none;
+    overflow-y: auto;
+    border-radius: 6px 14px 14px 6px;
+    background:
+      linear-gradient(90deg, rgba(29,26,38,.06) 0, rgba(29,26,38,0) 26px),
+      var(--paper);
+  }
+  .page.active { display: block; animation: pageIn .45s cubic-bezier(.2,.7,.3,1); }
+  .page.turn-back.active { animation: pageInBack .45s cubic-bezier(.2,.7,.3,1); }
+  @keyframes pageIn { from { opacity: 0; transform: translateX(44px); } to { opacity: 1; transform: none; } }
+  @keyframes pageInBack { from { opacity: 0; transform: translateX(-44px); } to { opacity: 1; transform: none; } }
+
+  .page.dark {
+    background: radial-gradient(120% 100% at 30% 20%, #17102e 0%, #0a0713 70%);
+    color: #efeaff;
+  }
+  .page.dark::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(150,120,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+
+  .runhead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--muted);
+    border-bottom: 1px solid rgba(29,26,38,.12);
+    padding-bottom: 12px; margin-bottom: 34px;
+  }
+  .page.dark .runhead { border-color: rgba(255,255,255,.14); color: #9c92c9; }
+  .folio {
+    position: absolute; bottom: 24px; left: 0; right: 0;
+    text-align: center; font-family: var(--serif); font-size: 14px; color: var(--muted);
+  }
+
+  /* ---------- typography ---------- */
+  .ep-kicker { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--violet); font-weight: 600; }
+  h1.ep-title { font-family: var(--serif); font-weight: 500; font-size: 36px; line-height: 1.14; letter-spacing: -.4px; margin: 12px 0 8px; }
+  .ep-sub { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink-soft); line-height: 1.45; }
+  h2.sec { font-family: var(--serif); font-weight: 600; font-size: 22px; margin: 0 0 12px; line-height: 1.25; }
+  p.body { font-family: var(--serif); font-size: 16.5px; line-height: 1.72; color: #2c2936; margin-bottom: 14px; }
+  p.body b { color: var(--ink); }
+  .dropcap::first-letter {
+    float: left; font-family: var(--serif); font-size: 64px; line-height: .82;
+    padding: 6px 10px 0 0; color: var(--violet);
+  }
+  .smallnote { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; position: relative; }
+  .duo::before {
+    content: ''; position: absolute; left: 50%; top: 8px; bottom: 8px; width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(29,26,38,.14) 18%, rgba(29,26,38,.14) 82%, transparent);
+  }
+
+  .pull {
+    font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.45;
+    color: var(--violet-deep); border-left: 3px solid var(--violet);
+    padding: 6px 0 6px 18px; margin: 20px 0;
+  }
+  .pull .who { display: block; font-style: normal; font-family: var(--sans); font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+  .statbox {
+    display: inline-block; border: 1px solid rgba(108,76,241,.3); border-radius: 10px;
+    padding: 14px 20px; margin: 14px 0; background: rgba(108,76,241,.05);
+  }
+  .statbox .n { font-family: var(--serif); font-size: 32px; color: var(--violet-deep); line-height: 1; }
+  .statbox .l { font-size: 12px; color: var(--ink-soft); margin-top: 6px; max-width: 240px; line-height: 1.45; }
+
+  /* in-brief findings */
+  .finding { margin-bottom: 16px; }
+  .finding .f { font-family: var(--serif); font-style: italic; font-size: 16.5px; color: var(--ink); line-height: 1.5; }
+  .finding .s { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-top: 4px; }
+
+  /* figures / exhibits */
+  figure.plate { margin: 18px 0; }
+  .plate .frame {
+    border-radius: 9px; overflow: hidden; background: #fff;
+    box-shadow: 0 22px 44px -18px rgba(29,26,38,.42), 0 0 0 1px rgba(29,26,38,.14);
+  }
+  .plate .bar { height: 22px; background: #17131f; display: flex; align-items: center; gap: 5px; padding: 0 10px; }
+  .plate .bar i { width: 7px; height: 7px; border-radius: 50%; display: block; }
+  .plate img { display: block; width: 100%; }
+  .plate .crop { overflow: hidden; }
+  .plate .crop img { object-fit: cover; width: 100%; height: 100%; }
+  figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.55; }
+  figcaption b { color: var(--ink-soft); font-weight: 600; }
+  figcaption .src { display: block; margin-top: 3px; font-size: 11px; }
+
+  .phone {
+    width: 195px; border-radius: 26px; padding: 8px; background: #17131f;
+    box-shadow: 0 22px 40px -16px rgba(29,26,38,.5);
+    margin: 0 auto;
+  }
+  .phone .screen { border-radius: 19px; overflow: hidden; }
+  .phone img { display: block; width: 100%; }
+  .phone-row { display: flex; gap: 26px; justify-content: center; }
+
+  /* placeholders */
+  .tk {
+    border: 2px dashed rgba(108,76,241,.5); border-radius: 12px;
+    background: repeating-linear-gradient(-45deg, rgba(108,76,241,.045) 0 14px, transparent 14px 28px);
+    padding: 18px 20px; margin: 16px 0;
+  }
+  .tk .tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1.8px; background: var(--violet); color: #fff; border-radius: 4px; padding: 4px 9px; margin-bottom: 9px; }
+  .tk.photo .tag { background: var(--priority-blue); }
+  .tk h4 { font-size: 14px; margin-bottom: 6px; color: var(--ink); }
+  .tk p { font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); }
+  .tk p em { color: var(--violet-deep); }
+
+  /* cover */
+  .coverlay { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+  .cover-title { font-family: var(--serif); font-weight: 400; font-size: 56px; line-height: 1.08; letter-spacing: -.6px; background: linear-gradient(100deg, #fff 25%, #cbbcff 55%, #fff 85%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .cover-rule { width: 64px; height: 3px; background: var(--violet); margin: 26px 0; }
+
+  /* contents */
+  .toc-line { display: flex; align-items: baseline; gap: 12px; font-family: var(--serif); font-size: 17px; padding: 11px 0; border-bottom: 1px solid rgba(29,26,38,.1); cursor: pointer; }
+  .toc-line:hover .t { color: var(--violet-deep); }
+  .toc-line .n { font-size: 11px; font-family: var(--sans); color: var(--violet); font-weight: 600; width: 64px; letter-spacing: 1.4px; flex-shrink: 0; }
+  .toc-line .t { flex: 1; line-height: 1.35; }
+  .toc-line .pg { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 20px 0; }
+  .kpis .k { border: 1px solid rgba(29,26,38,.14); border-radius: 10px; padding: 14px 14px; }
+  .kpis .k .n { font-family: var(--serif); font-size: 26px; color: var(--violet-deep); }
+  .kpis .k .l { font-size: 11px; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+  .page.dark .kpis .k { border-color: rgba(255,255,255,.18); }
+  .page.dark .kpis .k .n { color: #cbbcff; }
+  .page.dark .kpis .k .l { color: #b8b0d6; }
+
+  .nextup { margin-top: 22px; padding-top: 14px; border-top: 1px solid rgba(29,26,38,.12); font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .nextup b { color: var(--violet-deep); }
+
+  .steps { counter-reset: st; margin: 10px 0; }
+  .steps li { list-style: none; display: flex; gap: 10px; align-items: baseline; padding: 6.5px 0; border-top: 1px solid rgba(29,26,38,.09); font-size: 13px; color: var(--ink-soft); }
+  .steps li::before { counter-increment: st; content: counter(st, decimal-leading-zero); font-family: var(--serif); color: var(--violet); font-size: 15px; min-width: 24px; }
+  .steps li b { color: var(--ink); }
+
+  /* ---------- chrome ---------- */
+  .navbtn {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2);
+    background: rgba(23,16,46,.55); color: #cbbcff; font-size: 19px; cursor: pointer;
+    backdrop-filter: blur(6px); z-index: 30; transition: all .2s;
+  }
+  .navbtn:hover { background: rgba(108,76,241,.5); color: #fff; }
+  .navbtn.prev { left: 14px; }
+  .navbtn.next { right: 14px; }
+  .chrome-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    display: flex; align-items: center; gap: 16px;
+    padding: 10px 20px 12px;
+    color: #9c92c9; font-size: 11.5px; letter-spacing: 1px;
+  }
+  .chrome-bar .spacer { flex: 1; }
+  .chrome-bar button, .chrome-bar a {
+    background: none; border: none; color: #cbbcff; font: inherit; cursor: pointer;
+    letter-spacing: 1.6px; text-transform: uppercase; font-size: 10.5px; text-decoration: none;
+  }
+  .chrome-bar button:hover, .chrome-bar a:hover { color: #fff; }
+  .progress { position: fixed; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.08); z-index: 31; }
+  .progress .fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--violet), #a78bfa); transition: width .3s; }
+
+  .toc-overlay {
+    position: fixed; inset: 0; z-index: 40; display: none;
+    background: rgba(10,7,19,.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .toc-overlay.open { display: flex; }
+  .toc-panel { width: min(560px, 92vw); max-height: 82vh; overflow-y: auto; background: var(--paper); border-radius: 14px; padding: 34px 38px; }
+  .toc-panel h3 { font-family: var(--serif); font-size: 26px; margin-bottom: 14px; }
+
+  @media (max-width: 940px) {
+    body { overflow: auto; }
+    .book-wrap { padding: 12px 10px 58px; align-items: stretch; }
+    .book { height: calc(100dvh - 72px); border-radius: 10px; }
+    .book::before, .book::after { display: none; }
+    .page { padding: 26px 22px 54px; border-radius: 10px; }
+    .duo { grid-template-columns: 1fr; gap: 26px; }
+    .duo::before { display: none; }
+    h1.ep-title { font-size: 27px; }
+    .cover-title { font-size: 36px; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .navbtn { display: none; }
+    .phone-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage-glow sg1"></div>
+<div class="stage-glow sg2"></div>
+
+<div class="book-wrap">
+  <div class="book" id="book">
+
+    <!-- ═══════════ 1 · COVER ═══════════ -->
+    <section class="page dark" data-title="Cover">
+      <div class="coverlay">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <img src="/images/clients/priority-roofing-white.svg" alt="Priority Roofing" style="height:44px;">
+          <div style="font-size:10.5px; letter-spacing:2.6px; text-transform:uppercase; color:#9c92c9;">Field Review · Nº 01</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; max-width:860px;">
+          <div style="font-size:12px; letter-spacing:3.5px; text-transform:uppercase; color:#b7a9ff; font-weight:600;">A field review in six parts</div>
+          <div class="cover-title" style="margin-top:18px;">Priority Roofing: anatomy of an operational transformation</div>
+          <div class="cover-rule"></div>
+          <div style="font-family:var(--serif); font-style:italic; font-size:18px; line-height:1.5; color:#c8c2e0; max-width:640px;">How a $200 million contractor, ranked 18th nationally, replaced three commercial CRMs with software built around its own workflow — and what changed for the office, the field, and the P&amp;L.</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <img src="/images/Ephraim Purple White.svg" alt="Ephraim Solutions" style="height:30px; opacity:.95;">
+          <div style="font-size:11px; color:#9c92c9;">ephraimsolutions.ai · 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2 · IN BRIEF ═══════════ -->
+    <section class="page" data-title="In brief">
+      <div class="runhead"><span>Priority Roofing · Field review</span><span>In brief</span></div>
+      <div class="duo">
+        <div>
+          <div class="ep-kicker">In brief</div>
+          <h1 class="ep-title" style="font-size:30px;">Five findings from twelve months on one platform</h1>
+          <div class="finding" style="margin-top:18px;">
+            <div class="f">Job cycle times fell by roughly 75 percent after the company consolidated its workflow onto a single platform.</div>
+            <div class="s">The comparison is the company's own: elapsed time from quote to close before and after rollout. The basis and job sample are to be documented with management before publication.</div>
+          </div>
+          <div class="finding">
+            <div class="f">Thirty branches moved onto the platform in under a year, without a parallel expansion of office staff.</div>
+            <div class="s">Under the previous systems, management reports that each branch opening required additional coordination hires; under the platform, it has not.</div>
+          </div>
+          <div class="finding">
+            <div class="f">Three commercial roofing CRMs were adopted and abandoned before the company built its own.</div>
+            <div class="s">Roof Link, AccuLynx, and JobNimbus each covered part of the workflow; the remainder ran over email and spreadsheets.</div>
+          </div>
+          <div class="finding">
+            <div class="f">Five connected applications now cover the operation: the CRM, a field photo system, a proposal tool, an analytics portal, and an AI receivables assistant.</div>
+            <div class="s">All five draw on shared records, with QuickBooks as the financial source of truth.</div>
+          </div>
+          <div class="finding">
+            <div class="f">The changes are best understood role by role, which is how this review is organized.</div>
+            <div class="s">Parts 2 through 5 examine the office, the field sales role, production, and management reporting in turn; Part 6 traces a single job through all of them.</div>
+          </div>
+        </div>
+        <div>
+          <div class="ep-kicker">About this review</div>
+          <h2 class="sec" style="margin-top:12px;">Method and sources</h2>
+          <p class="body" style="font-size:15px;">Priority Roofing is a nationwide residential and commercial roofing contractor headquartered in Texas, with more than $200 million in annual work, 30 branches, and over 700 field and office staff. RoofingContractor.com ranks the company 18th in the nation by revenue.</p>
+          <p class="body" style="font-size:15px;">This review draws on the platform itself, on the system documentation, and on the published case study. Interface screens are the production software populated with demonstration data; no customer records appear. Operating figures not yet verified are marked as management estimates.</p>
+          <p class="body" style="font-size:15px;">Interviews with the four roles examined here are scheduled and will replace the marked placeholders; one sales-representative quote is already on record.</p>
+          <div class="tk">
+            <span class="tag">INTERVIEWS SCHEDULED</span>
+            <h4>Four roles, one hour each</h4>
+            <p>To record: a branch office administrator, a field sales representative (Greg Johnston, Charlotte, is on record and available), a branch general manager, and ownership. Suggested topics are noted where each interview will appear.</p>
+          </div>
+        </div>
+      </div>
+      <div class="folio">— 2 —</div>
+    </section>
+
+    <!-- ═══════════ 3 · CONTENTS ═══════════ -->
+    <section class="page" data-title="Contents">
+      <div class="runhead"><span>Priority Roofing · Field review</span><span>Contents</span></div>
+      <div style="max-width:680px; margin:0 auto;">
+        <div class="ep-kicker">Contents</div>
+        <h1 class="ep-title" style="font-size:32px; margin-bottom:26px;">Six parts</h1>
+        <div class="toc-line" data-goto="4"><span class="n">Part 1</span><span class="t">A growing company had outgrown its systems</span><span class="pg">p. 4</span></div>
+        <div class="toc-line" data-goto="6"><span class="n">Part 2</span><span class="t">The office: a single system of record replaced email and spreadsheets</span><span class="pg">p. 6</span></div>
+        <div class="toc-line" data-goto="11"><span class="n">Part 3</span><span class="t">The field: the sales workflow moved onto the phone</span><span class="pg">p. 11</span></div>
+        <div class="toc-line" data-goto="15"><span class="n">Part 4</span><span class="t">Production: documentation made the middle of the job visible</span><span class="pg">p. 15</span></div>
+        <div class="toc-line" data-goto="18"><span class="n">Part 5</span><span class="t">Reporting: managers see the business daily, not at month-end</span><span class="pg">p. 18</span></div>
+        <div class="toc-line" data-goto="22"><span class="n">Part 6</span><span class="t">Anatomy of a job: from first knock to final commission</span><span class="pg">p. 22</span></div>
+        <div class="toc-line" data-goto="25"><span class="n">Close</span><span class="t">What changed, and what the next phase requires</span><span class="pg">p. 25</span></div>
+        <p class="smallnote" style="margin-top:26px;">Turn pages with the arrows, the keyboard’s ← →, or by swiping. Press <b>C</b> for contents.</p>
+      </div>
+      <div class="folio">— 3 —</div>
+    </section>
+
+    <!-- ═══════════ 4-5 · PART 1 ═══════════ -->
+    <section class="page dark" data-title="Part 1 · A growing company had outgrown its systems">
+      <div class="runhead"><span>Part 1</span><span>The starting point</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 1</div>
+        <h1 class="ep-title" style="color:#fff;">A growing company had outgrown its systems</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">Strong demand, strained coordination: the company before the platform.</p>
+        <div class="tk" style="border-color:rgba(183,169,255,.5); max-width:580px; margin-top:28px;">
+          <span class="tag">INTERVIEW SCHEDULED · OWNERSHIP</span>
+          <h4>Opening account, in the owner’s words</h4>
+          <p>Topics: the specific coordination failure that made the status quo untenable; what it cost, in rework or lost jobs; why the company chose to build rather than adopt a fourth commercial CRM.</p>
+        </div>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 4 —</div>
+    </section>
+
+    <section class="page" data-title="Part 1 · continued">
+      <div class="runhead"><span>Part 1 · A growing company had outgrown its systems</span><span>The starting point</span></div>
+      <div class="duo">
+        <div>
+          <p class="body dropcap">By 2024, Priority Roofing employed more than 700 people across 30 branches and completed over $200 million in work a year. The company had adopted three commercial roofing CRMs in succession, and each had been abandoned for the same reason: the software described a generic roofing company, and Priority’s workflow no longer matched it.</p>
+          <p class="body">The gap between the software and the work was filled by email. Quoting, estimating, material orders, delivery confirmation, photo records, commission calculations, and subcontractor payments each ran partly in a system and partly in inboxes, spreadsheets, and phone calls. At the company’s scale, that arrangement produced two measurable costs.</p>
+          <p class="body">The first was coordination headcount. Management reports that each new branch required additional office staff whose primary function was moving information between systems, and that training a new administrator meant training them on the full set of disconnected tools at once.</p>
+        </div>
+        <div>
+          <p class="body">The second was cycle time. Work waited on handoffs, and handoffs waited on people noticing email. The company’s own before-and-after comparison puts the eventual reduction in quote-to-close cycle time at roughly 75 percent, which indicates how much of the original cycle was waiting rather than work.</p>
+          <div class="statbox"><div class="n">3</div><div class="l">commercial CRMs adopted and abandoned before the company built its own</div></div>
+          <p class="body">In 2025 the company engaged EphrAIm Solutions with a defined brief: map the full lifecycle of a job, from first customer contact to final commission payment, across sales, operations, and finance, and build one platform that carries all of it. The sections that follow examine the result one role at a time.</p>
+          <div class="pull">“When I used other CRMs, I worked around my problems. Now, with our custom CRM, I can work with our unique workflow through the system — no workarounds.”<span class="who">Greg Johnston · Sales representative, Charlotte branch (on record)</span></div>
+        </div>
+      </div>
+      <div class="folio">— 5 —</div>
+    </section>
+
+    <!-- ═══════════ 6-10 · PART 2 · OFFICE ═══════════ -->
+    <section class="page dark" data-title="Part 2 · The office">
+      <div class="runhead"><span>Part 2</span><span>The office</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 2</div>
+        <h1 class="ep-title" style="color:#fff;">The office: a single system of record replaced email and spreadsheets</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">The branch administrator’s workload changed in kind, not merely in volume: from reconstructing information to reviewing it.</p>
+        <div class="tk" style="border-color:rgba(183,169,255,.5); max-width:580px; margin-top:28px;">
+          <span class="tag">INTERVIEW SCHEDULED · OFFICE ADMINISTRATOR</span>
+          <h4>The administrator’s account</h4>
+          <p>Topics: the structure of the working day before and after rollout; how month-end commission preparation changed; the most recent error the review queue caught, and how it would previously have surfaced.</p>
+        </div>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 6 —</div>
+    </section>
+
+    <section class="page" data-title="Part 2 · The morning review queue">
+      <div class="runhead"><span>Part 2 · The office</span><span>The morning review queue</span></div>
+      <p class="body dropcap" style="max-width:900px;">On a typical morning before rollout, a branch administrator began the day by reconstructing the state of the branch: unread email, voicemail, and a set of spreadsheets that disagreed with one another. Under the platform, the day begins with a review queue. Jobs submitted overnight by sales representatives appear on the branch dashboard awaiting approval; the week’s schedule, residential and commercial counts, and resubmissions appear alongside (Exhibit 1). The information the administrator previously assembled by hand is assembled by the system, and the administrator’s first hour is spent on decisions rather than collection.</p>
+      <figure class="plate">
+        <div class="frame">
+          <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <img src="/images/booklets/priority-roofing/crm-dashboard.jpg" alt="Branch dashboard: job counts, submitted jobs queue, upcoming schedules">
+        </div>
+        <figcaption><b>Exhibit 1 — The branch dashboard consolidates the morning’s decisions into one screen.</b> Jobs submitted for review, weekly schedule, and branch counts.<span class="src">Source: Priority CRM, demonstration data.</span></figcaption>
+      </figure>
+      <div class="folio">— 7 —</div>
+    </section>
+
+    <section class="page" data-title="Part 2 · The nine-step lifecycle">
+      <div class="runhead"><span>Part 2 · The office</span><span>The lifecycle</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">Every job follows the same nine steps</h2>
+          <p class="body">The platform’s central design decision is a fixed job lifecycle. Each job passes through nine steps in order, and completing one step opens the next. The sequence encodes the company’s standard operating procedure, which previously existed as institutional knowledge.</p>
+          <ol class="steps">
+            <li><b>Job details</b> — documents, notes, requests, invoices</li>
+            <li><b>Material order</b> — itemized, costed, sent to the supplier</li>
+            <li><b>Production schedule</b> — project manager and crew assigned</li>
+            <li><b>Material verification</b> — delivered quantities checked against the order</li>
+            <li><b>Crew report</b> — labor hours and costs recorded</li>
+            <li><b>Final inspection</b> — checklist with photographs</li>
+            <li><b>Job completion</b> — certificate issued to the homeowner</li>
+            <li><b>Final commission</b> — calculated from QuickBooks records</li>
+            <li><b>Close-out</b> — the completed record archived</li>
+          </ol>
+          <p class="smallnote">Jobs group into three stages: pre-production, production, and post-production. QuickBooks remains the financial source of truth for invoices, payments, expenses, and bills throughout.</p>
+        </div>
+        <div>
+          <h2 class="sec">Review statuses synchronize the field and the office</h2>
+          <p class="body">Each job also carries a review status: submitted, approved, rejected, or resubmitted. A representative in the field and an administrator at a desk see the same status at the same time, which removed the status-inquiry calls that previously occupied both. The board view presents the branch’s pipeline as columns (Exhibit 2).</p>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="crop" style="height:225px;"><img src="/images/booklets/priority-roofing/crm-jobs-board.jpg" alt="Jobs kanban board" style="object-position:38% 30%;"></div>
+            </div>
+            <figcaption><b>Exhibit 2 — The board view shows each branch job by stage and status.</b><span class="src">Source: Priority CRM, demonstration data.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="folio">— 8 —</div>
+    </section>
+
+    <section class="page" data-title="Part 2 · Material orders">
+      <div class="runhead"><span>Part 2 · The office</span><span>Material orders</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">Material orders carry their own audit trail</h2>
+          <p class="body">Before the platform, a material order was an email thread: the order itself, the supplier’s reply, a forwarded confirmation, and, at delivery, a phone call if the load was short. Discrepancies were typically discovered at invoice time, when they were most expensive to resolve.</p>
+          <p class="body">Under the platform, the order is generated from the job record with line items, quantities, and costs; it is sent to the supplier from within the system; and it moves through three states — pending, generated, delivered. When the truck arrives, the field verifies delivered quantities against the order on the job record, with photographs (Exhibit 3). Discrepancies surface on the day of delivery.</p>
+          <div class="statbox"><div class="n">Same day</div><div class="l">delivery discrepancies now surface at the site, not at invoice reconciliation</div></div>
+        </div>
+        <div>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <img src="/images/booklets/priority-roofing/crm-material-orders.jpg" alt="Material orders across jobs with status counts">
+            </div>
+            <figcaption><b>Exhibit 3 — Branch material orders with supplier, requested delivery date, and status.</b><span class="src">Source: Priority CRM, demonstration data.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="folio">— 9 —</div>
+    </section>
+
+    <section class="page" data-title="Part 2 · Commissions">
+      <div class="runhead"><span>Part 2 · The office</span><span>Commissions</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">Commission became a lifecycle step rather than a month-end project</h2>
+          <p class="body">Commission preparation was previously a reconciliation exercise: contract amounts from one system, payments from another, and split arrangements held partly in memory. It consumed office time at every month-end and generated disputes in proportion to its opacity.</p>
+          <p class="body">On the platform, commission is step eight of the lifecycle. Each job carries its contract amount, its QuickBooks payments and expenses, and its split percentages; requests move through the same review states as jobs (Exhibit 4). A separate draw facility lets representatives request advances against earned commission through the system, with the same approval trail.</p>
+          <div class="tk">
+            <span class="tag">INTERVIEW SCHEDULED · OFFICE ADMINISTRATOR</span>
+            <h4>Month-end, before and after</h4>
+            <p>Topic: the hours spent on commission preparation at month-end before rollout versus now. A measured or well-estimated figure here would materially strengthen this section.</p>
+          </div>
+        </div>
+        <div>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <img src="/images/booklets/priority-roofing/crm-commissions.jpg" alt="Final commission list with statuses and splits">
+            </div>
+            <figcaption><b>Exhibit 4 — Commission requests with splits, percentages, and review states, computed from the job’s financial records.</b><span class="src">Source: Priority CRM, demonstration data.</span></figcaption>
+          </figure>
+          <div class="nextup"><b>Part 3</b> examines the same platform from the other side of the relationship: the sales representative in the field.</div>
+        </div>
+      </div>
+      <div class="folio">— 10 —</div>
+    </section>
+
+    <!-- ═══════════ 11-14 · PART 3 · FIELD ═══════════ -->
+    <section class="page dark" data-title="Part 3 · The field">
+      <div class="runhead"><span>Part 3</span><span>The field</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 3</div>
+        <h1 class="ep-title" style="color:#fff;">The field: the sales workflow moved onto the phone</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">Adoption in the field decided whether the platform would succeed. It was won by removing evening paperwork, not by adding features.</p>
+        <div class="tk" style="border-color:rgba(183,169,255,.5); max-width:580px; margin-top:28px;">
+          <span class="tag">INTERVIEW SCHEDULED · SALES REPRESENTATIVE</span>
+          <h4>A working day, in the representative’s words</h4>
+          <p>Topics: what is checked first in the morning and why; how canvassing assignments arrive; what happens between a homeowner’s signature and the crew’s arrival, and which parts of that previously required office time. Greg Johnston (Charlotte) is on record and available.</p>
+        </div>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 11 —</div>
+    </section>
+
+    <section class="page" data-title="Part 3 · The mobile workday">
+      <div class="runhead"><span>Part 3 · The field</span><span>The mobile workday</span></div>
+      <div class="duo">
+        <div>
+          <p class="body dropcap">A sales representative’s day runs from a vehicle, and the platform was built to be operated from one. The same system the office uses on desktops runs in full on the representative’s phone: leads, jobs, schedule, and commission status, arranged for single-handed use (Exhibits 5 and 6).</p>
+          <p class="body">The morning view shows active jobs and submissions, the week’s installations, and the branch’s door-knocking leaderboard, which ranks representatives by canvassing activity and recognizes a monthly leader. Management adopted the leaderboard to make prospecting effort visible; participation is reported to be high, though the company has not yet quantified its effect on lead volume.</p>
+          <p class="body">Each job displays its review status. A representative who wants to know whether a submission was approved checks the status rather than calling the office, and the office is not interrupted to answer.</p>
+          <div class="statbox"><div class="n">4</div><div class="l">functions on one device: leads, jobs, schedule, and commission status</div></div>
+        </div>
+        <div>
+          <div class="phone-row">
+            <div class="phone"><div class="screen"><img src="/images/booklets/priority-roofing/crm-m-dashboard.jpg" alt="Mobile dashboard with leaderboard and schedules"></div></div>
+            <div class="phone"><div class="screen"><img src="/images/booklets/priority-roofing/crm-m-jobs.jpg" alt="Mobile jobs list with statuses"></div></div>
+          </div>
+          <figcaption style="text-align:center; margin-top:12px;"><b>Exhibits 5 and 6 — The mobile dashboard and job list.</b> Canvassing leaderboard, weekly schedule, and per-job review status.<span class="src">Source: Priority CRM mobile, demonstration data.</span></figcaption>
+        </div>
+      </div>
+      <div class="folio">— 12 —</div>
+    </section>
+
+    <section class="page" data-title="Part 3 · Proposals at the point of sale">
+      <div class="runhead"><span>Part 3 · The field</span><span>Proposals at the point of sale</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">The proposal is produced at the property, not after it</h2>
+          <p class="body">After a storm, a representative documents damage on site and assembles a proposal from standard sections: cover page, findings, estimate, photographs, and terms. The homeowner receives a private link to the assessment, reviews it, and signs electronically. The proposal step that previously required an evening at the office now completes during the visit.</p>
+          <p class="body">The company has not yet published a measured effect on close rates. The observable change is in cycle: the interval between a homeowner’s verbal agreement and a signed contract, which previously spanned days when contracts traveled by truck, is now bounded by the length of the visit.</p>
+        </div>
+        <div>
+          <div class="tk photo">
+            <span class="tag">EXHIBIT TK · DEVELOPMENT TEAM</span>
+            <h4>Proposal editor and homeowner signing view</h4>
+            <p>Required: two sanitized screens from <em>PriorityProposal</em> — the section-based editor and the customer-facing assessment at the signature step. Fictional property and customer only; no live share tokens.</p>
+          </div>
+          <div class="tk photo">
+            <span class="tag">EXHIBIT TK · DEVELOPMENT TEAM</span>
+            <h4>Field photo capture</h4>
+            <p>Required: one phone screen of the <em>PriorityCAM</em> capture and annotation flow on a seeded demonstration job. Supports the production documentation discussion in Part 4.</p>
+          </div>
+        </div>
+      </div>
+      <div class="folio">— 13 —</div>
+    </section>
+
+    <section class="page" data-title="Part 3 · Submission and handoff">
+      <div class="runhead"><span>Part 3 · The field</span><span>Submission and handoff</span></div>
+      <div style="max-width:720px; margin:0 auto;">
+        <h2 class="sec">A signed job enters the lifecycle from the driveway</h2>
+        <p class="body">When the homeowner signs, the representative creates the job on the phone — address, property type, roof system, customer details — and submits it for review. From submission onward the lifecycle carries the job: the office approves it in the morning queue, the material order is generated, and the production schedule fills in. The representative’s remaining involvement is monitoring status.</p>
+        <p class="body">This is the exchange that secured field adoption: several minutes of structured entry at the point of sale, in return for the elimination of evening administrative work and status calls. Representatives who had resisted three previous CRMs adopted this one; the company attributes the difference to the fact that the workflow in the software matches the workflow on the ground.</p>
+        <div class="pull">“When I used other CRMs, I worked around my problems. Now I can work with our unique workflow through the system — no workarounds.”<span class="who">Greg Johnston · Sales representative, Charlotte branch (on record)</span></div>
+        <div class="nextup"><b>Part 4</b> follows the signed job into production, where the platform’s documentation requirements do their most visible work.</div>
+      </div>
+      <div class="folio">— 14 —</div>
+    </section>
+
+    <!-- ═══════════ 15-17 · PART 4 · PRODUCTION ═══════════ -->
+    <section class="page dark" data-title="Part 4 · Production">
+      <div class="runhead"><span>Part 4</span><span>Production</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 4</div>
+        <h1 class="ep-title" style="color:#fff;">Production: documentation made the middle of the job visible</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">Between contract and completion, roofing jobs traditionally go quiet. The platform’s middle steps are designed to prevent exactly that.</p>
+        <div class="tk" style="border-color:rgba(183,169,255,.5); max-width:580px; margin-top:28px;">
+          <span class="tag">INTERVIEW SCHEDULED · PROJECT MANAGER</span>
+          <h4>The project manager’s account</h4>
+          <p>Topics: concurrent job load per week and how it is tracked; a delivery or scope dispute settled by photographic records; what the final-inspection checklist catches in practice.</p>
+        </div>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 15 —</div>
+    </section>
+
+    <section class="page" data-title="Part 4 · Scheduling, verification, documentation">
+      <div class="runhead"><span>Part 4 · Production</span><span>Scheduling, verification, documentation</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">The production steps enforce their own records</h2>
+          <p class="body">Lifecycle steps three through seven govern production. The project manager and crew are assigned on a calendar visible to the branch. Delivered materials are verified against the order at the site. The crew report records labor hours and costs on completion, and the final inspection requires a checklist with photographs before the job can proceed to completion.</p>
+          <p class="body">Photographic documentation runs on PriorityCAM, a companion application built for the company: crews and project managers capture and annotate photographs on the roof, and the office assembles them into shareable reports tied to the job record. The practical effect is that delivery shortfalls, mid-job discoveries, and finished work are documented at the moment they occur, by the person standing in front of them.</p>
+          <div class="statbox"><div class="n">Steps 3–7</div><div class="l">of the lifecycle each require a record before the next step opens</div></div>
+        </div>
+        <div>
+          <div class="tk photo">
+            <span class="tag">EXHIBIT TK · DEVELOPMENT TEAM</span>
+            <h4>PriorityCAM job gallery and report builder</h4>
+            <p>Required: two sanitized screens from <em>PriorityCAM Web</em> — a job’s tagged photo gallery and the report editor with its share or PDF view. Seeded demonstration project only; no customer addresses.</p>
+          </div>
+          <div class="tk">
+            <span class="tag">INTERVIEW OPTIONAL · CREW LEAD</span>
+            <h4>One question from a jobsite</h4>
+            <p>Topic: what the crew photographs and why. A brief recorded answer from a crew lead would carry this section’s claim better than narration.</p>
+          </div>
+        </div>
+      </div>
+      <div class="folio">— 16 —</div>
+    </section>
+
+    <section class="page" data-title="Part 4 · Crew payment">
+      <div class="runhead"><span>Part 4 · Production</span><span>Crew payment</span></div>
+      <div style="max-width:720px; margin:0 auto;">
+        <h2 class="sec">Crew payment preparation moved from reconstruction to review</h2>
+        <p class="body">Paying subcontractor crews correctly requires reconciling three sources: the payables ledger that states what each crew is owed, the correspondence in which approvals and corrections were agreed, and the production calendar that records what work actually occurred. Before automation, the office assembled this reconciliation by hand each pay cycle.</p>
+        <p class="body">An automated reconciliation engine now performs the matching. It cross-references the three sources, applies the company’s line-item rates, and produces a review queue of exceptions for the office. Matching is deterministic — the same inputs always produce the same result — and every payment retains a human approval. The office’s role in crew pay shifted from assembling the picture to ruling on the cases the engine flags.</p>
+        <div class="statbox"><div class="n">3 sources</div><div class="l">ledger, correspondence, and calendar, reconciled automatically each pay cycle</div></div>
+        <div class="nextup"><b>Part 5</b> turns to what management can now see: branch performance reporting drawn from the books rather than from month-end assembly.</div>
+      </div>
+      <div class="folio">— 17 —</div>
+    </section>
+
+    <!-- ═══════════ 18-21 · PART 5 · REPORTING ═══════════ -->
+    <section class="page dark" data-title="Part 5 · Reporting">
+      <div class="runhead"><span>Part 5</span><span>Reporting</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 5</div>
+        <h1 class="ep-title" style="color:#fff;">Reporting: managers see the business daily, not at month-end</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">Thirty branches are now measured on one definition of profitability, current to the day.</p>
+        <div class="tk" style="border-color:rgba(183,169,255,.5); max-width:580px; margin-top:28px;">
+          <span class="tag">INTERVIEW SCHEDULED · BRANCH GENERAL MANAGER</span>
+          <h4>The general manager’s account</h4>
+          <p>Topics: the structure of the weekly numbers review; a job identified as unprofitable while still in progress, and what was done; how conversations with the CFO changed once both parties worked from the same figures.</p>
+        </div>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 18 —</div>
+    </section>
+
+    <section class="page" data-title="Part 5 · The executive view">
+      <div class="runhead"><span>Part 5 · Reporting</span><span>The executive view</span></div>
+      <p class="body dropcap" style="max-width:900px;">The analytics portal presents revenue, gross margin, EBITDA, and receivables with year-over-year comparisons, and ranks every branch on the same basis (Exhibit 7). The ranking is meaningful because the company first defined profitability centrally — the accounting rules, the benchmarks, and the category assignments — before building the reporting. Under the previous arrangement, each branch tracked performance in its own format, and like-for-like comparison across 30 branches was not practically possible. Reporting now draws from the same QuickBooks records that run the business, so the figures a general manager sees are current rather than assembled after month-end.</p>
+      <figure class="plate">
+        <div class="frame">
+          <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <img src="/images/booklets/priority-roofing/bap-home.jpg" alt="Executive analytics: revenue, gross margin, EBITDA, AR, branch rankings">
+        </div>
+        <figcaption><b>Exhibit 7 — The executive view reports P&amp;L and receivables from live records, with branches ranked on a single standard.</b><span class="src">Source: Business Analytics Portal, demonstration data.</span></figcaption>
+      </figure>
+      <div class="folio">— 19 —</div>
+    </section>
+
+    <section class="page" data-title="Part 5 · Branch comparison">
+      <div class="runhead"><span>Part 5 · Reporting</span><span>Branch comparison</span></div>
+      <div class="duo">
+        <div>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="crop" style="height:250px;"><img src="/images/booklets/priority-roofing/bap-home-map.jpg" alt="Branch performance map" style="object-position:50% 72%;"></div>
+            </div>
+            <figcaption><b>Exhibit 8 — Branch performance mapped, with markers graded by the selected metric.</b><span class="src">Source: Business Analytics Portal, demonstration data.</span></figcaption>
+          </figure>
+        </div>
+        <div>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="crop" style="height:250px;"><img src="/images/booklets/priority-roofing/bap-leaderboard.jpg" alt="Winner cards and rep leaderboard" style="object-position:50% 42%;"></div>
+            </div>
+            <figcaption><b>Exhibit 9 — Branch and representative rankings by revenue, margin, and activity.</b><span class="src">Source: Business Analytics Portal, demonstration data.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="body" style="max-width:900px; margin-top:8px;">Two management consequences follow. First, cost is visible at the level of the individual job, so a job running unprofitably can be identified while it is still open rather than in the month after it closes. Second, a general manager and the CFO now review the same figures, defined the same way, which converts performance discussions from disputes over whose numbers are right into decisions about what to do.</p>
+      <div class="folio">— 20 —</div>
+    </section>
+
+    <section class="page" data-title="Part 5 · Receivables">
+      <div class="runhead"><span>Part 5 · Reporting</span><span>Receivables</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">Receivables follow-up was assigned to software</h2>
+          <p class="body">The company’s accounts-receivable follow-up now runs through an AI assistant, internally named Vera, that reads open invoices, scores follow-ups by priority, flags jobs missing expected milestones, and drafts follow-up correspondence for staff review. Staff approve and send; the system does not contact customers autonomously.</p>
+          <p class="body">The design principle matches the rest of the platform: automation performs the monitoring and preparation, and people retain the judgment. The measurable claim — that fewer balances age past the company’s thresholds — is expected but not yet verified; the figure belongs in this section when finance can supply it.</p>
+        </div>
+        <div>
+          <div class="tk photo">
+            <span class="tag">EXHIBIT TK · DEVELOPMENT TEAM</span>
+            <h4>Receivables dashboard</h4>
+            <p>Required: one sanitized screen of <em>Vera’s</em> briefing or follow-up queue, seeded with fictional customers and balances. Production data must not be used.</p>
+          </div>
+          <div class="tk">
+            <span class="tag">INTERVIEW SCHEDULED · FINANCE</span>
+            <h4>Aging data, before and after</h4>
+            <p>Topics: receivables aging distribution before and after adoption; one concrete case the system surfaced that manual review had missed.</p>
+          </div>
+          <div class="nextup"><b>Part 6</b> assembles the preceding four parts into a single sequence by tracing one job end to end.</div>
+        </div>
+      </div>
+      <div class="folio">— 21 —</div>
+    </section>
+
+    <!-- ═══════════ 22-24 · PART 6 · ONE JOB ═══════════ -->
+    <section class="page dark" data-title="Part 6 · Anatomy of a job">
+      <div class="runhead"><span>Part 6</span><span>Anatomy of a job</span></div>
+      <div style="position:relative; z-index:2; height:82%; display:flex; flex-direction:column; justify-content:center; max-width:780px;">
+        <div class="ep-kicker" style="color:#b7a9ff;">Part 6</div>
+        <h1 class="ep-title" style="color:#fff;">Anatomy of a job: from first knock to final commission</h1>
+        <p class="ep-sub" style="color:#c8c2e0;">One residential re-roof, traced through every system described in this review.</p>
+        <p class="smallnote" style="color:#9c92c9; margin-top:22px; max-width:560px;">The job below is a composite constructed from the demonstration records shown in the exhibits. The sequence of steps, records, and approvals is the production workflow as built.</p>
+      </div>
+      <div class="folio" style="color:#9c92c9;">— 22 —</div>
+    </section>
+
+    <section class="page" data-title="Part 6 · Sale through delivery">
+      <div class="runhead"><span>Part 6 · Anatomy of a job</span><span>Sale through delivery</span></div>
+      <div class="duo">
+        <div>
+          <h2 class="sec">Days 1–2: contact, contract, approval</h2>
+          <p class="body"><b>Day 1.</b> Following a hailstorm, the canvassing map assigns the affected neighborhood; the knock at 2419 Kessler Parkway is logged as a lead from the representative’s phone. That evening, the representative documents the damage on site, assembles a retail shingle proposal at $38,450, and the homeowner reviews the assessment on the customer link and signs electronically. The representative converts the lead to a job and submits it.</p>
+          <p class="body"><b>Day 2.</b> The job appears in the branch review queue at the start of business and is approved. The material order is generated from the job record and sent to the supplier within the hour, with delivery requested for day 4.</p>
+        </div>
+        <div>
+          <h2 class="sec">Day 4: delivery, verified at the site</h2>
+          <p class="body">The delivery is checked against the purchase order at the property. One line item arrives short; the shortfall is recorded on the job with a photograph, and the supplier correction is requested the same morning. The installation date and crew assignment are already on the production calendar, visible to the office, the project manager, and the representative (Exhibit 10).</p>
+          <figure class="plate">
+            <div class="frame">
+              <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="crop" style="height:185px;"><img src="/images/booklets/priority-roofing/crm-jobs.jpg" alt="Job row for 2419 Kessler Pkwy" style="object-position:24% 30%;"></div>
+            </div>
+            <figcaption><b>Exhibit 10 — The job’s record in the branch list, carrying its status, permit state, and value.</b><span class="src">Source: Priority CRM, demonstration data.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="folio">— 23 —</div>
+    </section>
+
+    <section class="page" data-title="Part 6 · Installation through payment">
+      <div class="runhead"><span>Part 6 · Anatomy of a job</span><span>Installation through payment</span></div>
+      <div style="max-width:720px; margin:0 auto;">
+        <h2 class="sec">Days 5–9: installation, inspection, invoice, commission</h2>
+        <p class="body"><b>Installation day.</b> The crew documents tear-off, decking condition, and the finished roof in the photo system; the crew report records labor hours before the crew leaves. The final-inspection checklist, with photographs, is completed the same evening, and the homeowner’s completion certificate is generated from the job record.</p>
+        <p class="body"><b>Day 9.</b> The invoice posts to QuickBooks and the payment is recorded against the job. Commission — 10 percent, no split — is computed from the recorded financials and enters the approval queue, where the representative can watch its status. The job’s margin appears in the branch reporting the same day, and the receivables assistant registers the invoice as paid.</p>
+        <p class="body">At no point in the nine steps did the job depend on a forwarded email or a status phone call. Under the company’s pre-platform baseline, the same sequence routinely spanned several weeks; the company’s before-and-after comparison across its job portfolio puts the typical cycle-time reduction at roughly 75 percent.</p>
+        <div class="statbox"><div class="n">9 of 9</div><div class="l">lifecycle steps completed within the system, with records at each step</div></div>
+        <div class="nextup">The <b>closing section</b> summarizes what changed and states what the next phase of the program requires.</div>
+      </div>
+      <div class="folio">— 24 —</div>
+    </section>
+
+    <!-- ═══════════ 25 · CLOSE ═══════════ -->
+    <section class="page" data-title="Close · What changed, and what the next phase requires">
+      <div class="runhead"><span>Close</span><span>What changed</span></div>
+      <div class="duo">
+        <div>
+          <div class="ep-kicker">Close</div>
+          <h1 class="ep-title" style="font-size:30px;">What changed, and what the next phase requires</h1>
+          <p class="body">The measured results are stated above: job cycle times reduced by roughly 75 percent by the company’s own comparison, 30 branches consolidated onto one platform in under a year, and branch growth decoupled from coordination hiring. The organizational result is harder to quantify but consistently reported: disagreements about whose figures are correct have largely disappeared, because the figures have one source.</p>
+          <p class="body">The next phase is underway. An AI assistant embedded in the CRM answers role- and page-specific questions for staff; the receivables assistant is extending across branches; and the company continues to move manual processes onto the platform as they are documented. Each extension follows the pattern established here: encode the company’s own procedure, automate the monitoring, and keep approvals with people.</p>
+          <div class="kpis" style="grid-template-columns:repeat(2,1fr);">
+            <div class="k"><div class="n">~75%</div><div class="l">reduction in quote-to-close cycle time (company comparison)</div></div>
+            <div class="k"><div class="n">9</div><div class="l">lifecycle steps, uniform across 30 branches</div></div>
+            <div class="k"><div class="n">5</div><div class="l">connected applications on shared records</div></div>
+            <div class="k"><div class="n">1</div><div class="l">financial source of truth (QuickBooks)</div></div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; justify-content:center;">
+          <div class="tk">
+            <span class="tag">INTERVIEW SCHEDULED · OWNERSHIP</span>
+            <h4>Closing assessment, in the owner’s words</h4>
+            <p>Topics: which result mattered most, and which was unexpected; what the company would not return to; what a contractor starting today could compress, given that these systems now exist. The review should close on this answer rather than on narration.</p>
+          </div>
+          <p class="smallnote" style="margin-top:20px;">Figures marked as company comparisons or management estimates will be replaced with documented bases as they are verified. Exhibits show the production software with demonstration data throughout.</p>
+        </div>
+      </div>
+      <div class="folio">— 25 —</div>
+    </section>
+
+    <!-- ═══════════ 26 · BACK COVER ═══════════ -->
+    <section class="page dark" data-title="Back cover">
+      <div class="coverlay" style="text-align:center; align-items:center; justify-content:center;">
+        <div style="max-width:560px; margin:auto;">
+          <img src="/images/clients/priority-roofing-white.svg" alt="Priority Roofing" style="height:36px; opacity:.9;">
+          <div style="font-family:var(--serif); font-style:italic; font-size:20px; color:#c8c2e0; margin:26px 0;">Every prospect. Every roof. Perfectly managed.</div>
+          <div style="width:44px; height:2px; background:var(--violet); margin:0 auto 26px;"></div>
+          <p style="font-size:13.5px; line-height:1.7; color:#b8b0d6;">This review was produced by <b style="color:#fff;">EphrAIm Solutions</b>, which designed and built the systems it describes. Inquiries regarding similar work are welcome.</p>
+          <a href="/contact/" style="display:inline-block; margin-top:22px; padding:12px 26px; border:1px solid rgba(183,169,255,.5); border-radius:100px; color:#e4dcff; text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase;">Start a conversation</a>
+          <div style="margin-top:34px;"><img src="/images/Ephraim Purple White.svg" alt="Ephraim Solutions" style="height:26px; opacity:.9;"></div>
+          <div style="font-size:10.5px; letter-spacing:1.6px; color:#9c92c9; margin-top:10px;">© 2026 EphrAIm Solutions · Exhibits show production software with demonstration data</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<button class="navbtn prev" id="prevBtn" aria-label="Previous page">‹</button>
+<button class="navbtn next" id="nextBtn" aria-label="Next page">›</button>
+
+<div class="chrome-bar">
+  <a href="/case-studies/priority-roofing/">← Case study</a>
+  <button id="tocBtn">Contents</button>
+  <div class="spacer"></div>
+  <span id="pageLabel">Page 1 / 26</span>
+</div>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<div class="toc-overlay" id="tocOverlay">
+  <div class="toc-panel">
+    <h3>Contents</h3>
+    <div id="tocList"></div>
+    <p class="smallnote" style="margin-top:14px;">← → to turn pages · C for contents · Esc to close</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'))
+  var label = document.getElementById('pageLabel')
+  var fill = document.getElementById('progressFill')
+  var overlay = document.getElementById('tocOverlay')
+  var current = 0
+
+  function show(i, back) {
+    if (i < 0 || i >= pages.length) return
+    pages[current].classList.remove('active', 'turn-back')
+    current = i
+    var p = pages[current]
+    p.classList.toggle('turn-back', !!back)
+    p.classList.add('active')
+    p.scrollTop = 0
+    label.textContent = 'Page ' + (current + 1) + ' / ' + pages.length
+    fill.style.width = ((current + 1) / pages.length * 100) + '%'
+    if (history.replaceState) history.replaceState(null, '', '#p' + (current + 1))
+  }
+  function next() { show(current + 1, false) }
+  function prev() { show(current - 1, true) }
+
+  document.getElementById('nextBtn').addEventListener('click', next)
+  document.getElementById('prevBtn').addEventListener('click', prev)
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next() }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev() }
+    else if (e.key === 'c' || e.key === 'C') overlay.classList.toggle('open')
+    else if (e.key === 'Escape') overlay.classList.remove('open')
+  })
+
+  var sx = null, sy = null
+  document.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY }, { passive: true })
+  document.addEventListener('touchend', function (e) {
+    if (sx === null) return
+    var dx = e.changedTouches[0].clientX - sx
+    var dy = e.changedTouches[0].clientY - sy
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) { dx < 0 ? next() : prev() }
+    sx = sy = null
+  }, { passive: true })
+
+  var tocList = document.getElementById('tocList')
+  pages.forEach(function (p, i) {
+    var row = document.createElement('div')
+    row.className = 'toc-line'
+    row.innerHTML = '<span class="n">p. ' + (i + 1) + '</span><span class="t">' + (p.dataset.title || 'Page') + '</span>'
+    row.addEventListener('click', function () { overlay.classList.remove('open'); show(i, i < current) })
+    tocList.appendChild(row)
+  })
+  document.getElementById('tocBtn').addEventListener('click', function () { overlay.classList.toggle('open') })
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) overlay.classList.remove('open') })
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-goto]'), function (el) {
+    el.addEventListener('click', function () { show(parseInt(el.dataset.goto, 10) - 1, false) })
+  })
+
+  var m = location.hash.match(/^#p(\d+)$/)
+  var start = m ? Math.min(Math.max(parseInt(m[1], 10) - 1, 0), pages.length - 1) : 0
+  pages[start].classList.add('active')
+  current = start
+  label.textContent = 'Page ' + (current + 1) + ' / ' + pages.length
+  fill.style.width = ((current + 1) / pages.length * 100) + '%'
+})()
+</script>
+</body>
+</html>
