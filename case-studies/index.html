@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies | EphrAIm Solutions</title>
+  <meta name="description" content="Real operational systems, built for real companies. See how Priority Roofing, Specialty Designer Roofing, and Eagle Surveying scaled without scaling overhead.">
+  <link rel="icon" type="image/svg+xml" href="/images/Ephram E White.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .case-studies__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .case-studies__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .case-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid #e5e2ef;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
+    .case-card:hover {
+      border-color: rgba(110, 97, 254, 0.45);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px -24px rgba(110, 97, 254, 0.35);
+    }
+    .case-card__visual {
+      position: relative;
+      height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px 28px;
+    }
+    .case-card__visual--aurora {
+      background:
+        radial-gradient(rgba(190, 176, 255, 0.4) 1px, transparent 1.5px),
+        radial-gradient(circle at 18% 15%, rgba(108, 76, 241, 0.6), transparent 55%),
+        radial-gradient(circle at 88% 80%, rgba(167, 139, 250, 0.4), transparent 55%),
+        #0a0713;
+      background-size: 34px 34px, auto, auto, auto;
+    }
+    .case-card__visual--warm {
+      background:
+        radial-gradient(circle at 82% 8%, rgba(108, 76, 241, 0.22), transparent 60%),
+        radial-gradient(circle at 8% 95%, rgba(108, 76, 241, 0.14), transparent 55%),
+        #f4f1ea;
+    }
+    .case-card__visual--survey {
+      background:
+        linear-gradient(rgba(108, 76, 241, 0.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 76, 241, 0.13) 1px, transparent 1px),
+        #eceaf6;
+      background-size: 26px 26px, 26px 26px, auto;
+    }
+    .case-card__visual--flow {
+      background:
+        radial-gradient(rgba(94, 234, 212, 0.35) 1px, transparent 1.5px),
+        radial-gradient(circle at 18% 15%, rgba(20, 184, 166, 0.55), transparent 55%),
+        radial-gradient(circle at 88% 80%, rgba(94, 234, 212, 0.35), transparent 55%),
+        #04140f;
+      background-size: 34px 34px, auto, auto, auto;
+    }
+    .case-card__visual--voice {
+      background:
+        repeating-linear-gradient(90deg, rgba(167, 139, 250, 0.4) 0 5px, transparent 5px 16px),
+        linear-gradient(150deg, #2a1e56 0%, #160f30 60%, #0b0912 100%);
+      background-size: 100% 32%, auto;
+      background-position: bottom left, center;
+      background-repeat: no-repeat, no-repeat;
+    }
+    .case-card__visual--ripple {
+      background:
+        radial-gradient(circle at 32% 40%, transparent 37px, rgba(251, 191, 36, 0.25) 38px, transparent 40px),
+        radial-gradient(circle at 32% 40%, transparent 61px, rgba(251, 191, 36, 0.16) 62px, transparent 64px),
+        radial-gradient(circle at 80% 26%, transparent 29px, rgba(251, 191, 36, 0.2) 30px, transparent 32px),
+        radial-gradient(circle at 18% 15%, rgba(245, 158, 11, 0.5), transparent 55%),
+        radial-gradient(circle at 88% 80%, rgba(251, 191, 36, 0.3), transparent 55%),
+        #170f04;
+    }
+    .case-card__tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    .case-card__stat {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 3.5vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1;
+      margin: 0 0 8px;
+    }
+    .case-card__visual--aurora .case-card__stat { color: var(--white); }
+    .case-card__visual--warm .case-card__stat { color: #6c4cf1; }
+    .case-card__visual--survey .case-card__stat { color: #6c4cf1; }
+    .case-card__visual--flow .case-card__stat { color: var(--white); }
+    .case-card__visual--voice .case-card__stat { color: var(--white); }
+    .case-card__visual--ripple .case-card__stat { color: var(--white); }
+    .case-card__stat-label {
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .case-card__visual--aurora .case-card__stat-label { color: #c8c2e0; }
+    .case-card__visual--warm .case-card__stat-label { color: #5a5666; }
+    .case-card__visual--survey .case-card__stat-label { color: #55516a; }
+    .case-card__visual--flow .case-card__stat-label { color: #bcdcd4; }
+    .case-card__visual--voice .case-card__stat-label { color: #c8c2e0; }
+    .case-card__visual--ripple .case-card__stat-label { color: #ddd0b8; }
+    .case-card__body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      padding: 28px 28px 32px;
+    }
+    .case-card__title {
+      font-size: 22px;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .case-card__desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--gray-700);
+      margin: 0 0 20px;
+      flex-grow: 1;
+    }
+    .case-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--red);
+      transition: color 0.2s ease;
+    }
+    .case-card:hover .case-card__link {
+      color: var(--red-dark);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="/" class="logo"><img src="/images/Ephraim Purple Black.svg" alt="Ephraim Solutions"></a>
+        <nav class="nav" id="nav">
+          <a href="/what-we-do/">What We Do</a>
+          <a href="/ai-solutions/" class = "new-page">AI Employees</a>
+          <a href="/how-we-work/">How We Work</a>
+          <div class="nav__dropdown">
+            <a href="/who-we-help/" class="nav__dropdown-trigger">
+              Who We Help
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </a>
+            <div class="nav__dropdown-menu">
+              <a href="/who-we-help/">Overview</a>
+              <div class="nav__dropdown-divider"></div>
+              <span class="nav__dropdown-label">Industries</span>
+              <a href="/industries/roofing/">Roofing</a>
+              <a href="/industries/hvac-plumbing/">HVAC & Plumbing</a>
+              <a href="/industries/healthcare/">Healthcare & Clinics</a>
+              <a href="/industries/finance/">Finance & Lending</a>
+            </div>
+          </div>
+          <a href="/about/">About</a>
+          <a href="/contact/" class="nav__cta">Contact Us</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="/images/strategy-meeting-in-conference-room.jpg" alt="Strategy meeting">
+    </div>
+    <div class="container">
+      <div class="hero__content fade-in">
+        <p class="eyebrow">Client Results</p>
+        <h1>Case Studies</h1>
+        <p class="lead">Real operational systems, built for real companies. Here's what changed when they stopped working around their software.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="case-studies__grid fade-in">
+        <a href="/case-studies/priority-roofing/" class="case-card">
+          <div class="case-card__visual case-card__visual--aurora">
+            <p class="case-card__stat">75%</p>
+            <p class="case-card__stat-label">less time to run a job, end to end</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">Custom CRM · Roofing</span>
+            <h3 class="case-card__title">Priority Roofing</h3>
+            <p class="case-card__desc">A $200M+, 30-branch contractor replaced off-the-shelf CRMs and email with one platform built around how it actually runs a job.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+
+        <a href="/case-studies/specialty-designer-roofing/" class="case-card">
+          <div class="case-card__visual case-card__visual--warm">
+            <p class="case-card__stat">Real-time</p>
+            <p class="case-card__stat-label">profit visibility, down to the individual job</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">Business Analytics</span>
+            <h3 class="case-card__title">Specialty Designer Roofing</h3>
+            <p class="case-card__desc">Data trapped in QuickBooks and CRMs became live job-level P&amp;L — the same numbers for the CEO and every branch GM.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+
+        <a href="/case-studies/eagle-surveying/" class="case-card">
+          <div class="case-card__visual case-card__visual--survey">
+            <p class="case-card__stat">Minutes</p>
+            <p class="case-card__stat-label">to write a quote, down from spreadsheet hours</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">Custom Estimating</span>
+            <h3 class="case-card__title">Eagle Surveying</h3>
+            <p class="case-card__desc">One person's private spreadsheet became an estimating platform the whole team can see, built around how surveying is priced.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+
+        <a href="/case-studies/manufacturing-ai/" class="case-card">
+          <div class="case-card__visual case-card__visual--flow">
+            <p class="case-card__stat">40 → 2</p>
+            <p class="case-card__stat-label">hours a week for the same workload</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">AI Automation · Manufacturing</span>
+            <h3 class="case-card__title">Precision Manufacturer</h3>
+            <p class="case-card__desc">An AI companion to their NetSuite ERP now runs a 40-hour weekly workload in 2–3 hours — and readies the business for a key retirement.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+
+        <a href="/case-studies/know-the-costs/" class="case-card">
+          <div class="case-card__visual case-card__visual--voice">
+            <p class="case-card__stat">30K+</p>
+            <p class="case-card__stat-label">members supported without adding staff</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">AI Voice &amp; Text</span>
+            <h3 class="case-card__title">Know the Costs</h3>
+            <p class="case-card__desc">AI voice and text rebuilt the member journey, so routine imaging questions resolve themselves and Care Advisors handle what matters.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+
+        <a href="/case-studies/gillean-brothers-roofing/" class="case-card">
+          <div class="case-card__visual case-card__visual--ripple">
+            <p class="case-card__stat">24/7</p>
+            <p class="case-card__stat-label">emergency calls answered, nights and weekends</p>
+          </div>
+          <div class="case-card__body">
+            <span class="case-card__tag">AI Agents · Roofing</span>
+            <h3 class="case-card__title">Gillean Brothers Roofing</h3>
+            <p class="case-card__desc">Two AI teammates — "Jason" on the after-hours phones and an agent checking every supplier invoice — keep a one-person office running big.</p>
+            <span class="case-card__link">Read the case study →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark cta">
+    <div class="container">
+      <div class="fade-in">
+        <h2 style="color: var(--white);">Want Results Like These?</h2>
+        <p style="color: rgba(255,255,255,0.7);">Tell us where your operations hurt, and we'll show you what's possible.</p>
+        <a href="/contact/" class="btn btn--primary">Start a Conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="logo"><img src="/images/Ephraim Purple White.svg" alt="Ephraim Solutions"></p>
+          <p>We build the operational systems that allow growing companies to scale revenue without scaling overhead.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Company</p>
+          <ul class="footer__links">
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/what-we-do/">What We Do</a></li>
+            <li><a href="/how-we-work/">How We Work</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Services</p>
+          <ul class="footer__links">
+            <li><a href="/what-we-do/#communication">Digital Communication</a></li>
+            <li><a href="/what-we-do/#automation">Automation & Integration</a></li>
+            <li><a href="/what-we-do/#intelligence">Business Intelligence</a></li>
+            <li><a href="/ai-solutions/">AI Employees</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; <span id="copyright-year"></span> EphrAIm Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manufacturing AI Case Study | EphrAIm Solutions</title>
+<meta name="description" content="A precision manufacturer asked a focused question: how do we make one essential role faster with automation and AI? Ephraim Solutions built an AI companion to their NetSuite ERP that now runs in 2–3 hours what used to take a full 40-hour week.">
+<link rel="icon" type="image/svg+xml" href="/images/Ephram E White.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,0,600;6..72,1,400;6..72,1,500&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fff; font-family: 'Work Sans', sans-serif; }
+  a { color: #6c4cf1; text-decoration: none; }
+  a:hover { color: #573bd6; }
+  @keyframes auroraA { 0%{transform:translate(-10%,-8%) scale(1);} 50%{transform:translate(12%,10%) scale(1.25);} 100%{transform:translate(-10%,-8%) scale(1);} }
+  @keyframes auroraB { 0%{transform:translate(15%,10%) scale(1.1);} 50%{transform:translate(-12%,-6%) scale(1.35);} 100%{transform:translate(15%,10%) scale(1.1);} }
+  @keyframes floatY { 0%{transform:translateY(0);opacity:.5;} 50%{transform:translateY(9px);opacity:1;} 100%{transform:translateY(0);opacity:.5;} }
+  @keyframes shimmer { 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
+
+  /* Responsive overrides (desktop design preserved; these apply on small screens only) */
+  @media (max-width: 768px) {
+    .cs-hero { height: auto !important; min-height: 640px !important; }
+    .cs-hero-center { padding: 120px 24px 90px !important; position: relative !important; inset: auto !important; }
+    .cs-hero-title { font-size: 38px !important; }
+    .cs-hero-dek { font-size: 17px !important; }
+    .cs-brand { padding: 24px 24px !important; }
+    .cs-stats-band { height: auto !important; }
+    .cs-stats-wrap { padding: 48px 24px !important; position: relative !important; inset: auto !important; }
+    .cs-stats-row { flex-direction: column !important; gap: 28px !important; }
+    .cs-stat { padding: 0 22px !important; }
+    .cs-stat-num { font-size: 46px !important; }
+    .cs-nav { padding: 12px 16px !important; gap: 8px !important; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .cs-nav > div { white-space: nowrap; font-size: 13px !important; padding: 8px 14px !important; }
+    .cs-article { padding: 56px 24px 72px !important; }
+    .cs-section-title { font-size: 32px !important; }
+    .cs-sub-title { font-size: 28px !important; }
+    .cs-dropcap { font-size: 60px !important; }
+    .cs-inline-visual { height: 260px !important; }
+    .cs-quote { font-size: 26px !important; }
+    .cs-more { flex-direction: column !important; }
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%; overflow:hidden;">
+
+  <div class="cs-hero" style="position:relative; height:760px; background:#04140f; overflow:hidden;">
+    <div style="position:absolute; width:820px; height:820px; left:-140px; top:-220px; border-radius:50%; background:radial-gradient(circle, rgba(20,184,166,.55), rgba(20,184,166,0) 62%); filter:blur(30px); animation:auroraA 17s ease-in-out infinite; pointer-events:none;"></div>
+    <div style="position:absolute; width:760px; height:760px; right:-160px; bottom:-240px; border-radius:50%; background:radial-gradient(circle, rgba(13,148,136,.5), rgba(13,148,136,0) 60%); filter:blur(34px); animation:auroraB 21s ease-in-out infinite; pointer-events:none;"></div>
+    <div style="position:absolute; width:520px; height:520px; left:44%; top:20%; border-radius:50%; background:radial-gradient(circle, rgba(94,234,212,.32), rgba(94,234,212,0) 60%); filter:blur(40px); animation:auroraA 26s ease-in-out infinite; pointer-events:none;"></div>
+    <canvas id="cs-canvas" style="position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none;"></canvas>
+    <div style="position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 40%, rgba(4,20,15,0) 30%, rgba(4,20,15,.55) 100%); pointer-events:none;"></div>
+
+    <div class="cs-brand" style="position:absolute; top:0; left:0; right:0; padding:30px 56px; display:flex; align-items:center; justify-content:space-between; z-index:3;">
+      <a href="/"><img src="/images/Ephraim Purple White.svg" alt="Ephraim Solutions" style="height:36px; width:auto; display:block;"></a>
+      <a href="/case-studies/" style="color:#8ff0dd; font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:600;">All case studies</a>
+    </div>
+
+    <div class="cs-hero-center" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 100px; pointer-events:none;">
+      <div style="display:inline-flex; align-items:center; gap:10px; padding:8px 18px; border:1px solid rgba(127,233,216,.4); border-radius:100px; color:#8ff0dd; font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">2026 · Case Study</div>
+      <h1 class="cs-hero-title" style="font-family:'Newsreader',serif; font-weight:400; font-size:60px; line-height:1.08; letter-spacing:-.5px; margin-top:26px; max-width:920px; background:linear-gradient(100deg,#ffffff 20%,#7fe9d8 50%,#ffffff 80%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 9s linear infinite;">How an AI companion to NetSuite turned a 40-hour week into two</h1>
+      <div class="cs-hero-dek" style="font-size:19px; line-height:1.55; color:#bcdcd4; margin-top:24px; max-width:620px;">A precision manufacturer asked a focused question: how do we make one essential role faster with automation and AI? Ephraim Solutions built an AI companion to their NetSuite ERP that now runs in 2–3 hours what used to take a full 40-hour week — readying the business for a key retirement.</div>
+    </div>
+
+    <div style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); color:#5eead4; font-size:24px; animation:floatY 2.4s ease-in-out infinite; pointer-events:none;">⌄</div>
+  </div>
+
+  <div class="cs-stats-band" style="position:relative; height:340px; overflow:hidden; background:#06211a;">
+    <div style="position:absolute; width:700px; height:700px; left:10%; top:-200px; border-radius:50%; background:radial-gradient(circle, rgba(20,184,166,.4), rgba(20,184,166,0) 60%); filter:blur(40px); animation:auroraB 19s ease-in-out infinite; pointer-events:none;"></div>
+    <div class="cs-stats-wrap" style="position:absolute; inset:0; padding:0 56px; display:flex; align-items:center; justify-content:center;">
+      <div class="cs-stats-row" style="display:flex; gap:0; max-width:1100px; width:100%;">
+        <div class="cs-stat" style="flex:1; border-left:1px solid rgba(255,255,255,.16); padding:0 34px;">
+          <div class="cs-stat-num" style="font-family:'Newsreader',serif; font-size:60px; line-height:1; color:#fff;"><span data-countup="40 → 2">40 → 2</span></div>
+          <div style="font-size:14px; color:#c8c2e0; margin-top:10px;">hours a week for the same workload</div>
+        </div>
+        <div class="cs-stat" style="flex:1; border-left:1px solid rgba(255,255,255,.16); padding:0 34px;">
+          <div class="cs-stat-num" style="font-family:'Newsreader',serif; font-size:60px; line-height:1; color:#fff;"><span data-countup="~92%">~92%</span></div>
+          <div style="font-size:14px; color:#c8c2e0; margin-top:10px;">of the role's manual work now automated</div>
+        </div>
+        <div class="cs-stat" style="flex:1; border-left:1px solid rgba(255,255,255,.16); padding:0 34px;">
+          <div class="cs-stat-num" style="font-family:'Newsreader',serif; font-size:60px; line-height:1; color:#fff;"><span data-countup="2">2</span></div>
+          <div style="font-size:14px; color:#c8c2e0; margin-top:10px;">core processes automated: CoAs and lab results</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-nav" style="background:#062019; display:flex; gap:36px; padding:18px 56px; position:sticky; top:0; z-index:5;">
+    <div id="nav-opportunity" style="color:#fff; font-size:14px; font-weight:600; background:#28304a; padding:9px 18px; border-radius:8px;">The opportunity</div>
+    <div id="nav-approach" style="color:#9aa0b4; font-size:14px; font-weight:400; padding:9px 18px; border-radius:8px;">The approach</div>
+    <div id="nav-impact" style="color:#9aa0b4; font-size:14px; font-weight:400; padding:9px 18px; border-radius:8px;">The impact</div>
+    <div id="nav-team" style="color:#9aa0b4; font-size:14px; font-weight:400; padding:9px 18px; border-radius:8px;">The team</div>
+  </div>
+
+  <div class="cs-article" style="padding:72px 40px 96px; display:flex; flex-direction:column; align-items:center;">
+    <div data-reveal="" style="width:680px; max-width:100%;">
+      <div data-section="opportunity" style="font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:#8a8698;">The opportunity</div>
+      <h2 class="cs-section-title" style="font-family:'Newsreader',serif; font-weight:500; font-size:42px; line-height:1.12; letter-spacing:-.4px; color:#14141c; margin-top:14px;">One person, one week, a mountain of manual work</h2>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:26px;"><span class="cs-dropcap" style="float:left; font-family:'Newsreader',serif; font-size:82px; line-height:.8; padding:8px 12px 0 0; color:#6c4cf1;">A</span> precision manufacturer came to Ephraim Solutions with a simple ask: how do we make what Debbie does faster — using both traditional automation and AI? Debbie's role was essential, but it ran almost entirely by hand, and with her retirement approaching, that knowledge risked walking out the door with her.</div>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:20px;">Two processes consumed her week. Certificates of Analysis (CoAs) had to be processed one at a time. And lab results arrived by email, which Debbie tracked across a maze of spreadsheets and folders before manually re-entering and updating the data in NetSuite.</div>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:20px;">All told, it took roughly 40 hours a week — a full-time job in manual data handling, and a single point of failure the company couldn't afford to lose. (Client name withheld at their request.)</div>
+    </div>
+
+    <!-- To use a real photo here, replace the inner div with:
+         <img src="/images/your-photo.jpg" alt="The AI companion running alongside NetSuite" style="width:100%; height:100%; object-fit:cover;"> -->
+    <div data-reveal="" style="width:900px; max-width:100%; margin:52px 0;">
+      <div class="cs-inline-visual" style="position:relative; height:440px; overflow:hidden; border-radius:4px; background:#06211a;">
+        <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(94,234,212,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(94,234,212,.07) 1px, transparent 1px); background-size:44px 44px;"></div>
+        <div style="position:absolute; width:640px; height:640px; left:-120px; top:-260px; border-radius:50%; background:radial-gradient(circle, rgba(20,184,166,.5), rgba(20,184,166,0) 62%); filter:blur(34px); animation:auroraA 19s ease-in-out infinite;"></div>
+        <div style="position:absolute; width:560px; height:560px; right:-140px; bottom:-240px; border-radius:50%; background:radial-gradient(circle, rgba(94,234,212,.3), rgba(94,234,212,0) 60%); filter:blur(38px); animation:auroraB 23s ease-in-out infinite;"></div>
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 40px;">
+          <div style="font-family:'Newsreader',serif; font-size:30px; color:#fff; line-height:1.3; max-width:560px;">One AI companion. Two processes. A week's work in an afternoon.</div>
+          <div style="font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:#8ff0dd; margin-top:18px;">AI + Automation · Built alongside NetSuite</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal="" style="width:820px; max-width:100%; margin:8px 0 52px; text-align:center;">
+      <div class="cs-quote" style="font-family:'Newsreader',serif; font-style:italic; font-weight:400; font-size:34px; line-height:1.35; color:#6c4cf1;">We didn't just make the work faster. We made sure it doesn't leave when Debbie does.</div>
+      <div style="font-size:15px; color:#4a4658; margin-top:22px;">— Operations Leader, Manufacturing client (name withheld)</div>
+    </div>
+
+    <div data-reveal="" style="width:680px; max-width:100%;">
+      <div data-section="approach" style="font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:#8a8698;">The approach</div>
+      <h2 class="cs-sub-title" style="font-family:'Newsreader',serif; font-weight:500; font-size:36px; line-height:1.15; color:#14141c; margin-top:14px;">An AI companion that works inside their NetSuite ERP</h2>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:22px;">Ephraim Solutions studied the business and the role, then built a fully integrated AI system that understands their existing NetSuite ERP — an AI companion that does what Debbie used to do, working directly against the systems the company already runs on.</div>
+      <div style="display:flex; flex-direction:column; margin-top:24px;">
+        <div style="display:flex; gap:18px; align-items:baseline; padding:16px 0; border-top:1px solid #eeecf5;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#6c4cf1; width:34px; flex-shrink:0;">01</div>
+          <div><span style="font-size:18px; font-weight:600; color:#14141c;">Automated CoA Processing</span><span style="font-size:17px; line-height:1.55; color:#4a4658;"> — Certificates of Analysis are ingested and processed automatically, no longer handled one at a time.</span></div>
+        </div>
+        <div style="display:flex; gap:18px; align-items:baseline; padding:16px 0; border-top:1px solid #eeecf5;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#6c4cf1; width:34px; flex-shrink:0;">02</div>
+          <div><span style="font-size:18px; font-weight:600; color:#14141c;">Lab-Result Intake</span><span style="font-size:17px; line-height:1.55; color:#4a4658;"> — results that used to arrive by email are captured, tracked, and structured — no more spreadsheet-and-folder maze.</span></div>
+        </div>
+        <div style="display:flex; gap:18px; align-items:baseline; padding:16px 0; border-top:1px solid #eeecf5;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#6c4cf1; width:34px; flex-shrink:0;">03</div>
+          <div><span style="font-size:18px; font-weight:600; color:#14141c;">NetSuite Sync</span><span style="font-size:17px; line-height:1.55; color:#4a4658;"> — data flows straight into NetSuite, ending the manual re-entry and updates that ate the week.</span></div>
+        </div>
+        <div style="display:flex; gap:18px; align-items:baseline; padding:16px 0; border-top:1px solid #eeecf5;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#6c4cf1; width:34px; flex-shrink:0;">04</div>
+          <div><span style="font-size:18px; font-weight:600; color:#14141c;">Traditional + AI Automation</span><span style="font-size:17px; line-height:1.55; color:#4a4658;"> — rule-based automation for the predictable steps, AI for the judgment ones — matched to the real work.</span></div>
+        </div>
+      </div>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:26px;">Rather than replace NetSuite, Ephraim built alongside it — an AI companion tuned to the company's actual processes, so the automation fits the business instead of forcing the business to change.</div>
+
+      <div data-section="impact" style="font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:#8a8698; margin-top:56px;">The impact</div>
+      <h2 class="cs-sub-title" style="font-family:'Newsreader',serif; font-weight:500; font-size:36px; line-height:1.15; color:#14141c; margin-top:14px;">A 40-hour week, done in an afternoon</h2>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:22px;">The work that once took Debbie about 40 hours a week now runs in roughly 2 to 3. Same output, a fraction of the time — CoAs and lab results processed and synced into NetSuite automatically.</div>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:20px;">Just as importantly, the company is ready for Debbie's retirement. The platform captures how the work is done, giving them a foundation to train her replacement while cutting the role's workload dramatically.</div>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:26px;">
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="color:#6c4cf1; font-size:16px; line-height:1.5; flex-shrink:0;">✓</div>
+          <div style="font-size:17px; line-height:1.5; color:#2c2c38;">A ~40-hour weekly workload done in 2–3 hours</div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="color:#6c4cf1; font-size:16px; line-height:1.5; flex-shrink:0;">✓</div>
+          <div style="font-size:17px; line-height:1.5; color:#2c2c38;">CoA processing fully automated</div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="color:#6c4cf1; font-size:16px; line-height:1.5; flex-shrink:0;">✓</div>
+          <div style="font-size:17px; line-height:1.5; color:#2c2c38;">Lab results captured without email, spreadsheets, or re-entry</div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="color:#6c4cf1; font-size:16px; line-height:1.5; flex-shrink:0;">✓</div>
+          <div style="font-size:17px; line-height:1.5; color:#2c2c38;">The business prepared for a key retirement</div>
+        </div>
+      </div>
+      <div style="font-size:19px; line-height:1.72; color:#2c2c38; margin-top:30px;">With the first two processes automated, the company has a platform to extend the same approach to more of its manual work over time.</div>
+      <div data-section="team" style="margin-top:44px; padding-top:24px; border-top:1px solid #e6e3f0; font-size:15px; color:#4a4658;">Engagement led by Bec Chamberlain, Ephraim Solutions.</div>
+      <div style="margin-top:18px; font-size:15px;"><a href="/contact/">Talk to us about your operations →</a></div>
+
+      <div style="margin-top:56px; padding-top:32px; border-top:1px solid #e6e3f0;">
+        <div style="font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:#8a8698;">More case studies</div>
+        <div class="cs-more" style="display:flex; gap:16px; margin-top:18px;">
+          <a href="/case-studies/know-the-costs/" style="flex:1; border:1px solid #e6e3f0; border-radius:10px; padding:20px 22px; display:block;">
+            <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#6c4cf1; font-weight:600;">AI Voice &amp; Text</div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; color:#14141c; margin-top:8px; line-height:1.3;">Know the Costs: 30,000+ members supported without adding staff</div>
+            <div style="font-size:14px; color:#6c4cf1; margin-top:12px;">Read the case study →</div>
+          </a>
+          <a href="/case-studies/specialty-designer-roofing/" style="flex:1; border:1px solid #e6e3f0; border-radius:10px; padding:20px 22px; display:block;">
+            <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#6c4cf1; font-weight:600;">Business Analytics</div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; color:#14141c; margin-top:8px; line-height:1.3;">Specialty Designer Roofing: from running blind to real-time profit visibility</div>
+            <div style="font-size:14px; color:#6c4cf1; margin-top:12px;">Read the case study →</div>
+          </a>
+        </div>
+        <div style="margin-top:22px; font-size:14px;"><a href="/">← Back to ephraimsolutions.ai</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Flow-field background
+  var canvas = document.getElementById("cs-canvas");
+  if (canvas && !reduce) {
+    var ctx = canvas.getContext("2d");
+    var w = 0, h = 0, dpr = 1;
+    var pts = [];
+    var resize = function () {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = Math.max(1, w * dpr); canvas.height = Math.max(1, h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    var t = 0;
+    var N = Math.max(70, Math.min(170, Math.round((w * h) / 8500)));
+    for (var i = 0; i < N; i++) pts.push({ x: Math.random() * w, y: Math.random() * h });
+    ctx.fillStyle = "#04140f"; ctx.fillRect(0, 0, w, h);
+    var draw = function () {
+      ctx.fillStyle = "rgba(4,20,15,0.09)"; ctx.fillRect(0, 0, w, h);
+      for (var k = 0; k < pts.length; k++) {
+        var p = pts[k];
+        var ang = Math.sin(p.x * 0.0032 + t) * Math.PI + Math.cos(p.y * 0.0032 - t * 0.6) * Math.PI;
+        var nx = p.x + Math.cos(ang) * 1.15, ny = p.y + Math.sin(ang) * 1.15;
+        ctx.strokeStyle = "rgba(45,212,191,0.5)"; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
+        p.x = nx; p.y = ny;
+        if (p.x < -2 || p.x > w + 2 || p.y < -2 || p.y > h + 2) { p.x = Math.random() * w; p.y = Math.random() * h; }
+      }
+      t += 0.004;
+      requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  // Scroll reveals
+  var reveals = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  if (!reduce) {
+    reveals.forEach(function (el) { el.style.opacity = "0"; el.style.transform = "translateY(22px)"; el.style.transition = "opacity .75s ease, transform .75s ease"; });
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.style.opacity = "1"; e.target.style.transform = "none"; ro.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { ro.observe(el); });
+  }
+
+  // Count-up stats
+  var parse = function (s) { var m = String(s).match(/^([^\d\-]*)(-?[\d.,]+)(.*)$/); if (!m) return null; var dec = (m[2].split(".")[1] || "").length; return { pre: m[1], num: parseFloat(m[2].replace(/,/g, "")), suf: m[3], dec: dec, raw: s }; };
+  var nums = Array.prototype.slice.call(document.querySelectorAll("[data-countup]"));
+  nums.forEach(function (el) { var info = parse(el.getAttribute("data-countup")); if (info && !reduce) el.textContent = info.pre + "0" + info.suf; });
+  var run = function (el) {
+    var info = parse(el.getAttribute("data-countup")); if (!info || reduce) { el.textContent = el.getAttribute("data-countup"); return; }
+    var dur = 1300, t0 = performance.now();
+    var step = function (t) {
+      var k = Math.min(1, (t - t0) / dur); var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = info.pre + (info.num * e).toFixed(info.dec) + info.suf;
+      if (k < 1) requestAnimationFrame(step); else el.textContent = info.raw;
+    };
+    requestAnimationFrame(step);
+  };
+  var no = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { run(e.target); no.unobserve(e.target); } }); }, { threshold: 0.6 });
+  nums.forEach(function (el) { no.observe(el); });
+
+  // Sticky section nav
+  var keys = ["opportunity", "approach", "impact", "team"];
+  var setNav = function (key) {
+    keys.forEach(function (k) {
+      var el = document.getElementById("nav-" + k); if (!el) return;
+      var active = k === key;
+      el.style.background = active ? "#28304a" : "transparent";
+      el.style.color = active ? "#fff" : "#9aa0b4";
+      el.style.fontWeight = active ? "600" : "400";
+    });
+  };
+  keys.forEach(function (k) {
+    var nav = document.getElementById("nav-" + k);
+    var sec = document.querySelector('[data-section="' + k + '"]');
+    if (nav && sec) { nav.style.cursor = "pointer"; nav.addEventListener("click", function () { var y = sec.getBoundingClientRect().top + window.scrollY - 72; window.scrollTo({ top: y, behavior: "smooth" }); }); }
+  });
+  var secs = Array.prototype.slice.call(document.querySelectorAll("[data-section]"));
+  var so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setNav(e.target.getAttribute("data-section")); }); }, { rootMargin: "-45% 0px -45% 0px" });
+  secs.forEach(function (el) { so.observe(el); });
+})();
+</script>
+</body>
+</html>
