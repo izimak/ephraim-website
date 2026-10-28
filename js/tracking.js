@@ -11,7 +11,7 @@
   // ============================================
 
   var META_PIXEL_ID = '2774567706260773';
-  var GA4_ID = ''; // e.g. 'G-XXXXXXXXXX' - leave empty until the GA4 property exists
+  var GA4_ID = 'G-4P3XWZVYB2';
 
   // ============================================
   // META PIXEL
