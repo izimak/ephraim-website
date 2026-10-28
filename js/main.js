@@ -439,6 +439,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Prepare data
       const webhookData = {
         name: `${firstNameEl.value} ${lastNameEl.value}`,
+        first_name: firstNameEl.value,
+        last_name: lastNameEl.value,
         email: emailEl.value,
         company: companyEl.value,
         message: messageEl.value,
@@ -447,9 +449,16 @@ document.addEventListener('DOMContentLoaded', function() {
         industry: industryEl ? industryEl.value : '',
         interest: interestEl ? interestEl.value : ''
       };
+
+      // Lead source (ads, Google, referrer) from tracking.js
+      const eventId = 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+      webhookData.event_id = eventId;
+      if (typeof window.ephLeadSource === 'function') {
+        Object.assign(webhookData, window.ephLeadSource());
+      }
       
       try {
-        const response = await fetch('https://services.leadconnectorhq.com/hooks/Bzlv7WXaYANtvUQKWqm5/webhook-trigger/0c9efb11-3f0d-4fac-b27c-5051635c12fd', {
+        const response = await fetch('https://services.leadconnectorhq.com/hooks/MG3qJP7QCa9sAe1ckZVY/webhook-trigger/ec30b8b9-073e-4a3f-a5fb-8a40a4ede89d', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -457,6 +466,10 @@ document.addEventListener('DOMContentLoaded', function() {
           body: JSON.stringify(webhookData)
         });
         
+        if (typeof window.ephTrackLead === 'function') {
+          window.ephTrackLead(eventId);
+        }
+
         // Show success message (webhook may not return proper CORS headers)
         formContainer.style.display = 'none';
         successMessage.style.display = 'block';
